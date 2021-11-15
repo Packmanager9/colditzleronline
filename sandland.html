@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+  </head>
+
+  <div class="gamepage-wrapper">
+
+    <!-- Basic header. Should hold simple branding and navigation. -->
+    <header class="gamepage-header">
+      <!-- Image provided by Eucalyp Studio in Artificial Intelligence from https://www.iconfinder.com/iconsets/artificial-intelligence-6 -->
+      <!-- <img id="site-logo" src="assets/iconfinder_ArtificialIntelligence29_2890576_blackwhite.png"> -->
+      <ul class="nav-content">
+        <!-- <li class="nav-list-item"><a class="nav-link-text" href="">Home</a></li> -->
+        <li class="nav-list-item"><a class="nav-link-text" href="http://ditzbitz.com/games.html">Games</a></li>
+        <!-- <li class="nav-list-item"><a class="nav-link-text" href="https://www.linkedin.com/in/cole-ditzler-41b160133/" target="_blank">About</a></li> -->
+      </ul>
+    </header>
+
+    <!-- Container for page content. Contains and aligns instructions, game, and ads. -->
+    <div class="game-content-container">
+      
+      <!-- Left side banner. Should contain instuctions for the game. -->
+      <aside class="gamepage-left-aside">
+        <h2>Cold Itzler</h2>
+        <ul>
+        <li>Press space to turn off the AI and assume control of the faction you are watching.</li>
+        <li>Drag to select your uints, command them with right click.</li>
+        <li>As humans. hold B and click a tile to build a wall, hold x and click a wall to dismantle it.</li>
+        <li>As humans. hold N and click a tile to build a barracks. Click it to select it to make units using the UI on the right.</li>
+        <li>As Cold Itzlerians. units can metamorphose, this is controlled by clicking the button in the UI on the right.</li>
+        <li>Press H and K alternatively to swap sides.</li>
+        <li>Humans will freeze to death without wind barrier walls.</li>
+        <li>The wind speed may increase, making survival difficult.</li>
+        <li>Cold Itzlerians are immune to cold.</li>
+        <li>Use the minimap to navigate the large map, or WASD.</li>
+        <li>Brown tiles are hotrock, you can harvest it with any unit by standing on the tile.</li>
+        </ul>
+      </aside>
+    
+      <!-- Game container. Holds the game for this page scaled to fit.  -->
+ 
+      <div class="game-container">
+        
+  <div id="dog-image-container">
+
+    <canvas id="canvas" width="1280" height="720" class="canvas"></canvas>
+    <canvas hidden id="map" width="1280" height="1280" class="canvas"></canvas>
+    <canvas hidden id="gCanvas" width="1280" height="1280" class="canvas"></canvas>
+
+    <script src="wallclipastar.js"></script>
+    <script src="astar.js"></script>
+    <script src="sandland.js"></script>
+</div id="go">
+      </div>
+    
+      <!-- Right side banner. No content for now. Perhaps ad-space in the future. -->
+      <aside class="gamepage-right-aside">
+        <!-- Add content here later. -->
+      </aside>
+    </div>
+
+    <!-- Simple footer. Just a copyright notice. -->
+    <footer class="games-footer">
+    </footer>
+
+  </div>
+</html>
