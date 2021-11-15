@@ -1,0 +1,26 @@
+{
+  "name": "coreboys",
+  "version": "1.0.0",
+  "main": "Coreboy.js",
+  "engines": {
+    "node": "12.17.x"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bufferutil": "^4.0.3",
+    "electron": "^15.3.1",
+    "express": "^4.17.1",
+    "mongoose": "^5.12.14",
+    "permessage-deflate": "^0.1.7",
+    "tone": "^14.7.77",
+    "utf-8-validate": "^5.0.5",
+    "websocket-extensions": "^0.1.4",
+    "ws": "^7.4.5"
+  },
+  "description": "This engine is meant to help take some of the tedious setup out of making browser-based games and toys."
+}
