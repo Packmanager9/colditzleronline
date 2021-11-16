@@ -4297,7 +4297,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                 } else if (JSON.parse(data).damage != 0) {
                                     //console.log(data)
                                     //////console.log(sandmap.players[Math.abs(sandmap.turn-1)].units[JSON.parse(data).index].health )
-                                    sandmap.players[Math.abs(sandmap.turn)].units[JSON.parse(data).index].health -= JSON.parse(data).damage
+                                    if(typeof sandmap.players[Math.abs(sandmap.turn)].units[JSON.parse(data).index] != "undefined"){
+                                        sandmap.players[Math.abs(sandmap.turn)].units[JSON.parse(data).index].health -= JSON.parse(data).damage
+                                    }
                                     //////console.log(sandmap.players[Math.abs(sandmap.turn-1)].units[JSON.parse(data).index].health )
                                 //     gameIDs.push(JSON.parse(data).id)
                                 }
