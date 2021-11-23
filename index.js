@@ -37,7 +37,12 @@ class Game {
         this.players.splice(this.players.indexOf(player), 1)
     }
     addPlayer(player) {
-        this.players.push(player)
+        if(this.players.length<2){
+            this.players.push(player)
+        }else{
+            this.players.push(player)
+            this.swapRoom(player, games.indexOf(this)+1)
+        }
     }
     swapRoom(player, room){
         this.players.splice(this.players.indexOf(player), 1)
