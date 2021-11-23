@@ -6275,6 +6275,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
         ws.addEventListener("message", ({
             data
         }) => {
+
+            connectedlight.draw()
+
                     ////////////////////console.log(data)
                 if (JSON.parse(data).grid >= 0) {
                     ////////////////////console.log(data)
@@ -7095,6 +7098,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
 
 
+        
             this.window = new Window()
             // this.players.push(new Player('Skribulons', "#696969"))
             // this.players.push(new Player('Palletae', "pink"))
@@ -14074,6 +14078,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     start = 1
 
     let endbutton = new UiRectangle(sandmap.window.minibody.x + 260, sandmap.window.minibody.y - 77, 100, 75, "#333333")
+    let connectedlight = new UiRectangle(sandmap.window.minibody.x + sandmap.window.minibody.width-10, sandmap.window.minibody.y - 10, 10, 10, "#FF00FF")
     let endgame = 0
 
     // for(let  t = 0;t<128;t++){
