@@ -6309,13 +6309,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     //////////////console.log(sandmap.players[Math.abs(sandmap.turn-1)].units[JSON.parse(data).index].health )
                         for(let  t = 0;t<sandmap.players[Math.abs(sandmap.turn)].units.length;t++){
                             // ////console.log(sandmap.players[Math.abs(sandmap.turn)].units[t].id,JSON.parse(data).index)
-                            if(sandmap.players[Math.abs(sandmap.turn)].units[t].id >= JSON.parse(data).index-.002 && sandmap.players[Math.abs(sandmap.turn)].units[t].id <= JSON.parse(data).index+.002 ){
+                            if(sandmap.players[Math.abs(sandmap.turn)].units[t].id >= JSON.parse(data).index-.0011 && sandmap.players[Math.abs(sandmap.turn)].units[t].id <= JSON.parse(data).index+.0011 ){
                                   sandmap.players[Math.abs(sandmap.turn)].units[t].health  -= JSON.parse(data).damage
                             }
                         }
                         for(let  t = 0;t<sandmap.players[Math.abs(sandmap.turn)].buildings.length;t++){
                             //console.log(sandmap.players[Math.abs(sandmap.turn)].buildings[t].id,JSON.parse(data).index)
-                            if(sandmap.players[Math.abs(sandmap.turn)].buildings[t].id >= JSON.parse(data).index-.002 && sandmap.players[Math.abs(sandmap.turn)].buildings[t].id <= JSON.parse(data).index+.002 ){
+                            if(sandmap.players[Math.abs(sandmap.turn)].buildings[t].id >= JSON.parse(data).index-.0011 && sandmap.players[Math.abs(sandmap.turn)].buildings[t].id <= JSON.parse(data).index+.0011 ){
                                   sandmap.players[Math.abs(sandmap.turn)].buildings[t].health  -= JSON.parse(data).damage
                             }
                         }
