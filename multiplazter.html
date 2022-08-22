@@ -38,6 +38,7 @@
 
 
 window.addEventListener('DOMContentLoaded', (event) => {
+
     // javascript-astar 0.4.1
     // http://github.com/bgrins/javascript-astar
     // Freely distributable under the MIT License.
@@ -3842,6 +3843,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             if(keysPressed['q']){
                 sandmap.turn = 1
+                sandmap.players[1].isAI = 0
             }
             if (playstart == 1) {
                 main()
@@ -3995,11 +3997,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
                                 this.sporeball = 0 //1
                                 this.slime = 0 //1
+                                console.log(this)
                             
                                 let tk = (0.5 * (Math.round(unit.tile.t) + unit.tile.k) * (Math.round(unit.tile.t) + unit.tile.k + 1)) + unit.tile.k
                                 let gridvalue = (0.5 * (Math.round(unit.health) + type) * (Math.round(unit.health) + type + 1)) + type
                                 let biggo = (0.5 * (Math.round(gridvalue) + tk) * (Math.round(gridvalue) + tk + 1)) + tk
-                                biggo+=Math.floor(unit.id*1000)/1000
+                                biggo+=unit.id    //Math.floor(unit.id*1000)/1000
                                 // if(unit.sent != 1 || unit.health <= 0){
                                     grid.push(biggo)
                                 // }
@@ -4081,10 +4084,17 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 }
                 if (playstart == 3) {
 
+
                     canvas_context.drawImage(startupart, 0, 0)
 
                     guideplus.draw()
                     playbutton.draw()
+
+                    swap.draw()
+
+                    canvas_context.font = "15px Arial";
+                    canvas_context.fillStyle = "#000000"
+                    canvas_context.fillText("Swap", swap.x + 5, swap.y + 19)
                     let invscale = 1
                     let string = "Click the buttons to set up the match."
                     let ypointer = 50
@@ -4180,12 +4190,27 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     canvas_context.fillStyle = "#FFFFFF"
                     canvas_context.fillText(sandmap.players[0].name, chartoggle1.x + 15, chartoggle1.y + 50)
                     canvas_context.fillText(sandmap.players[1].name, chartoggle2.x + 15, chartoggle2.y + 50)
+
+
+if(sandmap.turn == 0){
+
                     canvas_context.font = "40px Arial";
                     canvas_context.fillStyle = "#FFFFFF"
                     canvas_context.fillText("(You)", chartoggle1.x - 150, chartoggle1.y + 50)
                     canvas_context.font = "40px Arial";
                     canvas_context.fillStyle = "#FFFFFF"
                     canvas_context.fillText("(Enemy)", chartoggle2.x + 350, chartoggle2.y + 50)
+}else{
+
+                    canvas_context.font = "40px Arial";
+                    canvas_context.fillStyle = "#FFFFFF"
+                    canvas_context.fillText("(Enemy)", chartoggle1.x - 160, chartoggle1.y + 50)
+                    canvas_context.font = "40px Arial";
+                    canvas_context.fillStyle = "#FFFFFF"
+                    canvas_context.fillText("(You)", chartoggle2.x + 350, chartoggle2.y + 50)
+}
+
+
                     canvas_context.font = "40px Arial";
                     canvas_context.fillStyle = "#FFFFFF"
                     if (sandmap.players[0].isAI == 1) {
@@ -4310,6 +4335,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             }
 
                         }
+
+
                     } else if (manual == 1) {
                         canvas_context.drawImage(humanfacesintro, 0, 0, 256, 64, 1280 - 512, 720 - 128, 512, 128)
 
@@ -4926,6 +4953,28 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 TIP_engine.x = XS_engine
                 TIP_engine.y = YS_engine
                 TIP_engine.body = TIP_engine
+
+
+                if (playstart == 3 && swap.stop != 1) {
+                    if(swap.isPointInside(TIP_engine)){
+
+                        let Json = {}
+                        Json.array = []
+                        Json.grid = 1
+                        ws.send(JSON.stringify(Json))
+                        swap.draw = empty
+                        swap.stop = 1
+                        if(sandmap.turn == 1){
+                            sandmap.players[0].isAI = 0
+                            sandmap.players[1].isAI = 0
+                            sandmap.turn = 0
+                        }else{
+                            sandmap.turn = 1
+                            sandmap.players[0].isAI = 0
+                            sandmap.players[1].isAI = 0
+                        }
+                    }
+                }
 
                 if (endgame == 1) {
                     if (score.button.isPointInside(TIP_engine)) {
@@ -6262,6 +6311,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     let map_canvas = document.getElementById('map') //getting canvas from document
 
+
+    let swap = new UiRectangle(570, 360, 50, 30, "#FF00aa")
+
     map_context = map_canvas.getContext('2d');
     map_context.imageSmoothingEnabled = false;
     map_canvas.style.background = "tan"
@@ -6284,6 +6336,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
                     ////////////////////console.log(data)
                 if (JSON.parse(data).grid >= 0) {
+                    swap.draw = empty
+                    swap.stop = 1
                     ////////////////////console.log(data)
                 //     ////////////////////console.log(JSON.parse(data))
                 // if (gameIDs.includes(JSON.parse(data).id)) {
@@ -6303,6 +6357,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
                     sandmap.players[Math.abs(sandmap.turn-1)] = new Player( "Connected guy", "Red",0, 0, JSON.parse(data).array)
                 } else if (JSON.parse(data).damage != 0) {
+                    console.log(JSON.parse(data))
                     //////console.log(data)
                     //////console.log(sandmap.players[sandmap.turn].units)
                     //////////console.log(data)
@@ -7508,7 +7563,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             this.color = color
             this.buildings = []
             this.units = []
-            this.hotrock = 250
+            this.hotrock = 25000
             this.isAI = ai
             this.type = type
             this.chunk = 0
@@ -7522,6 +7577,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             this.defending = 0
             this.income = 0
                }else{
+                   this.idtable = []
             this.attacktimeout = 0
             this.blocks = []
             this.seen = []
@@ -7532,7 +7588,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             this.color = color
             this.buildings = []
             this.units = []
-            this.hotrock = 250
+            this.hotrock = 25000
             this.isAI = 0
             this.type = -1
             this.chunk = 0
@@ -7550,7 +7606,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 if(data[t] > 0){
                     ////////console.log(data[t], "base")
                     
-                    let id = Math.floor((data[t]%1)*1000)/1000
+                    let id =  data[t]%1  //Math.floor((data[t]%1)*1000)/1000
                     ////////console.log(id, "id")
                     data[t] = Math.floor(data[t])
                     ////////console.log(data[t], "after")
@@ -7598,6 +7654,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                 standee.isNymph()
                                 standee.finishMorph2()
                             }else if(backgroundval.type == 16){
+                                standee.isNymph()
                                 standee.finishMorphgamergate()
                             }else if(backgroundval.type == 17){
                                 standee.isPollinator()
@@ -7612,6 +7669,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
                     standee.health = backgroundtk.x
                     standee.id = id
+                    this.idtable.push(standee.id)
                     ////////////console.log(standee)
                     // ////////////////////console.log(background)
                     if(backgroundval.type > 20){
@@ -13345,6 +13403,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
             this.attackcounter++
             if (this.attackcounter % (this.firerate * 3) == 0 && this.submerged != 1) { //3 because 0 strikeout
+            if(typeof sandmap.players[Math.abs(sandmap.players.indexOf(this.faction) - 1)].idtable != undefined){
+
+            if(sandmap.players[Math.abs(sandmap.players.indexOf(this.faction) - 1)].idtable.includes(this.attacktarget.id)){
+
                 let shot = new UnitCircle(this.body.x, this.body.y, 2, this.faction.color)
                 shot.attacktarget = {}
                 shot.attacktarget.body = new UnitCircle(this.attacktarget.body.x, this.attacktarget.body.y, 1, "transparent")
@@ -13354,6 +13416,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 shot.attacktarget.defense = this.attacktarget.defense
                 shot.stage = 0
                 this.shots.push(shot)
+            }
+            }
             }
         }
         attackmove() {
@@ -13666,7 +13730,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 if(typeof this.attacktarget.tile.x == "undefined"){
                     this.attacktarget.tile.x = -1000000
                 }
-                if (this.attacktarget.health <= 0 || (Math.abs((this.attacktarget.tile.y - this.tile.y)) + Math.abs((this.attacktarget.tile.x - this.tile.x))) > (this.attackrange * 15)) {
+                if ((!(this.attacktarget.health > 0)) || (Math.abs((this.attacktarget.tile.y - this.tile.y)) + Math.abs((this.attacktarget.tile.x - this.tile.x))) > (this.attackrange * 15)) {
                     if (this.moved == 1 || this.seetime % 5 == 0) {
                         this.attack()
                     }
@@ -14038,11 +14102,29 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         this.attacktarget = {}
                         this.attacktarget.tile = {}
 
+                        //even newer
+                        this.attackindex = -1
+
                         //new
                         this.attacktarget.tile.x = -100000
                         this.attacktarget.tile.y = -100000
                         this.attacktarget.tile.t = 0
                         this.attacktarget.tile.k = 0
+                    }else if (!(this.attacktarget.health > 0)) {
+
+                        this.attacktarget = {}
+                        this.attacktarget.tile = {}
+
+                        //even newer
+                        this.attackindex = -1
+
+                        //new
+                        this.attacktarget.tile.x = -100000
+                        this.attacktarget.tile.y = -100000
+                        this.attacktarget.tile.t = 0
+                        this.attacktarget.tile.k = 0
+
+
                     }
                     // }
                 }
