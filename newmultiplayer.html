@@ -75,6 +75,7 @@ let qflag = 0
 let globalHealthDraw = false
 let controllerSupport = 0
 let globalframe = 0
+let takenMap = 0
 window.addEventListener('DOMContentLoaded', (event) => {
 
 
@@ -3716,6 +3717,9 @@ let drawcount = 0
 
                         let Json = {}
                         Json.array = [...grid]
+                        Json.map = mapindex
+                        Json.mapsize = worldscale
+                        Json.unitcap = unitcap
                         Json.grid = 2
                         Json.player = t
                         // roughSizeOfObject(Json)
@@ -7583,7 +7587,8 @@ let drawcount = 0
                 //needs lobby
             if (JSON.parse(data).grid == 1) {
                 onlineNow = 1
-                if(controlking != 1 && playstart != 1){
+                if((controlking != 1 && playstart != 1) && takenMap != 1){
+                takenMap = 1
                 unitcap = JSON.parse(data).unitcap
                 mapindex = JSON.parse(data).map
                 worldscale = JSON.parse(data).mapsize
@@ -7595,6 +7600,14 @@ let drawcount = 0
                 sandmap.players[JSON.parse(data).player] = new Player("Connected guy", "Red", 0, 0, JSON.parse(data).array)
             }else{
                 onlineNow = 1
+                if((controlking != 1 && playstart != 1) && takenMap != 1){
+                takenMap = 1
+                unitcap = JSON.parse(data).unitcap
+                mapindex = JSON.parse(data).map
+                worldscale = JSON.parse(data).mapsize
+                let resizeMap = new MapResizer(worldscale, 0)
+                let mapfix  = new  Mapskinner(maplist[mapindex])
+                }
                 sandmap.players[JSON.parse(data).player].unitize(JSON.parse(data).array)
             }
             } else if (JSON.parse(data).damage != 0) {
