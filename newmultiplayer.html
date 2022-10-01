@@ -7704,7 +7704,7 @@ let drawcount = 0
             this.koffset = 0
             this.toffset = 0
             this.occupied = false
-            // this.markdraw = 1 //remove for fog
+            this.markdraw = 1 //remove for fog
             this.breaker = []
             var F;
 
@@ -9103,10 +9103,10 @@ let drawcount = 0
             // }
             //remove fog/g
 
-            map_context.drawImage(this.players[this.turn].canvasx, 0, 0, worldscale, worldscale, 0, 0, (worldscale * 10), (worldscale * 10))
-            // map_context.globalAlpha = 0
-            map_context.globalAlpha = .4;
-            map_context.drawImage(this.players[this.turn].canvas, 0, 0, worldscale, worldscale, 0, 0, (worldscale * 10), (worldscale * 10))
+            // map_context.drawImage(this.players[this.turn].canvasx, 0, 0, worldscale, worldscale, 0, 0, (worldscale * 10), (worldscale * 10))
+            // // map_context.globalAlpha = 0
+            // map_context.globalAlpha = .4;
+            // map_context.drawImage(this.players[this.turn].canvas, 0, 0, worldscale, worldscale, 0, 0, (worldscale * 10), (worldscale * 10))
 
             map_context.globalAlpha = 1
 
@@ -25496,6 +25496,7 @@ let drawcount = 0
                     return
                 } else {
                     this.tiles[t].builtOn = 1
+                    this.tiles[t].walkable = false
                 }
             }
 
@@ -25540,6 +25541,7 @@ let drawcount = 0
             this.waylink = new Line(this.tile.x + 5, this.tile.y + 5, this.waypoint.x + 5, this.waypoint.y + 5, this.faction.color, .5)
             for (let t = 0; t < this.tiles.length; t++) {
                     this.tiles[t].builtOn = 0
+                    this.tiles[t].walkable = true
             }
             this.tiles = []
             for (let t = 0; t <= this.size; t++) {
@@ -25549,6 +25551,7 @@ let drawcount = 0
             }
             for (let t = 0; t < this.tiles.length; t++) {
                     this.tiles[t].builtOn = 1
+                    this.tiles[t].walkable = false
             }
 
 
@@ -27073,9 +27076,13 @@ let drawcount = 0
                 }
                 this.draw()
             }
-            if(this.dying > 0){
-
-            sandmap.buildingCanvas_context.clearRect(this.tile.x, this.tile.y, this.tile.width + (this.size * 1 * this.tile.width), this.tile.height + (this.size * 1 * this.tile.height))
+            if(this.dying > 0 || this.health <= 0){
+                sandmap.buildingCanvas_context.clearRect(this.tile.x, this.tile.y, this.tile.width + (this.size * 1 * this.tile.width), this.tile.height + (this.size * 1 * this.tile.height))
+            for (let t = 0; t < this.tiles.length; t++) {
+                this.tiles[t].walkable = true
+                this.tiles[t].builtOn = true
+            }
+            return
             }
             
 
