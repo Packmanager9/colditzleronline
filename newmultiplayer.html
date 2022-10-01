@@ -7704,7 +7704,7 @@ let drawcount = 0
             this.koffset = 0
             this.toffset = 0
             this.occupied = false
-            this.markdraw = 1 //remove for fog
+            // this.markdraw = 1 //remove for fog
             this.breaker = []
             var F;
 
@@ -9103,10 +9103,10 @@ let drawcount = 0
             // }
             //remove fog/g
 
-            // map_context.drawImage(this.players[this.turn].canvasx, 0, 0, worldscale, worldscale, 0, 0, (worldscale * 10), (worldscale * 10))
-            // // map_context.globalAlpha = 0
-            // map_context.globalAlpha = .4;
-            // map_context.drawImage(this.players[this.turn].canvas, 0, 0, worldscale, worldscale, 0, 0, (worldscale * 10), (worldscale * 10))
+            map_context.drawImage(this.players[this.turn].canvasx, 0, 0, worldscale, worldscale, 0, 0, (worldscale * 10), (worldscale * 10))
+            // map_context.globalAlpha = 0
+            map_context.globalAlpha = .4;
+            map_context.drawImage(this.players[this.turn].canvas, 0, 0, worldscale, worldscale, 0, 0, (worldscale * 10), (worldscale * 10))
 
             map_context.globalAlpha = 1
 
