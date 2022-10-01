@@ -37,7 +37,7 @@ class Game {
         this.players.splice(this.players.indexOf(player), 1)
     }
     addPlayer(player) {
-        if(this.players.length<2){
+        if(this.players.length<4){
             this.players.push(player)
         }else{
             this.players.push(player)
