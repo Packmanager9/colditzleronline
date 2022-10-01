@@ -105,7 +105,7 @@ wss.on("connection", ws => {
                 }
             }
             sjon.playerIDs = ids
-            games[ws.assigned].players[t].send(JSON.stringify(sjon))
+            // games[ws.assigned].players[t].send(JSON.stringify(sjon))
             ids = []
             sjon = {
                 'clean': '1'
@@ -118,7 +118,7 @@ wss.on("connection", ws => {
             sjon.playerIDs = ids
             let data = JSON.stringify(sjon)
             for (let t = 0; t < games[ws.assigned].players.length; t++) {
-                games[ws.assigned].players[t].send(data)
+                // games[ws.assigned].players[t].send(data)
             }
         }
         games[ws.assigned].removePlayer(ws)
