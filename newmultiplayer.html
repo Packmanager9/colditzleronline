@@ -3658,7 +3658,7 @@ let drawcount = 0
                                 biggo+=unit.id    //Math.floor(unit.id*1000)/1000
                                 // if(unit.sent != 1 || unit.health <= 0){
                                 ////console.log(biggo)
-                                grid.push({data:biggo, walk:nextwalk})
+                                grid.push({d:biggo, w:nextwalk})
                                 // }
 
                     }
@@ -7189,14 +7189,14 @@ let drawcount = 0
             ////console.log(data)
             if (JSON.parse(data).dot >= 0) {
                 if(sandmap.turn > -1){
-                let datax = JSON.parse(data).array[0].course
+                let datax = JSON.parse(data).array[0].c
                 let id = datax%1
                 //console.log(id)
                 datax = Math.floor(datax)
                 let pair = invert_cantor(datax)
                 const dot = new UnitCircle(pair.x*10, pair.y*10, 2, sandmap.players[JSON.parse(data).player].color)
-                dot.startx = pair.x*10,
-                dot.starty = pair.y*10,
+                dot.startx = (pair.x*10) + 5
+                dot.starty = (pair.y*10) + 5
                 dot.track = id
                 dot.life = 8
                 
@@ -7319,7 +7319,7 @@ let drawcount = 0
                 }
                 sandmap.players[JSON.parse(data).player].unitize(JSON.parse(data).array)
             }
-            } else if (JSON.parse(data).damage != 0) {
+            } else if (JSON.parse(data).d != 0) {
 
             onlineNow = 1
                 ////console.log(data)
@@ -7332,8 +7332,8 @@ let drawcount = 0
                 for (let t = 0; t < sandmap.players[Math.abs(sandmap.turn)].units.length; t++) {
                 let idvariance = .0019
                     // ////console.log(sandmap.players[Math.abs(sandmap.turn)].units[t].id,JSON.parse(data).index)
-                    if (sandmap.players[Math.abs(sandmap.turn)].units[t].id >= JSON.parse(data).index - idvariance && sandmap.players[Math.abs(sandmap.turn)].units[t].id <= JSON.parse(data).index + idvariance) {
-                        sandmap.players[Math.abs(sandmap.turn)].units[t].health -= JSON.parse(data).damage
+                    if (sandmap.players[Math.abs(sandmap.turn)].units[t].id >= JSON.parse(data).i - idvariance && sandmap.players[Math.abs(sandmap.turn)].units[t].id <= JSON.parse(data).i + idvariance) {
+                        sandmap.players[Math.abs(sandmap.turn)].units[t].health -= JSON.parse(data).d
                         if(sandmap.players[Math.abs(sandmap.turn)].units[t].health < 0){
                             sandmap.players[Math.abs(sandmap.turn)].units[t].health = -1
                         }
@@ -7342,8 +7342,8 @@ let drawcount = 0
                 for (let t = 0; t < sandmap.players[Math.abs(sandmap.turn)].buildings.length; t++) {
                 let idvariance = .0001
                     ////console.log(sandmap.players[Math.abs(sandmap.turn)].buildings[t].id,JSON.parse(data).index)
-                    if (sandmap.players[Math.abs(sandmap.turn)].buildings[t].id >= JSON.parse(data).index - idvariance && sandmap.players[Math.abs(sandmap.turn)].buildings[t].id <= JSON.parse(data).index + idvariance) {
-                        sandmap.players[Math.abs(sandmap.turn)].buildings[t].health -= JSON.parse(data).damage
+                    if (sandmap.players[Math.abs(sandmap.turn)].buildings[t].id >= JSON.parse(data).i - idvariance && sandmap.players[Math.abs(sandmap.turn)].buildings[t].id <= JSON.parse(data).i + idvariance) {
+                        sandmap.players[Math.abs(sandmap.turn)].buildings[t].health -= JSON.parse(data).d
                         if(sandmap.players[Math.abs(sandmap.turn)].buildings[t].health < 0){
                             sandmap.players[Math.abs(sandmap.turn)].buildings[t].health = -1
                         }
@@ -11445,7 +11445,7 @@ let drawcount = 0
 
             if(this.agent.bee == 1){
                 if (this.agent.beeworker == 1) {
-                    if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                    if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                         if (this.agent.dying <= 0) {
                             this.image = beeworkerimg
                         } else {
@@ -11460,7 +11460,7 @@ let drawcount = 0
                     }
                 } 
                 if (this.agent.beescout == 1) {
-                    if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                    if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                         if (this.agent.dying <= 0) {
                             this.image = beescoutimg
                         } else {
@@ -11475,7 +11475,7 @@ let drawcount = 0
                     }
                 } 
                 if (this.agent.beesoldier == 1) {
-                    if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                    if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                         if (this.agent.dying <= 0) {
                             this.image = beesoldierimg
                         } else {
@@ -11490,7 +11490,7 @@ let drawcount = 0
                     }
                 } 
                 if (this.agent.beemega == 1) {
-                    if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                    if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                         if (this.agent.dying <= 0) {
                             this.image = beemegaimg
                         } else {
@@ -11508,7 +11508,7 @@ let drawcount = 0
 
                 if (this.agent.gogonaut == 1) {
 
-                    if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                    if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                         if (this.agent.dying <= 0) {
                             this.image = gogonaut
                         } else {
@@ -11526,7 +11526,7 @@ let drawcount = 0
                         }
                     }
                 } else if (this.agent.gogonautdefender == 1) {
-                    if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                    if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                         if (this.agent.dying <= 0) {
                             this.image = gogonautdefender
                         } else {
@@ -11541,7 +11541,7 @@ let drawcount = 0
                         }
                     }
                 } else if (this.agent.gogonautchampion == 1) {
-                    if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                    if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                         if (this.agent.dying <= 0) {
                             this.image = gogonautchampion
                         } else {
@@ -11556,7 +11556,7 @@ let drawcount = 0
 
                     }
                 } else if (this.agent.gogonautteam == 1) {
-                    if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                    if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                         if (this.agent.dying <= 0) {
                             this.image = gogonautteam
                         } else {
@@ -11573,7 +11573,7 @@ let drawcount = 0
             } else if (this.agent.ave == 1) {
                 if (this.agent.flugoon == 1) {
 
-                    if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                    if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                         if (this.agent.dying <= 0) {
                             this.image = flugoon
                         } else {
@@ -11591,7 +11591,7 @@ let drawcount = 0
                         }
                     }
                 } else if (this.agent.buzzlet == 1) {
-                    if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                    if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                         if (this.agent.dying <= 0) {
                             this.image = buzzlet
                         } else {
@@ -11606,7 +11606,7 @@ let drawcount = 0
                         }
                     }
                 } else if (this.agent.starbatross == 1) {
-                    if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                    if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                         if (this.agent.dying <= 0) {
                             this.image = starbatross
                         } else {
@@ -11621,7 +11621,7 @@ let drawcount = 0
 
                     }
                 } else if (this.agent.megagnat == 1) {
-                    if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                    if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                         if (this.agent.dying <= 0) {
                             this.image = megagnat
                         } else {
@@ -11638,7 +11638,7 @@ let drawcount = 0
             } else if (this.agent.alagadile == 1) {
                 if (this.agent.bigalagadile == 1) {
 
-                    if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                    if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                         if (this.agent.dying <= 0) {
                             this.image = bigalagadile
                         } else {
@@ -11656,7 +11656,7 @@ let drawcount = 0
                         }
                     }
                 } else if (this.agent.babyalagadile == 1) {
-                    if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                    if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                         if (this.agent.dying <= 0) {
                             this.image = alagadile
                         } else {
@@ -11671,7 +11671,7 @@ let drawcount = 0
                         }
                     }
                 } else if (this.agent.hunchalagadile == 1) {
-                    if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                    if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                         if (this.agent.dying <= 0) {
                             this.image = hunchalagadile
                         } else {
@@ -11686,7 +11686,7 @@ let drawcount = 0
 
                     }
                 } else if (this.agent.bighunchalagadile == 1) {
-                    if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                    if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                         if (this.agent.dying <= 0) {
                             this.image = bighunchalagadile
                         } else {
@@ -11702,7 +11702,7 @@ let drawcount = 0
                 }
             } else {
                 if (this.agent.targetroid == 1) {
-                    if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                    if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                         this.image = targetroidimg
                     } else {
                         this.image = targetroidimginv
@@ -11711,7 +11711,7 @@ let drawcount = 0
                     if (this.agent.dying <= 0) {
 
                         if (this.agent.hamartanscout == 1) {
-                            if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                            if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                                 this.image = hamartanscout
                             } else {
                                 this.image = hamartanscoutinv
@@ -11719,7 +11719,7 @@ let drawcount = 0
                             }
                         } else if (this.agent.hamartansoldier == 1) {
 
-                            if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                            if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                                 this.image = hamartansoldier
                             } else {
                                 this.image = hamartansoldierinv
@@ -11727,14 +11727,14 @@ let drawcount = 0
                             }
                         } else if (this.agent.hamartaninvader == 1) {
 
-                            if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                            if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                                 this.image = hamartaninvader
                             } else {
                                 this.image = hamartaninvaderinv
 
                             }
                         } else if (this.agent.hamartanworker == 1) {
-                            if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                            if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                                 this.image = hamartanworker
                             } else {
                                 this.image = hamartanworkerinv
@@ -11749,7 +11749,7 @@ let drawcount = 0
                         if (this.agent.super == 1) {
                             this.image = superdrone
                         } else {
-                            if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                            if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                                 this.image = drone
                             } else {
                                 this.image = droneinv
@@ -11757,7 +11757,7 @@ let drawcount = 0
                             }
                         }
                     } else {
-                        if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                        if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                             this.image = dronedeath
                         } else {
                             this.image = dronedeathinv
@@ -11770,7 +11770,7 @@ let drawcount = 0
                         if (this.agent.super == 1) {
                             this.image = superinfantry
                         } else {
-                            if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                            if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                                 this.image = infantry
                             } else {
                                 this.image = infantryinv
@@ -11779,7 +11779,7 @@ let drawcount = 0
                         }
                     } else {
 
-                        if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                        if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                             this.image = infantrydeath
                         } else {
                             this.image = infantrydeathinv
@@ -11791,7 +11791,7 @@ let drawcount = 0
                         if (this.agent.super == 1) {
                             this.image = supersniper1
                         } else {
-                            if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                            if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                                 this.image = sniper1
                             } else {
 
@@ -11801,7 +11801,7 @@ let drawcount = 0
                         }
                     } else {
 
-                        if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                        if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                             this.image = sniper1death
                         } else {
                             this.image = sniper1deathinv
@@ -11814,7 +11814,7 @@ let drawcount = 0
                         if (this.agent.super == 1) {
                             this.image = superharvester
                         } else {
-                            if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                            if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                                 this.image = harvester
                             } else {
                                 this.image = harvesterinv
@@ -11831,7 +11831,7 @@ let drawcount = 0
                         if (this.agent.sana == 1) {
                             this.image = nymphsana
                         } else {
-                            if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                            if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                                 this.image = nymph
                             } else {
                                 this.image = nymphinv
@@ -11839,7 +11839,7 @@ let drawcount = 0
                         }
                     } else {
 
-                        if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                        if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                             this.image = nymphdeath
                         } else {
 
@@ -11852,7 +11852,7 @@ let drawcount = 0
                         if (this.agent.sana == 1) {
                             this.image = scuttlersana
                         } else {
-                            if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                            if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                                 this.image = scuttler
                             } else {
                                 this.image = scuttlerinv
@@ -11861,7 +11861,7 @@ let drawcount = 0
                         }
                     } else {
 
-                        if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                        if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                             this.image = scuttlerdeathimg
                         } else {
 
@@ -11873,7 +11873,7 @@ let drawcount = 0
 
                     if (this.agent.dying >= 1) {
 
-                        if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                        if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                             this.image = gamergatedeath
                         } else {
 
@@ -11886,7 +11886,7 @@ let drawcount = 0
                             if (this.agent.sana == 1) {
                                 this.image = gamergatesana
                             } else {
-                                if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                                if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                                     this.image = gamergate
                                 } else {
                                     this.image = gamergateinv
@@ -11898,7 +11898,7 @@ let drawcount = 0
                                 if (this.agent.sana == 1) {
                                     this.image = gamergatedugsana
                                 } else {
-                                    if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                                    if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                                         this.image = gamergatedug
                                     } else {
                                         this.image = gamergateduginv
@@ -11929,7 +11929,7 @@ let drawcount = 0
                                     if (this.agent.sana == 1) {
                                         this.image = gamergatedugsana
                                     } else {
-                                        if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                                        if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                                             this.image = gamergatedug
                                         } else {
                                             this.image = gamergateduginv
@@ -11951,7 +11951,7 @@ let drawcount = 0
                             this.image = imagosana
                         } else {
 
-                            if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                            if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                                 this.image = imago
                             } else {
 
@@ -11960,7 +11960,7 @@ let drawcount = 0
                         }
                     } else {
 
-                        if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                        if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                             this.image = imagodeath
                         } else {
 
@@ -11969,13 +11969,13 @@ let drawcount = 0
                     }
                 } else if (this.agent.pollinator == 1) {
                     if (this.agent.dying <= 0) {
-                        if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                        if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                             this.image = librilbianpollinator
                         } else {
                             this.image = librilbianpollinatorinv
                         }
                     } else {
-                        if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                        if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                             this.image = librilbianpollinatordeath
 
                         } else {
@@ -11985,14 +11985,14 @@ let drawcount = 0
                     }
                 } else if (this.agent.goliophyte == 1) {
                     if (this.agent.dying <= 0) {
-                        if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                        if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                             this.image = librilbiangoliophyte
                         } else {
                             this.image = librilbiangoliophyteinv
                         }
                     } else {
 
-                        if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                        if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                             this.image = librilbiangoliophytedeath
 
                         } else {
@@ -12002,14 +12002,14 @@ let drawcount = 0
                     }
                 } else if (this.agent.pufffellow == 1) {
                     if (this.agent.dying <= 0) {
-                        if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                        if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                             this.image = librilbianpufffellow
                         } else {
                             this.image = librilbianpufffellowinv
                         }
                     } else {
 
-                        if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                        if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                             this.image = librilbianpufffellowdeath
 
                         } else {
@@ -12020,7 +12020,7 @@ let drawcount = 0
                     }
                 } else if (this.agent.podman == 1) {
                     if (this.agent.dying <= 0) {
-                        if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                        if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                             this.image = librilbianpodman
                         } else {
                             this.image = librilbianpodmaninv
@@ -12028,7 +12028,7 @@ let drawcount = 0
                     } else {
 
 
-                        if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                        if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                             this.image = librilbianpodmandeath
 
                         } else {
@@ -12038,14 +12038,14 @@ let drawcount = 0
                     }
                 } else if (this.agent.fruiting == 1) {
                     if (this.agent.dying <= 0) {
-                        if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                        if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                             this.image = fruitingbuddy
                         } else {
                             this.image = fruitingbuddyinv
                         }
                     } else {
 
-                        if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                        if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                             this.image = fruitingbuddydeath
                         } else {
                             this.image = fruitingbuddydeathinv
@@ -12054,7 +12054,7 @@ let drawcount = 0
                 } else if (this.agent.mycoknight == 1) {
 
                     if (this.agent.dying <= 0) {
-                        if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                        if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                             this.image = mycoknight
                         } else {
                             this.image = mycoknightinv
@@ -12062,7 +12062,7 @@ let drawcount = 0
                         }
                     } else {
 
-                        if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                        if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                             this.image = mycoknightdeath
                         } else {
                             this.image = mycoknightdeathinv
@@ -12072,14 +12072,14 @@ let drawcount = 0
                 } else if (this.agent.sporevizir == 1) {
 
                     if (this.agent.dying <= 0) {
-                        if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                        if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                             this.image = sporevizir
                         } else {
                             this.image = sporevizirinv
 
                         }
                     } else {
-                        if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                        if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                             this.image = sporevizirdeath
 
                         } else {
@@ -12092,14 +12092,14 @@ let drawcount = 0
                 } else if (this.agent.seer == 1) {
 
                     if (this.agent.dying <= 0) {
-                        if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                        if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                             this.image = sporeseer
                         } else {
                             this.image = sporeseerinv
 
                         }
                     } else {
-                        if (sandmap.players.indexOf(this.agent.faction) == 0) {
+                        if (sandmap.players.indexOf(this.agent.faction) == sandmap.turn) {
                             this.image = sporeseerdeath
                         } else {
                             this.image = sporeseerdeathinv
@@ -12281,14 +12281,14 @@ let drawcount = 0
 
 
             for(let t = 0;t<data.length;t++){
-                if(data[t].data > 0){
+                if(data[t].d > 0){
                     ////console.log(data[t], "base")
                     
-                    let id =  data[t].data%1  //Math.floor((data[t]%1)*1000)/1000
+                    let id =  data[t].d%1  //Math.floor((data[t]%1)*1000)/1000
                     ////console.log(id, "id")
-                    data[t].data = Math.floor(data[t].data)
+                    data[t].d = Math.floor(data[t].d)
                     ////console.log(data[t], "after")
-                    let background = invert_cantor(data[t].data)
+                    let background = invert_cantor(data[t].d)
                     let backgroundtk = invert_cantor(background.x)
                     let backgroundval = invert_cantor(background.y)
                     let standee = new Agent(sandmap.blocks[backgroundval.x][backgroundval.y], sandmap.players[Math.abs(sandmap.turn-1)])
@@ -12469,16 +12469,16 @@ let drawcount = 0
 
 
     for (let t = 0; t < data.length; t++) {
-        if (data[t].data != 0) {
+        if (data[t].d != 0) {
             ////console.log(data[t].walk)
-            if (data[t].data <= -1) {
-                data[t].data = Math.abs(data[t].data)
+            if (data[t].d <= -1) {
+                data[t].d = Math.abs(data[t].d)
                 if(Math.floor(data[t].walk) > 0){
                     continue
                 }
                 let id = data[t].walk%1
-                data[t].data = Math.floor(data[t].data)
-                let background = invert_cantor(data[t].data)
+                data[t].d = Math.floor(data[t].d)
+                let background = invert_cantor(data[t].d)
                 let backgroundtk = invert_cantor(background.x)
                 let backgroundval = invert_cantor(background.y)
                 backgroundval.type = backgroundtk.y
@@ -12660,12 +12660,12 @@ let drawcount = 0
             } else {
 
                 ////console.log(4)
-                let id = data[t].data % 1
-                data[t].data = Math.floor(data[t].data)
-                let nextwalk = invert_cantor(data[t].walk)
+                let id = data[t].d % 1
+                data[t].d = Math.floor(data[t].d)
+                let nextwalk = invert_cantor(data[t].w)
                 let walkdying = invert_cantor(nextwalk.x)
                 let proceed = invert_cantor(nextwalk.y)
-                let background = invert_cantor(data[t].data)
+                let background = invert_cantor(data[t].d)
                 let backgroundtk = invert_cantor(background.x)
                 let backgroundval = invert_cantor(background.y)
                 let standee
@@ -30126,7 +30126,7 @@ let drawcount = 0
                         let grid = []
                         let tk = (0.5 * (Math.round(this.tile.t) + this.tile.k) * (Math.round(this.tile.t) + this.tile.k + 1)) + this.tile.k
                         tk+= this.attacktarget.id
-                        grid.push({course:tk})
+                        grid.push({c:tk})
                         let Json = {}
                         Json.array = [...grid]
                         Json.player = sandmap.turn
@@ -33679,8 +33679,8 @@ let drawcount = 0
 
                         if(onlineNow == 1){
                             let Json = {}
-                            Json.damage = Math.max((this.damage * 3) - this.attacktarget.defense, 0)
-                            Json.index = this.shots[t].refhealth.id // sandmap.players[Math.abs(sandmap.turn-1)].units.indexOf(this.attacktarget) //this.shots[t].refhealth.index //sandmap.players[Math.abs(sandmap.turn-1)].units.indexOf(this.shots[t].refhealth)
+                            Json.d = Math.max((this.damage * 3) - this.attacktarget.defense, 0)
+                            Json.i = this.shots[t].refhealth.id // sandmap.players[Math.abs(sandmap.turn-1)].units.indexOf(this.attacktarget) //this.shots[t].refhealth.index //sandmap.players[Math.abs(sandmap.turn-1)].units.indexOf(this.shots[t].refhealth)
                             // roughSizeOfObject(Json)
                             ws.send(JSON.stringify(Json))
                         }
