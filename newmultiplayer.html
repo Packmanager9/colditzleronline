@@ -7286,10 +7286,10 @@ let drawcount = 0
 
                 //spliceout
 
-                // for (let t = 0; t < sandmap.players[Math.abs(sandmap.turn - 1)].units.length; t++) {
-                //     sandmap.players[Math.abs(sandmap.turn - 1)].units[t].tile.walkable = true
-                //     sandmap.players[Math.abs(sandmap.turn - 1)].units[t].tile.occupied = false
-                // }
+                for (let t = 0; t < sandmap.players[Math.abs(sandmap.turn - 1)].units.length; t++) {
+                    sandmap.players[Math.abs(sandmap.turn - 1)].units[t].tile.walkable = true
+                    sandmap.players[Math.abs(sandmap.turn - 1)].units[t].tile.occupied = false
+                }
 
 
 
@@ -25322,6 +25322,14 @@ let drawcount = 0
 
             totalBlank(tile, size) {
                 this.size = size
+                
+            this.tile.drawish = 0
+            this.tile.walkable = true
+            this.tile.occupied = false
+            this.tile.occupant = {}
+            this.tile.occupant.moving = false
+            this.tile.occupant.faction = {}
+            this.tile.occupant.faction.id = -1
             this.tile = tile
             this.waypoint = this.tile
             this.tile.wallflag = 0
@@ -31660,7 +31668,26 @@ let drawcount = 0
         }
         incrementMove() {
 
+            this.tile.drawish = 0
+            this.tile.walkable = true
+            this.tile.occupied = false
+            this.tile.occupant = {}
+            this.tile.occupant.moving = false
+            this.tile.occupant.faction = {}
+            this.tile.occupant.faction.id = -1
             if(onlineNow == 1 && sandmap.players.indexOf(this.faction) != sandmap.turn){
+            this.tile.occupied = true
+            this.tile.occupant = this
+            if (this.index == this.realPath.length - 1) {
+                this.tile.occupant.moving = false
+            } else {
+                this.tile.occupant.moving = true
+            }
+
+            if (this.submerged != 1) {
+                this.tile.walkable = false
+            }
+            this.tile.drawish = 1
                 return
             }
             if (this.awaiting > 0) {
@@ -31680,13 +31707,6 @@ let drawcount = 0
                     }
                 }
             }
-            this.tile.drawish = 0
-            this.tile.walkable = true
-            this.tile.occupied = false
-            this.tile.occupant = {}
-            this.tile.occupant.moving = false
-            this.tile.occupant.faction = {}
-            this.tile.occupant.faction.id = -1
             if (this.tile.id != this.realPath[this.index].id) {
                 this.heatmoved = 1
             }
