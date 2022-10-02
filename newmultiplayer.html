@@ -821,7 +821,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
     funintro.src = "https://ditzbitz.com/funintro.png"
     const aveintro = new Image()
     aveintro.src = "https://ditzbitz.com/aveintro.png"
+    const gogonautfaces = new Image()
+    gogonautfaces.src = "https://ditzbitz.com/gogonautfaces.png"
+    const alagadilefaces = new Image()
+    alagadilefaces.src = "https://ditzbitz.com/alagadilefaces.png"
 
+    
 
 
     // gogonaughts sprites
@@ -3870,15 +3875,19 @@ let drawcount = 0
                         swap2.draw()
                         swap3.draw()
                         swap4.draw()
-                        AImodeButton.draw()
-                        if(AImode == 0){
-                            canvas_context.font = "20px Arial";
-                            canvas_context.fillStyle = "#FFFFFF"
-                            canvas_context.fillText("Offline AI", AImodeButton.x + 5, AImodeButton.y + 40)
+                        if(swap.stop == 1 || swap2.stop == 1 || swap3.stop == 1 || swap4.stop == 1){
+                            
                         }else{
-                            canvas_context.font = "20px Arial";
-                            canvas_context.fillStyle = "#FFFFFF"
-                            canvas_context.fillText("Go Online", AImodeButton.x + 5, AImodeButton.y + 40)
+                            AImodeButton.draw()
+                            if(AImode == 0){
+                                canvas_context.font = "20px Arial";
+                                canvas_context.fillStyle = "#FFFFFF"
+                                canvas_context.fillText("Offline AI", AImodeButton.x + 5, AImodeButton.y + 40)
+                            }else{
+                                canvas_context.font = "20px Arial";
+                                canvas_context.fillStyle = "#FFFFFF"
+                                canvas_context.fillText("Go Online", AImodeButton.x + 5, AImodeButton.y + 40)
+                            }
                         }
 
                         canvas_context.font = "20px Arial";
@@ -4028,7 +4037,7 @@ let drawcount = 0
                     canvas_context.fillText("Back", playbutton.x + 35, playbutton.y + 50)
                     canvas_context.font = "40px Arial";
                     canvas_context.fillStyle = "#FFFFFF"
-                    if (manual < 6) {
+                    if (manual < 11) {
                         canvas_context.fillText("Next", guideplus.x + 35, guideplus.y + 50)
                     } else {
                         canvas_context.fillText("Again", guideplus.x + 35, guideplus.y + 50)
@@ -4135,7 +4144,7 @@ let drawcount = 0
 
                         if (true) {
                             const invscale = 1
-                            const string = "As humans. hold B and click a tile to build a wall, hold X and click a wall to remove it."
+                            const string = "As humans. hold Q and click a tile to build a wall, hold X and click a wall to remove it."
                             let ypointer = 50
                             let xpointer = 10
                             canvas_context.font = "30px Arial";
@@ -4159,7 +4168,7 @@ let drawcount = 0
                         }
                         if (true) {
                             const invscale = 1
-                            const string = "Hold G and click a tile to build a gate, gates can open and closed for units to pass."
+                            const string = "Hold R and click a tile to build a gate, gates can open and closed for units to pass."
                             let ypointer = 100
                             let xpointer = 10
                             canvas_context.font = "30px Arial";
@@ -4183,7 +4192,7 @@ let drawcount = 0
                         }
                         if (true) {
                             const invscale = 1
-                            const string = "Hold N and click a tile to build a barracks. Click it to select it to make infantry and snipers using the UI."
+                            const string = "Hold C and click a tile to build a barracks. Click it to select it to make infantry and snipers using the UI."
                             let ypointer = 150
                             let xpointer = 10
                             canvas_context.font = "30px Arial";
@@ -4207,7 +4216,7 @@ let drawcount = 0
                         }
                         if (true) {
                             const invscale = 1
-                            const string = "Hold M and click a tile to build a machine lab. Click it to select it to make scout drones and harvesters using the UI."
+                            const string = "Hold E and click a tile to build a machine lab. Click it to select it to make scout drones and harvesters using the UI."
                             let ypointer = 250
                             let xpointer = 10
                             canvas_context.font = "30px Arial";
@@ -4377,7 +4386,7 @@ let drawcount = 0
                         }
                         if (true) {
                             const invscale = 1
-                            const string = "Hold B and click to build a spire to condition the air."
+                            const string = "hold Q and click to build a spire to condition the air."
                             let ypointer = 120
                             let xpointer = 10
                             canvas_context.font = "30px Arial";
@@ -4401,7 +4410,7 @@ let drawcount = 0
 
                         if (true) {
                             const invscale = 1
-                            const string = "Hold N and click for a soldier assembler."
+                            const string = "Hold C and click for a soldier assembler."
                             let ypointer = 190
                             let xpointer = 10
                             canvas_context.font = "30px Arial";
@@ -4425,7 +4434,7 @@ let drawcount = 0
 
                         if (true) {
                             const invscale = 1
-                            const string = "Hold M and click for a scout assembler."
+                            const string = "Hold E and click for a scout assembler."
                             let ypointer = 260
                             let xpointer = 10
                             canvas_context.font = "30px Arial";
@@ -4448,7 +4457,7 @@ let drawcount = 0
                         }
                         if (true) {
                             const invscale = 1
-                            const string = "Hold G and click for a 'high-caste' assembler where workers and invaders are made."
+                            const string = "Hold R and click for a 'high-caste' assembler where workers and invaders are made."
                             let ypointer = 330
                             let xpointer = 10
                             canvas_context.font = "30px Arial";
@@ -4520,7 +4529,7 @@ let drawcount = 0
                         }
                         if (true) {
                             const invscale = 1
-                            const string = "Hold N and click to plant a bulbplant, it can seed pollinators, your core gathering unit."
+                            const string = "Hold C and click to plant a bulbplant, it can seed pollinators, your core gathering unit."
                             let ypointer = 110
                             let xpointer = 10
                             canvas_context.font = "30px Arial";
@@ -4543,7 +4552,7 @@ let drawcount = 0
                         }
                         if (true) {
                             const invscale = 1
-                            const string = "Hold M and click to plant a podmother, it can create fighting units."
+                            const string = "Hold E and click to plant a podmother, it can create fighting units."
                             let ypointer = 170
                             let xpointer = 10
                             canvas_context.font = "30px Arial";
@@ -4638,7 +4647,7 @@ let drawcount = 0
                         }
                         if (true) {
                             const invscale = 1
-                            const string = "Hold N and click to place a sporeball, it acts as a hub for your gathering slime pathways."
+                            const string = "Hold C and click to place a sporeball, it acts as a hub for your gathering slime pathways."
                             let ypointer = 110
                             let xpointer = 10
                             canvas_context.font = "30px Arial";
@@ -4661,7 +4670,7 @@ let drawcount = 0
                         }
                         if (true) {
                             const invscale = 1
-                            const string = "Hold B and click/drag to create slime pathways to collect hotrock, slime can also create fighting units."
+                            const string = "hold Q and click/drag to create slime pathways to collect hotrock, slime can also create fighting units."
                             let ypointer = 170
                             let xpointer = 10
                             canvas_context.font = "30px Arial";
@@ -4728,7 +4737,7 @@ let drawcount = 0
                                 }
                             }
                         }
-                    } else if (manual == 6) {
+                    }else if (manual == 6) {
                         canvas_context.drawImage(aveintro, 0, 0, 256, 64, 1280 - 512, 720 - 128, 512, 128)
 
                         if (true) {
@@ -4756,7 +4765,7 @@ let drawcount = 0
                         }
                         if (true) {
                             const invscale = 1
-                            const string = "Hold B and click to place a eggmound, it acts as a hub for your egg production."
+                            const string = "hold Q and click to place a eggmound, it acts as a hub for your egg production."
                             let ypointer = 110
                             let xpointer = 10
                             canvas_context.font = "30px Arial";
@@ -4846,7 +4855,528 @@ let drawcount = 0
                                 }
                             }
                         }
-                    }
+                    } else if (manual == 7) {
+                        canvas_context.drawImage(schlorkupineface, 0, 0, 64, 64, 1280 - 512, 720 - 128, 128, 128)
+
+                        if (true) {
+                            const invscale = 1
+                            const string = "As the Schlorkupine, you are alone."
+                            let ypointer = 50
+                            let xpointer = 10
+                            canvas_context.font = "30px Arial";
+                            canvas_context.fillStyle = "#FFFFFF"
+                            const stoarr = string.split(' ')
+                            let stostring = ''
+                            for (let t = 0; t < stoarr.length; t++) {
+                                const width = canvas_context.measureText(stostring + ' ' + stoarr[t]).width
+                                if (width > canvas.width * invscale * .921) {
+                                    canvas_context.fillText(stostring + ' ' + stoarr[t], xpointer, ypointer)
+                                    ypointer += 35
+                                    stostring = ''
+                                } else {
+                                    stostring = stostring + " " + stoarr[t]
+                                    if (t == stoarr.length - 1) {
+                                        canvas_context.fillText(stostring, xpointer, ypointer)
+                                    }
+                                }
+                            }
+                        }
+                        if (true) {
+                            const invscale = 1
+                            const string = "Use QWCR to upgrade the Schlorkupine."
+                            let ypointer = 110
+                            let xpointer = 10
+                            canvas_context.font = "30px Arial";
+                            canvas_context.fillStyle = "#FFFFFF"
+                            const stoarr = string.split(' ')
+                            let stostring = ''
+                            for (let t = 0; t < stoarr.length; t++) {
+                                const width = canvas_context.measureText(stostring + ' ' + stoarr[t]).width
+                                if (width > canvas.width * invscale * .921) {
+                                    canvas_context.fillText(stostring + ' ' + stoarr[t], xpointer, ypointer)
+                                    ypointer += 35
+                                    stostring = ''
+                                } else {
+                                    stostring = stostring + " " + stoarr[t]
+                                    if (t == stoarr.length - 1) {
+                                        canvas_context.fillText(stostring, xpointer, ypointer)
+                                    }
+                                }
+                            }
+                        }
+                        if (true) {
+                            const invscale = 1
+                            const string = "You reflect some incoming damage. Upgrading defense increases the damage you reflect."
+                            let ypointer = 170
+                            let xpointer = 10
+                            canvas_context.font = "30px Arial";
+                            canvas_context.fillStyle = "#FFFFFF"
+                            const stoarr = string.split(' ')
+                            let stostring = ''
+                            for (let t = 0; t < stoarr.length; t++) {
+                                const width = canvas_context.measureText(stostring + ' ' + stoarr[t]).width
+                                if (width > canvas.width * invscale * .921) {
+                                    canvas_context.fillText(stostring + ' ' + stoarr[t], xpointer, ypointer)
+                                    ypointer += 35
+                                    stostring = ''
+                                } else {
+                                    stostring = stostring + " " + stoarr[t]
+                                    if (t == stoarr.length - 1) {
+                                        canvas_context.fillText(stostring, xpointer, ypointer)
+                                    }
+                                }
+                            }
+                        }
+                        if (true) {
+                            const invscale = 1
+                            const string = "Maximizing harvesting will lead to better offense."
+                            let ypointer = 270
+                            let xpointer = 10
+                            canvas_context.font = "30px Arial";
+                            canvas_context.fillStyle = "#FFFFFF"
+                            const stoarr = string.split(' ')
+                            let stostring = ''
+                            for (let t = 0; t < stoarr.length; t++) {
+                                const width = canvas_context.measureText(stostring + ' ' + stoarr[t]).width
+                                if (width > canvas.width * invscale * .921) {
+                                    canvas_context.fillText(stostring + ' ' + stoarr[t], xpointer, ypointer)
+                                    ypointer += 35
+                                    stostring = ''
+                                } else {
+                                    stostring = stostring + " " + stoarr[t]
+                                    if (t == stoarr.length - 1) {
+                                        canvas_context.fillText(stostring, xpointer, ypointer)
+                                    }
+                                }
+                            }
+                        }
+                        if (true) {
+                            const invscale = 1
+                            const string = "Difficulty: Low."
+                            let ypointer = 450
+                            let xpointer = 10
+                            canvas_context.font = "30px Arial";
+                            canvas_context.fillStyle = "#FFFFFF"
+                            const stoarr = string.split(' ')
+                            let stostring = ''
+                            for (let t = 0; t < stoarr.length; t++) {
+                                const width = canvas_context.measureText(stostring + ' ' + stoarr[t]).width
+                                if (width > canvas.width * invscale * .921) {
+                                    canvas_context.fillText(stostring + ' ' + stoarr[t], xpointer, ypointer)
+                                    ypointer += 35
+                                    stostring = ''
+                                } else {
+                                    stostring = stostring + " " + stoarr[t]
+                                    if (t == stoarr.length - 1) {
+                                        canvas_context.fillText(stostring, xpointer, ypointer)
+                                    }
+                                }
+                            }
+                        }
+                    } else if (manual == 8) {
+                        canvas_context.drawImage(targetroidface, 0, 0, 64, 64, 1280 - 512, 720 - 128, 128, 128)
+
+                        if (true) {
+                            const invscale = 1
+                            const string = "As the Targetroid, you are hunter and hunted, working alone."
+                            let ypointer = 50
+                            let xpointer = 10
+                            canvas_context.font = "30px Arial";
+                            canvas_context.fillStyle = "#FFFFFF"
+                            const stoarr = string.split(' ')
+                            let stostring = ''
+                            for (let t = 0; t < stoarr.length; t++) {
+                                const width = canvas_context.measureText(stostring + ' ' + stoarr[t]).width
+                                if (width > canvas.width * invscale * .921) {
+                                    canvas_context.fillText(stostring + ' ' + stoarr[t], xpointer, ypointer)
+                                    ypointer += 35
+                                    stostring = ''
+                                } else {
+                                    stostring = stostring + " " + stoarr[t]
+                                    if (t == stoarr.length - 1) {
+                                        canvas_context.fillText(stostring, xpointer, ypointer)
+                                    }
+                                }
+                            }
+                        }
+                        if (true) {
+                            const invscale = 1
+                            const string = "Use QWCR to upgrade the Targetroid."
+                            let ypointer = 110
+                            let xpointer = 10
+                            canvas_context.font = "30px Arial";
+                            canvas_context.fillStyle = "#FFFFFF"
+                            const stoarr = string.split(' ')
+                            let stostring = ''
+                            for (let t = 0; t < stoarr.length; t++) {
+                                const width = canvas_context.measureText(stostring + ' ' + stoarr[t]).width
+                                if (width > canvas.width * invscale * .921) {
+                                    canvas_context.fillText(stostring + ' ' + stoarr[t], xpointer, ypointer)
+                                    ypointer += 35
+                                    stostring = ''
+                                } else {
+                                    stostring = stostring + " " + stoarr[t]
+                                    if (t == stoarr.length - 1) {
+                                        canvas_context.fillText(stostring, xpointer, ypointer)
+                                    }
+                                }
+                            }
+                        }
+                        if (true) {
+                            const invscale = 1
+                            const string = "You have extreme potential."
+                            let ypointer = 170
+                            let xpointer = 10
+                            canvas_context.font = "30px Arial";
+                            canvas_context.fillStyle = "#FFFFFF"
+                            const stoarr = string.split(' ')
+                            let stostring = ''
+                            for (let t = 0; t < stoarr.length; t++) {
+                                const width = canvas_context.measureText(stostring + ' ' + stoarr[t]).width
+                                if (width > canvas.width * invscale * .921) {
+                                    canvas_context.fillText(stostring + ' ' + stoarr[t], xpointer, ypointer)
+                                    ypointer += 35
+                                    stostring = ''
+                                } else {
+                                    stostring = stostring + " " + stoarr[t]
+                                    if (t == stoarr.length - 1) {
+                                        canvas_context.fillText(stostring, xpointer, ypointer)
+                                    }
+                                }
+                            }
+                        }
+                        if (true) {
+                            const invscale = 1
+                            const string = "Maximizing harvesting will lead to better offense."
+                            let ypointer = 270
+                            let xpointer = 10
+                            canvas_context.font = "30px Arial";
+                            canvas_context.fillStyle = "#FFFFFF"
+                            const stoarr = string.split(' ')
+                            let stostring = ''
+                            for (let t = 0; t < stoarr.length; t++) {
+                                const width = canvas_context.measureText(stostring + ' ' + stoarr[t]).width
+                                if (width > canvas.width * invscale * .921) {
+                                    canvas_context.fillText(stostring + ' ' + stoarr[t], xpointer, ypointer)
+                                    ypointer += 35
+                                    stostring = ''
+                                } else {
+                                    stostring = stostring + " " + stoarr[t]
+                                    if (t == stoarr.length - 1) {
+                                        canvas_context.fillText(stostring, xpointer, ypointer)
+                                    }
+                                }
+                            }
+                        }
+                        if (true) {
+                            const invscale = 1
+                            const string = "Difficulty: Very Low."
+                            let ypointer = 450
+                            let xpointer = 10
+                            canvas_context.font = "30px Arial";
+                            canvas_context.fillStyle = "#FFFFFF"
+                            const stoarr = string.split(' ')
+                            let stostring = ''
+                            for (let t = 0; t < stoarr.length; t++) {
+                                const width = canvas_context.measureText(stostring + ' ' + stoarr[t]).width
+                                if (width > canvas.width * invscale * .921) {
+                                    canvas_context.fillText(stostring + ' ' + stoarr[t], xpointer, ypointer)
+                                    ypointer += 35
+                                    stostring = ''
+                                } else {
+                                    stostring = stostring + " " + stoarr[t]
+                                    if (t == stoarr.length - 1) {
+                                        canvas_context.fillText(stostring, xpointer, ypointer)
+                                    }
+                                }
+                            }
+                        }
+                    } else if (manual == 9) {
+                        canvas_context.drawImage(gogonautfaces, 0, 0, 256, 64, 1280 - 512, 720 - 128, 512, 128)
+
+                        if (true) {
+                            const invscale = 1
+                            const string = "As the Gogonauts. hold Q and click a tile to plant a Gogonaut tree."
+                            let ypointer = 50
+                            let xpointer = 10
+                            canvas_context.font = "30px Arial";
+                            canvas_context.fillStyle = "#FFFFFF"
+                            const stoarr = string.split(' ')
+                            let stostring = ''
+                            for (let t = 0; t < stoarr.length; t++) {
+                                const width = canvas_context.measureText(stostring + ' ' + stoarr[t]).width
+                                if (width > canvas.width * invscale * .921) {
+                                    canvas_context.fillText(stostring + ' ' + stoarr[t], xpointer, ypointer)
+                                    ypointer += 35
+                                    stostring = ''
+                                } else {
+                                    stostring = stostring + " " + stoarr[t]
+                                    if (t == stoarr.length - 1) {
+                                        canvas_context.fillText(stostring, xpointer, ypointer)
+                                    }
+                                }
+                            }
+                        }
+                        if (true) {
+                            const invscale = 1
+                            const string = "The Gogonaut tree can be used to make units."
+                            let ypointer = 110
+                            let xpointer = 10
+                            canvas_context.font = "30px Arial";
+                            canvas_context.fillStyle = "#FFFFFF"
+                            const stoarr = string.split(' ')
+                            let stostring = ''
+                            for (let t = 0; t < stoarr.length; t++) {
+                                const width = canvas_context.measureText(stostring + ' ' + stoarr[t]).width
+                                if (width > canvas.width * invscale * .921) {
+                                    canvas_context.fillText(stostring + ' ' + stoarr[t], xpointer, ypointer)
+                                    ypointer += 35
+                                    stostring = ''
+                                } else {
+                                    stostring = stostring + " " + stoarr[t]
+                                    if (t == stoarr.length - 1) {
+                                        canvas_context.fillText(stostring, xpointer, ypointer)
+                                    }
+                                }
+                            }
+                        }
+                        if (true) {
+                            const invscale = 1
+                            const string = "Difficulty: Very Low."
+                            let ypointer = 450
+                            let xpointer = 10
+                            canvas_context.font = "30px Arial";
+                            canvas_context.fillStyle = "#FFFFFF"
+                            const stoarr = string.split(' ')
+                            let stostring = ''
+                            for (let t = 0; t < stoarr.length; t++) {
+                                const width = canvas_context.measureText(stostring + ' ' + stoarr[t]).width
+                                if (width > canvas.width * invscale * .921) {
+                                    canvas_context.fillText(stostring + ' ' + stoarr[t], xpointer, ypointer)
+                                    ypointer += 35
+                                    stostring = ''
+                                } else {
+                                    stostring = stostring + " " + stoarr[t]
+                                    if (t == stoarr.length - 1) {
+                                        canvas_context.fillText(stostring, xpointer, ypointer)
+                                    }
+                                }
+                            }
+                        }
+                    } else if (manual == 10) {
+                        canvas_context.drawImage(alagadilefaces, 0, 0, 256, 64, 1280 - 512, 720 - 128, 512, 128)
+
+                        if (true) {
+                            const invscale = 1
+                            const string = "As the Alagadiles. hold Q and click a tile to plant a Alagadile pond."
+                            let ypointer = 50
+                            let xpointer = 10
+                            canvas_context.font = "30px Arial";
+                            canvas_context.fillStyle = "#FFFFFF"
+                            const stoarr = string.split(' ')
+                            let stostring = ''
+                            for (let t = 0; t < stoarr.length; t++) {
+                                const width = canvas_context.measureText(stostring + ' ' + stoarr[t]).width
+                                if (width > canvas.width * invscale * .921) {
+                                    canvas_context.fillText(stostring + ' ' + stoarr[t], xpointer, ypointer)
+                                    ypointer += 35
+                                    stostring = ''
+                                } else {
+                                    stostring = stostring + " " + stoarr[t]
+                                    if (t == stoarr.length - 1) {
+                                        canvas_context.fillText(stostring, xpointer, ypointer)
+                                    }
+                                }
+                            }
+                        }
+                        if (true) {
+                            const invscale = 1
+                            const string = "The Alagadile pond can be used to make units."
+                            let ypointer = 110
+                            let xpointer = 10
+                            canvas_context.font = "30px Arial";
+                            canvas_context.fillStyle = "#FFFFFF"
+                            const stoarr = string.split(' ')
+                            let stostring = ''
+                            for (let t = 0; t < stoarr.length; t++) {
+                                const width = canvas_context.measureText(stostring + ' ' + stoarr[t]).width
+                                if (width > canvas.width * invscale * .921) {
+                                    canvas_context.fillText(stostring + ' ' + stoarr[t], xpointer, ypointer)
+                                    ypointer += 35
+                                    stostring = ''
+                                } else {
+                                    stostring = stostring + " " + stoarr[t]
+                                    if (t == stoarr.length - 1) {
+                                        canvas_context.fillText(stostring, xpointer, ypointer)
+                                    }
+                                }
+                            }
+                        }
+                        if (true) {
+                            const invscale = 1
+                            const string = "The Alagadile units are low-cost, strong, but very slow."
+                            let ypointer = 270
+                            let xpointer = 10
+                            canvas_context.font = "30px Arial";
+                            canvas_context.fillStyle = "#FFFFFF"
+                            const stoarr = string.split(' ')
+                            let stostring = ''
+                            for (let t = 0; t < stoarr.length; t++) {
+                                const width = canvas_context.measureText(stostring + ' ' + stoarr[t]).width
+                                if (width > canvas.width * invscale * .921) {
+                                    canvas_context.fillText(stostring + ' ' + stoarr[t], xpointer, ypointer)
+                                    ypointer += 35
+                                    stostring = ''
+                                } else {
+                                    stostring = stostring + " " + stoarr[t]
+                                    if (t == stoarr.length - 1) {
+                                        canvas_context.fillText(stostring, xpointer, ypointer)
+                                    }
+                                }
+                            }
+                        }
+                        if (true) {
+                            const invscale = 1
+                            const string = "Difficulty: High."
+                            let ypointer = 450
+                            let xpointer = 10
+                            canvas_context.font = "30px Arial";
+                            canvas_context.fillStyle = "#FFFFFF"
+                            const stoarr = string.split(' ')
+                            let stostring = ''
+                            for (let t = 0; t < stoarr.length; t++) {
+                                const width = canvas_context.measureText(stostring + ' ' + stoarr[t]).width
+                                if (width > canvas.width * invscale * .921) {
+                                    canvas_context.fillText(stostring + ' ' + stoarr[t], xpointer, ypointer)
+                                    ypointer += 35
+                                    stostring = ''
+                                } else {
+                                    stostring = stostring + " " + stoarr[t]
+                                    if (t == stoarr.length - 1) {
+                                        canvas_context.fillText(stostring, xpointer, ypointer)
+                                    }
+                                }
+                            }
+                        }
+                    } else if (manual == 11) {
+                        // canvas_context.drawImage(beeplefaces, 0, 0, 256, 64, 1280 - 512, 720 - 128, 512, 128)
+
+                        if (true) {
+                            const invscale = 1
+                            const string = "As the Beeple. hold Q and click a tile to make a Beeple hive."
+                            let ypointer = 50
+                            let xpointer = 10
+                            canvas_context.font = "30px Arial";
+                            canvas_context.fillStyle = "#FFFFFF"
+                            const stoarr = string.split(' ')
+                            let stostring = ''
+                            for (let t = 0; t < stoarr.length; t++) {
+                                const width = canvas_context.measureText(stostring + ' ' + stoarr[t]).width
+                                if (width > canvas.width * invscale * .921) {
+                                    canvas_context.fillText(stostring + ' ' + stoarr[t], xpointer, ypointer)
+                                    ypointer += 35
+                                    stostring = ''
+                                } else {
+                                    stostring = stostring + " " + stoarr[t]
+                                    if (t == stoarr.length - 1) {
+                                        canvas_context.fillText(stostring, xpointer, ypointer)
+                                    }
+                                }
+                            }
+                        }
+                        if (true) {
+                            const invscale = 1
+                            const string = "The Beeple hive can be used to make units."
+                            let ypointer = 110
+                            let xpointer = 10
+                            canvas_context.font = "30px Arial";
+                            canvas_context.fillStyle = "#FFFFFF"
+                            const stoarr = string.split(' ')
+                            let stostring = ''
+                            for (let t = 0; t < stoarr.length; t++) {
+                                const width = canvas_context.measureText(stostring + ' ' + stoarr[t]).width
+                                if (width > canvas.width * invscale * .921) {
+                                    canvas_context.fillText(stostring + ' ' + stoarr[t], xpointer, ypointer)
+                                    ypointer += 35
+                                    stostring = ''
+                                } else {
+                                    stostring = stostring + " " + stoarr[t]
+                                    if (t == stoarr.length - 1) {
+                                        canvas_context.fillText(stostring, xpointer, ypointer)
+                                    }
+                                }
+                            }
+                        }
+                        if (true) {
+                            const invscale = 1
+                            const string = "The Beeple hive is expensive, and very difficult for foes to destroy."
+                            let ypointer = 270
+                            let xpointer = 10
+                            canvas_context.font = "30px Arial";
+                            canvas_context.fillStyle = "#FFFFFF"
+                            const stoarr = string.split(' ')
+                            let stostring = ''
+                            for (let t = 0; t < stoarr.length; t++) {
+                                const width = canvas_context.measureText(stostring + ' ' + stoarr[t]).width
+                                if (width > canvas.width * invscale * .921) {
+                                    canvas_context.fillText(stostring + ' ' + stoarr[t], xpointer, ypointer)
+                                    ypointer += 35
+                                    stostring = ''
+                                } else {
+                                    stostring = stostring + " " + stoarr[t]
+                                    if (t == stoarr.length - 1) {
+                                        canvas_context.fillText(stostring, xpointer, ypointer)
+                                    }
+                                }
+                            }
+                        }
+                        if (true) {
+                            const invscale = 1
+                            const string = "The Beeple scout is a very good scout."
+                            let ypointer = 370
+                            let xpointer = 10
+                            canvas_context.font = "30px Arial";
+                            canvas_context.fillStyle = "#FFFFFF"
+                            const stoarr = string.split(' ')
+                            let stostring = ''
+                            for (let t = 0; t < stoarr.length; t++) {
+                                const width = canvas_context.measureText(stostring + ' ' + stoarr[t]).width
+                                if (width > canvas.width * invscale * .921) {
+                                    canvas_context.fillText(stostring + ' ' + stoarr[t], xpointer, ypointer)
+                                    ypointer += 35
+                                    stostring = ''
+                                } else {
+                                    stostring = stostring + " " + stoarr[t]
+                                    if (t == stoarr.length - 1) {
+                                        canvas_context.fillText(stostring, xpointer, ypointer)
+                                    }
+                                }
+                            }
+                        }
+                        if (true) {
+                            const invscale = 1
+                            const string = "Difficulty: Very Low."
+                            let ypointer = 450
+                            let xpointer = 10
+                            canvas_context.font = "30px Arial";
+                            canvas_context.fillStyle = "#FFFFFF"
+                            const stoarr = string.split(' ')
+                            let stostring = ''
+                            for (let t = 0; t < stoarr.length; t++) {
+                                const width = canvas_context.measureText(stostring + ' ' + stoarr[t]).width
+                                if (width > canvas.width * invscale * .921) {
+                                    canvas_context.fillText(stostring + ' ' + stoarr[t], xpointer, ypointer)
+                                    ypointer += 35
+                                    stostring = ''
+                                } else {
+                                    stostring = stostring + " " + stoarr[t]
+                                    if (t == stoarr.length - 1) {
+                                        canvas_context.fillText(stostring, xpointer, ypointer)
+                                    }
+                                }
+                            }
+                        }
+                    } 
                 }
             }
             
@@ -5151,10 +5681,14 @@ let drawcount = 0
                                 // swap3.stop = 1
                                 swap4.draw = empty
                                 // swap4.stop = 1
-                                controlking = 1
+                                // controlking = 1
                             }else{
                                 sandmap.turn = -1
                                 AImode = 0
+                                swap1.stop = 0
+                                swap2.stop = 0
+                                swap3.stop = 0
+                                swap4.stop = 0
                                 swap.draw = uibox.draw
                                 swap2.draw = uibox.draw
                                 swap3.draw = uibox.draw
@@ -5341,7 +5875,7 @@ let drawcount = 0
                     if (playstart == 4) {
                         if (guideplus.isPointInside(TIP_engine)) {
                             manual += 1
-                            manual %= 7
+                            manual %= 12
                         }
                         if (playbutton.isPointInside(TIP_engine)) {
                             manual = 0
