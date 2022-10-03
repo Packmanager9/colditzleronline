@@ -10838,7 +10838,7 @@ let drawcount = 0
                                 canvas_context.fillText("Worker: 100", this.faction.buildings[t].commandPanel.commandButtons[0].x + 1, this.faction.buildings[t].commandPanel.commandButtons[0].y + 66)
                                 canvas_context.fillText("Scout: 100", this.faction.buildings[t].commandPanel.commandButtons[1].x + 1, this.faction.buildings[t].commandPanel.commandButtons[1].y + 66)
                                 canvas_context.fillText("Soldier: 230", this.faction.buildings[t].commandPanel.commandButtons[2].x + 1, this.faction.buildings[t].commandPanel.commandButtons[2].y + 66)
-                                canvas_context.fillText("Queen: 400", this.faction.buildings[t].commandPanel.commandButtons[3].x + 1, this.faction.buildings[t].commandPanel.commandButtons[3].y + 66)
+                                canvas_context.fillText("Queen: 450", this.faction.buildings[t].commandPanel.commandButtons[3].x + 1, this.faction.buildings[t].commandPanel.commandButtons[3].y + 66)
                             }
                             if (this.faction.buildings[t].timer > 0) {
                                 if (dataflop == 0) {
@@ -26967,16 +26967,16 @@ let drawcount = 0
                 if (this.que == 1) {
                     return
                 }
-                if (this.faction.hotrock >= 400 && this.faction.units.length < (unitcap)) {
-                    this.faction.hotrock -= 400
+                if (this.faction.hotrock >= 450 && this.faction.units.length < (unitcap)) {
+                    this.faction.hotrock -= 450
                     this.que = 1
                     this.beemega = 1
                     this.timer = 300 //70
                     this.maxtimer = this.timer
                 }
             } else {
-                if (this.faction.hotrock >= 400 && this.faction.units.length < (unitcap)) {
-                    this.faction.hotrock -= 400
+                if (this.faction.hotrock >= 450 && this.faction.units.length < (unitcap)) {
+                    this.faction.hotrock -= 450
                     this.que = 1
                     this.loaded.push('beemega')
                     this.times.push(300)
@@ -28734,7 +28734,7 @@ let drawcount = 0
             this.firerate = gargantuanNumber / 3
             this.decayRate = 0
             this.damage = 14
-            this.name = "Worker Beeple"
+            this.name = "Beeple Worker"
             // this.nymph = 1
             this.defense = 0
             this.sight = 1 + this.movespeed
@@ -28754,7 +28754,7 @@ let drawcount = 0
             this.body.color = "teal"
             this.body.radius = 4
             this.movespeed = 4
-            this.firerate = gargantuanNumber / 3
+            this.firerate = gargantuanNumber / 6
             this.decayRate = 0
             this.damage = 22
             this.name = "Beeple Soldier"
@@ -28777,7 +28777,7 @@ let drawcount = 0
             this.body.color = "teal"
             this.body.radius = 4
             this.movespeed = 6
-            this.firerate = gargantuanNumber / 8
+            this.firerate = gargantuanNumber / 9
             this.decayRate = 0
             this.damage = 51
             this.name = "Beeple Queen"
