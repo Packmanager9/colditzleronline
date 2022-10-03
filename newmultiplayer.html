@@ -4887,7 +4887,7 @@ let drawcount = 0
                         }
                         if (true) {
                             const invscale = 1
-                            const string = "Use QWCR to upgrade the Schlorkupine."
+                            const string = "Use QECR to upgrade the Schlorkupine."
                             let ypointer = 110
                             let xpointer = 10
                             canvas_context.font = "30px Arial";
@@ -5005,7 +5005,7 @@ let drawcount = 0
                         }
                         if (true) {
                             const invscale = 1
-                            const string = "Use QWCR to upgrade the Targetroid."
+                            const string = "Use QECR to upgrade the Targetroid."
                             let ypointer = 110
                             let xpointer = 10
                             canvas_context.font = "30px Arial";
@@ -5172,7 +5172,7 @@ let drawcount = 0
 
                         if (true) {
                             const invscale = 1
-                            const string = "As the Alagadiles. hold Q and click a tile to plant a Alagadile pond."
+                            const string = "As the Alagadiles. hold Q and click a tile to dig an Alagadile pond."
                             let ypointer = 50
                             let xpointer = 10
                             canvas_context.font = "30px Arial";
@@ -5220,6 +5220,29 @@ let drawcount = 0
                             const invscale = 1
                             const string = "The Alagadile units are low-cost, strong, but very slow."
                             let ypointer = 270
+                            let xpointer = 10
+                            canvas_context.font = "30px Arial";
+                            canvas_context.fillStyle = "#FFFFFF"
+                            const stoarr = string.split(' ')
+                            let stostring = ''
+                            for (let t = 0; t < stoarr.length; t++) {
+                                const width = canvas_context.measureText(stostring + ' ' + stoarr[t]).width
+                                if (width > canvas.width * invscale * .921) {
+                                    canvas_context.fillText(stostring + ' ' + stoarr[t], xpointer, ypointer)
+                                    ypointer += 35
+                                    stostring = ''
+                                } else {
+                                    stostring = stostring + " " + stoarr[t]
+                                    if (t == stoarr.length - 1) {
+                                        canvas_context.fillText(stostring, xpointer, ypointer)
+                                    }
+                                }
+                            }
+                        }
+                        if (true) {
+                            const invscale = 1
+                            const string = "Building a Teleporter with E, can prove to be a good investment."
+                            let ypointer = 370
                             let xpointer = 10
                             canvas_context.font = "30px Arial";
                             canvas_context.fillStyle = "#FFFFFF"
@@ -5315,6 +5338,29 @@ let drawcount = 0
                             const invscale = 1
                             const string = "The Beeple hive is expensive, and very difficult for foes to destroy."
                             let ypointer = 270
+                            let xpointer = 10
+                            canvas_context.font = "30px Arial";
+                            canvas_context.fillStyle = "#FFFFFF"
+                            const stoarr = string.split(' ')
+                            let stostring = ''
+                            for (let t = 0; t < stoarr.length; t++) {
+                                const width = canvas_context.measureText(stostring + ' ' + stoarr[t]).width
+                                if (width > canvas.width * invscale * .921) {
+                                    canvas_context.fillText(stostring + ' ' + stoarr[t], xpointer, ypointer)
+                                    ypointer += 35
+                                    stostring = ''
+                                } else {
+                                    stostring = stostring + " " + stoarr[t]
+                                    if (t == stoarr.length - 1) {
+                                        canvas_context.fillText(stostring, xpointer, ypointer)
+                                    }
+                                }
+                            }
+                        }
+                        if (true) {
+                            const invscale = 1
+                            const string = "Beeple produce heat for each other and move faster while warm."
+                            let ypointer = 320
                             let xpointer = 10
                             canvas_context.font = "30px Arial";
                             canvas_context.fillStyle = "#FFFFFF"
@@ -6080,19 +6126,7 @@ let drawcount = 0
                         if (sandmap.players[sandmap.turn].flopped == 1 && sandmap.players[sandmap.turn].playerUI.state == 0) {
                             if (sandmap.players[sandmap.turn].commandPanel.commandButtons[1].isPointInside(TIP_engine)) {
 
-                                if (sandmap.players[sandmap.turn].Nflag == 0) {
-                                    sandmap.players[sandmap.turn].Bflag = 0
-                                    sandmap.players[sandmap.turn].Nflag = 1
-                                    sandmap.players[sandmap.turn].Mflag = 0
-                                    sandmap.players[sandmap.turn].Gflag = 0
-                                } else if (sandmap.players[sandmap.turn].Nflag == 1) {
-                                    sandmap.players[sandmap.turn].Nflag = 0
-                                }
-                            }
-                        }
-
-                        if (sandmap.players[sandmap.turn].flopped == 1 && sandmap.players[sandmap.turn].playerUI.state == 0) {
-                            if (sandmap.players[sandmap.turn].commandPanel.commandButtons[2].isPointInside(TIP_engine)) {
+                                    if(sandmap.players[sandmap.turn].type == 7){
                                 if (sandmap.players[sandmap.turn].Mflag == 0) {
                                     sandmap.players[sandmap.turn].Bflag = 0
                                     sandmap.players[sandmap.turn].Nflag = 0
@@ -6101,6 +6135,33 @@ let drawcount = 0
                                 } else if (sandmap.players[sandmap.turn].Mflag == 1) {
                                     sandmap.players[sandmap.turn].Mflag = 0
                                 }
+                                    }else{
+                                if (sandmap.players[sandmap.turn].Nflag == 0) {
+                                    sandmap.players[sandmap.turn].Bflag = 0
+                                    sandmap.players[sandmap.turn].Nflag = 1
+                                    sandmap.players[sandmap.turn].Mflag = 0
+                                    sandmap.players[sandmap.turn].Gflag = 0
+                                } else if (sandmap.players[sandmap.turn].Nflag == 1) {
+                                    sandmap.players[sandmap.turn].Nflag = 0
+                                }
+                                    }
+                            }
+                        }
+
+                        if (sandmap.players[sandmap.turn].flopped == 1 && sandmap.players[sandmap.turn].playerUI.state == 0) {
+                            if (sandmap.players[sandmap.turn].commandPanel.commandButtons[2].isPointInside(TIP_engine)) {
+                                    if(sandmap.players[sandmap.turn].type == 7){
+                                    }else{
+
+                                if (sandmap.players[sandmap.turn].Mflag == 0) {
+                                    sandmap.players[sandmap.turn].Bflag = 0
+                                    sandmap.players[sandmap.turn].Nflag = 0
+                                    sandmap.players[sandmap.turn].Mflag = 1
+                                    sandmap.players[sandmap.turn].Gflag = 0
+                                } else if (sandmap.players[sandmap.turn].Mflag == 1) {
+                                    sandmap.players[sandmap.turn].Mflag = 0
+                                }
+                                    }
                             }
                         }
                         if (sandmap.players[sandmap.turn].flopped == 1 && sandmap.players[sandmap.turn].playerUI.state == 0) {
