@@ -97,99 +97,99 @@ window.addEventListener('DOMContentLoaded', (event) => {
     let unitcap = 50
     let video_recorder
     let recording = 0
-    // function CanvasCaptureToWEBM(canvas, bitrate) {
-    //     // the video_recorder is set to  '= new CanvasCaptureToWEBM(canvas, 4500000);' in the setup, 
-    //     // it uses the same canvas as the rest of the file.
-    //     // to start a recording call .record() on video_recorder
-    //     /*
-    //     for example, 
-    //     if(keysPressed['-'] && recording == 0){
-    //         recording = 1
-    //         video_recorder.record()
-    //     }
-    //     if(keysPressed['='] && recording == 1){
-    //         recording = 0
-    //         video_recorder.stop()
-    //         video_recorder.download('File Name As A String.webm')
-    //     }
-    //     */
-    //     this.record = Record
-    //     this.stop = Stop
-    //     this.download = saveToDownloads
-    //     let blobCaptures = []
-    //     let outputFormat = {}
-    //     let recorder = {}
-    //     let canvasInput = canvas.captureStream()
-    //     if (typeof canvasInput == undefined || !canvasInput) {
-    //         return
-    //     }
-    //     let video = document.createElement('video')
-    //     video.style.display = 'none'
+    function CanvasCaptureToWEBM(canvas, bitrate) {
+        // the video_recorder is set to  '= new CanvasCaptureToWEBM(canvas, 4500000);' in the setup, 
+        // it uses the same canvas as the rest of the file.
+        // to start a recording call .record() on video_recorder
+        /*
+        for example, 
+        if(keysPressed['-'] && recording == 0){
+            recording = 1
+            video_recorder.record()
+        }
+        if(keysPressed['='] && recording == 1){
+            recording = 0
+            video_recorder.stop()
+            video_recorder.download('File Name As A String.webm')
+        }
+        */
+        this.record = Record
+        this.stop = Stop
+        this.download = saveToDownloads
+        let blobCaptures = []
+        let outputFormat = {}
+        let recorder = {}
+        let canvasInput = canvas.captureStream()
+        if (typeof canvasInput == undefined || !canvasInput) {
+            return
+        }
+        let video = document.createElement('video')
+        video.style.display = 'none'
 
-    //     function Record() {
-    //         let formats = [
-    //             "video/webm\;codecs=h264",
-    //             "video/webm\;codecs=vp8",
-    //             'video/vp8',
-    //             "video/webm",
-    //             'video/webm,codecs=vp9',
-    //             "video/webm\;codecs=daala",
-    //             "video/mpeg"
-    //         ];
+        function Record() {
+            let formats = [
+                "video/webm\;codecs=h264",
+                "video/webm\;codecs=vp8",
+                'video/vp8',
+                "video/webm",
+                'video/webm,codecs=vp9',
+                "video/webm\;codecs=daala",
+                "video/mpeg"
+            ];
 
-    //         for (let t = 0; t < formats.length; t++) {
-    //             if (MediaRecorder.isTypeSupported(formats[t])) {
-    //                 outputFormat = formats[t]
-    //                 break
-    //             }
-    //         }
-    //         if (typeof outputFormat != "string") {
-    //             return
-    //         } else {
-    //             let videoSettings = {
-    //                 mimeType: outputFormat,
-    //                 videoBitsPerSecond: bitrate || 2000000 // 2Mbps
-    //             };
-    //             blobCaptures = []
-    //             try {
-    //                 recorder = new MediaRecorder(canvasInput, videoSettings)
-    //             } catch (error) {
-    //                 return;
-    //             }
-    //             recorder.onstop = handleStop
-    //             recorder.ondataavailable = handleAvailableData
-    //             recorder.start(100)
-    //         }
-    //     }
-    //     function handleAvailableData(event) {
-    //         if (event.data && event.data.size > 0) {
-    //             blobCaptures.push(event.data)
-    //         }
-    //     }
-    //     function handleStop() {
-    //         let superBuffer = new Blob(blobCaptures, { type: outputFormat })
-    //         video.src = window.URL.createObjectURL(superBuffer)
-    //     }
-    //     function Stop() {
-    //         recorder.stop()
-    //         video.controls = true
-    //     }
-    //     function saveToDownloads(input) { // specifying a file name for the output
-    //         let name = input || 'video_out.webm'
-    //         let blob = new Blob(blobCaptures, { type: outputFormat })
-    //         let url = window.URL.createObjectURL(blob)
-    //         let storageElement = document.createElement('a')
-    //         storageElement.style.display = 'none'
-    //         storageElement.href = url
-    //         storageElement.download = name
-    //         document.body.appendChild(storageElement)
-    //         storageElement.click()
-    //         setTimeout(() => {
-    //             document.body.removeChild(storageElement)
-    //             window.URL.revokeObjectURL(url)
-    //         }, 100)
-    //     }
-    // }
+            for (let t = 0; t < formats.length; t++) {
+                if (MediaRecorder.isTypeSupported(formats[t])) {
+                    outputFormat = formats[t]
+                    break
+                }
+            }
+            if (typeof outputFormat != "string") {
+                return
+            } else {
+                let videoSettings = {
+                    mimeType: outputFormat,
+                    videoBitsPerSecond: bitrate || 2000000 // 2Mbps
+                };
+                blobCaptures = []
+                try {
+                    recorder = new MediaRecorder(canvasInput, videoSettings)
+                } catch (error) {
+                    return;
+                }
+                recorder.onstop = handleStop
+                recorder.ondataavailable = handleAvailableData
+                recorder.start(100)
+            }
+        }
+        function handleAvailableData(event) {
+            if (event.data && event.data.size > 0) {
+                blobCaptures.push(event.data)
+            }
+        }
+        function handleStop() {
+            let superBuffer = new Blob(blobCaptures, { type: outputFormat })
+            video.src = window.URL.createObjectURL(superBuffer)
+        }
+        function Stop() {
+            recorder.stop()
+            video.controls = true
+        }
+        function saveToDownloads(input) { // specifying a file name for the output
+            let name = input || 'video_out.webm'
+            let blob = new Blob(blobCaptures, { type: outputFormat })
+            let url = window.URL.createObjectURL(blob)
+            let storageElement = document.createElement('a')
+            storageElement.style.display = 'none'
+            storageElement.href = url
+            storageElement.download = name
+            document.body.appendChild(storageElement)
+            storageElement.click()
+            setTimeout(() => {
+                document.body.removeChild(storageElement)
+                window.URL.revokeObjectURL(url)
+            }, 100)
+        }
+    }
 
     let dynamic2 = 0
     let dynamic1 = 0
@@ -3545,7 +3545,7 @@ let drawcount = 0
         canvas_context = canvas.getContext('2d');
         canvas.style.background = style
 
-        // video_recorder = new CanvasCaptureToWEBM(canvas, 1000000);
+        video_recorder = new CanvasCaptureToWEBM(canvas, 1000000);
         window.setInterval(function () {
             
             if (keysPressed['v']) {
@@ -3554,15 +3554,15 @@ let drawcount = 0
             if (keysPressed['b']) {
                 globalHealthDraw = false
             }
-            // if (keysPressed['-'] && recording == 0) {
-            //     recording = 1
-            //     video_recorder.record()
-            // }
-            // if (keysPressed['='] && recording == 1) {
-            //     recording = 0
-            //     video_recorder.stop()
-            //     video_recorder.download('colddemo.webm')
-            // }
+            if (keysPressed['-'] && recording == 0) {
+                recording = 1
+                video_recorder.record()
+            }
+            if (keysPressed['='] && recording == 1) {
+                recording = 0
+                video_recorder.stop()
+                video_recorder.download('colddemo.webm')
+            }
             // security.fileuri.strict_origin_policy = true
             // playstart = 1
             if (playstart == 1) {
@@ -10248,6 +10248,10 @@ let drawcount = 0
                             if (this.faction.units[t].faction.type == 6) {
                                 // canvas_context.strokeText(((1 - this.faction.units[t].suffocating) * 100) + "%  Air Tolerance", facex2+69, 55)
                                 canvas_context.fillText("Reflecting: " + Math.round(this.faction.units[t].spikes * 100) + '%', facex2 + 72, 32)
+                            }
+                            if (this.faction.units[t].faction.type == 10) {
+                                // canvas_context.strokeText(((1 - this.faction.units[t].suffocating) * 100) + "%  Air Tolerance", facex2+69, 55)
+                                canvas_context.fillText("Warmth: " + Math.round(this.faction.units[t].warmth * 100) + '%', facex2 + 72, 32)
                             }
 
 
@@ -24012,6 +24016,11 @@ let drawcount = 0
                 this.units[t].move()
             }
             for (let t = 0; t < this.units.length; t++) {
+                if(this.units[t].bee == 1){
+                    this.units[t].body.draw()
+                }
+            }
+            for (let t = 0; t < this.units.length; t++) {
                 this.units[t].draw()
             }
         }
@@ -28727,9 +28736,10 @@ let drawcount = 0
         }
         isBeeWorker() {
             this.bee = 1
+            this.warmth = 0
             this.beeworker = 1
-            this.body.color = "teal"
-            this.body.radius = 4
+            this.body.color = "#FFAA0008"
+            this.body.radius = 10
             this.movespeed = 4
             this.firerate = gargantuanNumber / 3
             this.decayRate = 0
@@ -28750,13 +28760,14 @@ let drawcount = 0
         }
         isBeeSoldier() {
             this.bee = 1
+            this.warmth = 0
             this.beesoldier = 1
-            this.body.color = "teal"
-            this.body.radius = 4
+            this.body.color = "#FFAA0008"
+            this.body.radius = 20
             this.movespeed = 4
             this.firerate = gargantuanNumber / 6
             this.decayRate = 0
-            this.damage = 22
+            this.damage = 23
             this.name = "Beeple Soldier"
             // this.nymph = 1
             this.defense = 6
@@ -28774,8 +28785,9 @@ let drawcount = 0
         isBeeMega() {
             this.bee = 1
             this.beemega = 1
-            this.body.color = "teal"
-            this.body.radius = 4
+            this.warmth = 0
+            this.body.color = "#FFAA0008"
+            this.body.radius = 30
             this.movespeed = 6
             this.firerate = gargantuanNumber / 8
             this.decayRate = 0
@@ -28797,8 +28809,9 @@ let drawcount = 0
         isBeeScout() {
             this.bee = 1
             this.beescout = 1
-            this.body.color = "teal"
-            this.body.radius = 4
+            this.warmth = 0
+            this.body.color = "#FFAA0008"
+            this.body.radius = 20
             this.movespeed = 2
             this.firerate = gargantuanNumber / 3
             this.decayRate = 0
@@ -33013,6 +33026,75 @@ let drawcount = 0
             }
 
             if(this.bee == 1){
+                if(onlineNow == 1){ 
+                    let warm = 0
+                    if(this.factionNum == sandmap.turn){
+                        for(let t = 0;t<this.faction.units.length;t++){
+                            if(this.faction.units[t] != this){
+                                this.faction.units[t].gameline.object = this.faction.units[t].body
+                                this.faction.units[t].gameline.target = this.body
+                                if(this.faction.units[t].gameline.hypotenuse() < this.body.radius + this.faction.units[t].body.radius){
+                                    this.warmth+=.001
+                                    warm = 1
+                                    // break
+                                }
+                            }
+                        }
+                    }
+                    if(warm != 1){
+                        this.warmth -= .005
+                    }
+                    this.warmth = Math.max(Math.min(1,this.warmth),0)
+   
+                if (this.beeworker == 1) {
+                    this.movespeed = 5 - Math.min(Math.floor(this.warmth*3),2)
+                }
+                if (this.beesoldier == 1) {
+                    this.movespeed = 5 - Math.min(Math.floor(this.warmth*3),2)
+                }
+                if (this.beescout == 1) {
+                    this.movespeed = 3 - Math.min(Math.floor(this.warmth*3),1)
+                }
+                if (this.beemega == 1) {
+                    this.movespeed = 7 - Math.min(Math.floor(this.warmth*4),2)
+                }
+                if(this.movespeed <= this.movespeedcount){
+                    this.movespeedcount--
+                }
+                }else{
+                    let warm = 0
+                        for(let t = 0;t<this.faction.units.length;t++){
+                            if(this.faction.units[t] != this){
+                                this.faction.units[t].gameline.object = this.faction.units[t].body
+                                this.faction.units[t].gameline.target = this.body
+                                if(this.faction.units[t].gameline.hypotenuse() < this.body.radius + this.faction.units[t].body.radius){
+                                    this.warmth+=.001
+                                    warm = 1
+                                    // break
+                                }
+                            }
+                        }
+                    if(warm != 1){
+                        this.warmth -= .005
+                    }
+                    this.warmth = Math.max(Math.min(1,this.warmth),0)
+
+                if (this.beeworker == 1) {
+                    this.movespeed = 5 - Math.min(Math.floor(this.warmth*3),2)
+                }
+                if (this.beesoldier == 1) {
+                    this.movespeed = 5 - Math.min(Math.floor(this.warmth*3),2)
+                }
+                if (this.beescout == 1) {
+                    this.movespeed = 3 - Math.min(Math.floor(this.warmth*3),1)
+                }
+                if (this.beemega == 1) {
+                    this.movespeed = 7 - Math.min(Math.floor(this.warmth*4),2)
+                }
+                if(this.movespeed <= this.movespeedcount){
+                    this.movespeedcount--
+                }
+                }
                 if (this.beeworker == 1) {
                     // if (sandmap.players.indexOf(this.faction) == sandmap.turn) {
                         if (this.dying <= 0) {
