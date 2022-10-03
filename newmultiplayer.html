@@ -97,99 +97,99 @@ window.addEventListener('DOMContentLoaded', (event) => {
     let unitcap = 50
     let video_recorder
     let recording = 0
-    function CanvasCaptureToWEBM(canvas, bitrate) {
-        // the video_recorder is set to  '= new CanvasCaptureToWEBM(canvas, 4500000);' in the setup, 
-        // it uses the same canvas as the rest of the file.
-        // to start a recording call .record() on video_recorder
-        /*
-        for example, 
-        if(keysPressed['-'] && recording == 0){
-            recording = 1
-            video_recorder.record()
-        }
-        if(keysPressed['='] && recording == 1){
-            recording = 0
-            video_recorder.stop()
-            video_recorder.download('File Name As A String.webm')
-        }
-        */
-        this.record = Record
-        this.stop = Stop
-        this.download = saveToDownloads
-        let blobCaptures = []
-        let outputFormat = {}
-        let recorder = {}
-        let canvasInput = canvas.captureStream()
-        if (typeof canvasInput == undefined || !canvasInput) {
-            return
-        }
-        let video = document.createElement('video')
-        video.style.display = 'none'
+    // function CanvasCaptureToWEBM(canvas, bitrate) {
+    //     // the video_recorder is set to  '= new CanvasCaptureToWEBM(canvas, 4500000);' in the setup, 
+    //     // it uses the same canvas as the rest of the file.
+    //     // to start a recording call .record() on video_recorder
+    //     /*
+    //     for example, 
+    //     if(keysPressed['-'] && recording == 0){
+    //         recording = 1
+    //         video_recorder.record()
+    //     }
+    //     if(keysPressed['='] && recording == 1){
+    //         recording = 0
+    //         video_recorder.stop()
+    //         video_recorder.download('File Name As A String.webm')
+    //     }
+    //     */
+    //     this.record = Record
+    //     this.stop = Stop
+    //     this.download = saveToDownloads
+    //     let blobCaptures = []
+    //     let outputFormat = {}
+    //     let recorder = {}
+    //     let canvasInput = canvas.captureStream()
+    //     if (typeof canvasInput == undefined || !canvasInput) {
+    //         return
+    //     }
+    //     let video = document.createElement('video')
+    //     video.style.display = 'none'
 
-        function Record() {
-            let formats = [
-                "video/webm\;codecs=h264",
-                "video/webm\;codecs=vp8",
-                'video/vp8',
-                "video/webm",
-                'video/webm,codecs=vp9',
-                "video/webm\;codecs=daala",
-                "video/mpeg"
-            ];
+    //     function Record() {
+    //         let formats = [
+    //             "video/webm\;codecs=h264",
+    //             "video/webm\;codecs=vp8",
+    //             'video/vp8',
+    //             "video/webm",
+    //             'video/webm,codecs=vp9',
+    //             "video/webm\;codecs=daala",
+    //             "video/mpeg"
+    //         ];
 
-            for (let t = 0; t < formats.length; t++) {
-                if (MediaRecorder.isTypeSupported(formats[t])) {
-                    outputFormat = formats[t]
-                    break
-                }
-            }
-            if (typeof outputFormat != "string") {
-                return
-            } else {
-                let videoSettings = {
-                    mimeType: outputFormat,
-                    videoBitsPerSecond: bitrate || 2000000 // 2Mbps
-                };
-                blobCaptures = []
-                try {
-                    recorder = new MediaRecorder(canvasInput, videoSettings)
-                } catch (error) {
-                    return;
-                }
-                recorder.onstop = handleStop
-                recorder.ondataavailable = handleAvailableData
-                recorder.start(100)
-            }
-        }
-        function handleAvailableData(event) {
-            if (event.data && event.data.size > 0) {
-                blobCaptures.push(event.data)
-            }
-        }
-        function handleStop() {
-            let superBuffer = new Blob(blobCaptures, { type: outputFormat })
-            video.src = window.URL.createObjectURL(superBuffer)
-        }
-        function Stop() {
-            recorder.stop()
-            video.controls = true
-        }
-        function saveToDownloads(input) { // specifying a file name for the output
-            let name = input || 'video_out.webm'
-            let blob = new Blob(blobCaptures, { type: outputFormat })
-            let url = window.URL.createObjectURL(blob)
-            let storageElement = document.createElement('a')
-            storageElement.style.display = 'none'
-            storageElement.href = url
-            storageElement.download = name
-            document.body.appendChild(storageElement)
-            storageElement.click()
-            setTimeout(() => {
-                document.body.removeChild(storageElement)
-                window.URL.revokeObjectURL(url)
-            }, 100)
-        }
-    }
+    //         for (let t = 0; t < formats.length; t++) {
+    //             if (MediaRecorder.isTypeSupported(formats[t])) {
+    //                 outputFormat = formats[t]
+    //                 break
+    //             }
+    //         }
+    //         if (typeof outputFormat != "string") {
+    //             return
+    //         } else {
+    //             let videoSettings = {
+    //                 mimeType: outputFormat,
+    //                 videoBitsPerSecond: bitrate || 2000000 // 2Mbps
+    //             };
+    //             blobCaptures = []
+    //             try {
+    //                 recorder = new MediaRecorder(canvasInput, videoSettings)
+    //             } catch (error) {
+    //                 return;
+    //             }
+    //             recorder.onstop = handleStop
+    //             recorder.ondataavailable = handleAvailableData
+    //             recorder.start(100)
+    //         }
+    //     }
+    //     function handleAvailableData(event) {
+    //         if (event.data && event.data.size > 0) {
+    //             blobCaptures.push(event.data)
+    //         }
+    //     }
+    //     function handleStop() {
+    //         let superBuffer = new Blob(blobCaptures, { type: outputFormat })
+    //         video.src = window.URL.createObjectURL(superBuffer)
+    //     }
+    //     function Stop() {
+    //         recorder.stop()
+    //         video.controls = true
+    //     }
+    //     function saveToDownloads(input) { // specifying a file name for the output
+    //         let name = input || 'video_out.webm'
+    //         let blob = new Blob(blobCaptures, { type: outputFormat })
+    //         let url = window.URL.createObjectURL(blob)
+    //         let storageElement = document.createElement('a')
+    //         storageElement.style.display = 'none'
+    //         storageElement.href = url
+    //         storageElement.download = name
+    //         document.body.appendChild(storageElement)
+    //         storageElement.click()
+    //         setTimeout(() => {
+    //             document.body.removeChild(storageElement)
+    //             window.URL.revokeObjectURL(url)
+    //         }, 100)
+    //     }
+    // }
 
     let dynamic2 = 0
     let dynamic1 = 0
@@ -1228,6 +1228,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
     //alagadile buildings
     const pond = new Image()
     pond.src = "https://ditzbitz.com/pondsheet.png"
+    const teleporterimg = new Image()
+    teleporterimg.src = "https://ditzbitz.com/teleporterimg.png"
     const pondinv = new Image()
     pondinv.src = "https://ditzbitz.com/pondsheetinv.png"
 
@@ -3545,7 +3547,7 @@ let drawcount = 0
         canvas_context = canvas.getContext('2d');
         canvas.style.background = style
 
-        video_recorder = new CanvasCaptureToWEBM(canvas, 1000000);
+        // video_recorder = new CanvasCaptureToWEBM(canvas, 1000000);
         window.setInterval(function () {
             
             if (keysPressed['v']) {
@@ -3554,15 +3556,15 @@ let drawcount = 0
             if (keysPressed['b']) {
                 globalHealthDraw = false
             }
-            if (keysPressed['-'] && recording == 0) {
-                recording = 1
-                video_recorder.record()
-            }
-            if (keysPressed['='] && recording == 1) {
-                recording = 0
-                video_recorder.stop()
-                video_recorder.download('colddemo.webm')
-            }
+            // if (keysPressed['-'] && recording == 0) {
+            //     recording = 1
+            //     video_recorder.record()
+            // }
+            // if (keysPressed['='] && recording == 1) {
+            //     recording = 0
+            //     video_recorder.stop()
+            //     video_recorder.download('colddemo.webm')
+            // }
             // security.fileuri.strict_origin_policy = true
             // playstart = 1
             if (playstart == 1) {
@@ -3702,6 +3704,7 @@ let drawcount = 0
                                 if(unit.tree == 1){type = 0 + 16} //12
 
                                 if(unit.beehive == 1){type = 0 + 17} //12
+                                if(unit.teleporter == 1){type = 0 + 18} //12
 
 
                                 let walkdeath = -1// (0.5 * (Math.round(unit.movespeedcount) + unit.dying) * (Math.round(unit.movespeedcount) + unit.dying+ 1)) + unit.dying
@@ -6307,7 +6310,11 @@ let drawcount = 0
                                     wet = 1
                                 }
                                 if (wet == 0) {
-                                    sandmap.players[sandmap.turn].buildMachineLab(sandmap.players[sandmap.turn].selected_tile, 0)
+                                    if(sandmap.players[sandmap.turn].type == 7){
+                                        sandmap.players[sandmap.turn].buildTeleporter(sandmap.players[sandmap.turn].selected_tile, 0)
+                                    }else{
+                                        sandmap.players[sandmap.turn].buildMachineLab(sandmap.players[sandmap.turn].selected_tile, 0)
+                                    }
                                     // const building = new Building(sandmap.players[sandmap.turn].selected_tile, sandmap.players[sandmap.turn], 0)
 
                                 }
@@ -6497,6 +6504,9 @@ let drawcount = 0
                                             sandmap.players[sandmap.turn].buildings[t].hatchStarbatross()
                                         }
 
+                                    }
+                                    if (sandmap.players[sandmap.turn].buildings[t].teleporter == 1) {
+                                        sandmap.players[sandmap.turn].buildings[t].teleport
                                     }
                                     if (sandmap.players[sandmap.turn].buildings[t].pond == 1) {
                                         if (sandmap.players[sandmap.turn].buildings[t].commandPanel.commandButtons[0].isPointInside(TIP_engine)) {
@@ -9620,6 +9630,9 @@ let drawcount = 0
                             if(gamepadAPI.buttonPressed('Y')){
                             sandmap.players[sandmap.turn].buildPond(sandmap.players[sandmap.turn].selected_tile, 0)
                             }
+                            if(gamepadAPI.buttonPressed('A')){
+                            sandmap.players[sandmap.turn].buildTeleporter(sandmap.players[sandmap.turn].selected_tile, 0)
+                            }
 
                         } else if (sandmap.players[sandmap.turn].type == 9) {
                             if(gamepadAPI.buttonPressed('Y')){
@@ -9655,7 +9668,11 @@ let drawcount = 0
                         wet = 1
                     }
                     if (wet == 0) {
-                        sandmap.players[sandmap.turn].buildMachineLab(sandmap.players[sandmap.turn].selected_tile, 0)
+                                    if(sandmap.players[sandmap.turn].type == 7){
+                                        sandmap.players[sandmap.turn].buildTeleporter(sandmap.players[sandmap.turn].selected_tile, 0)
+                                    }else{
+                                        sandmap.players[sandmap.turn].buildMachineLab(sandmap.players[sandmap.turn].selected_tile, 0)
+                                    }
                         // const building = new Building(sandmap.players[sandmap.turn].selected_tile, sandmap.players[sandmap.turn], 0)
 
                     }
@@ -9889,6 +9906,11 @@ let drawcount = 0
                             sandmap.players[sandmap.turn].buildings[t].hatchStarbatross()
                         }
 
+                    }
+                    if (sandmap.players[sandmap.turn].buildings[t].teleporter == 1) {
+                        if (gamepadAPI.buttonPressed('Y') || keysPressed['q']) {
+                            sandmap.players[sandmap.turn].buildings[t].teleport()
+                        }
                     }
                     if (sandmap.players[sandmap.turn].buildings[t].pond == 1) {
                         if (gamepadAPI.buttonPressed('Y') || keysPressed['q']) {
@@ -11552,19 +11574,29 @@ let drawcount = 0
                             }
                         } else if (this.faction.type == 7) {
                             this.faction.commandPanel.commandButtons[0].draw()
+                            this.faction.commandPanel.commandButtons[1].draw()
 
                             // let barrect = new UiRectangle(this.faction.commandPanel.commandButtons[0].x + 25, this.faction.commandPanel.commandButtons[0].y + 5, 40, 40, this.faction.color)
                             // barrect.draw()
                             if (sandmap.players.indexOf(this.faction) == sandmap.turn) {
                                 canvas_context.drawImage(pond, 0, 0, 10, 10, this.faction.commandPanel.commandButtons[0].x + 25, this.faction.commandPanel.commandButtons[0].y + 5, 40, 40)
+                                canvas_context.drawImage(teleporterimg, 0, 0, 10, 10, this.faction.commandPanel.commandButtons[1].x + 25, this.faction.commandPanel.commandButtons[1].y + 5, 40, 40)
                             } else {
                                 canvas_context.drawImage(pondinv, 0, 0, 10, 10, this.faction.commandPanel.commandButtons[0].x + 25, this.faction.commandPanel.commandButtons[0].y + 5, 40, 40)
+                                canvas_context.drawImage(teleporterimg, 0, 0, 10, 10, this.faction.commandPanel.commandButtons[1].x + 25, this.faction.commandPanel.commandButtons[1].y + 5, 40, 40)
                             }
                             canvas_context.fillStyle = "white"
                             canvas_context.font = "12px arial"
                             canvas_context.fillText("Pond: 250", this.faction.commandPanel.commandButtons[0].x + 15, this.faction.commandPanel.commandButtons[0].y + 66)
+                            canvas_context.fillStyle = "white"
+                            canvas_context.font = "12px arial"
+                            canvas_context.fillText("Teleporter: 300", this.faction.commandPanel.commandButtons[1].x + 15, this.faction.commandPanel.commandButtons[1].y + 66)
                             if (this.faction.Bflag == 1) {
                                 const xout = new RedX(this.faction.commandPanel.commandButtons[0].x + 90, this.faction.commandPanel.commandButtons[0].y + 15)
+                                xout.draw()
+                            }
+                            if (this.faction.Mflag == 1) {
+                                const xout = new RedX(this.faction.commandPanel.commandButtons[1].x + 90, this.faction.commandPanel.commandButtons[1].y + 15)
                                 xout.draw()
                             }
                         } else if (this.faction.type == 9) {
@@ -11820,7 +11852,7 @@ let drawcount = 0
             } else if (this.agent.type == 6) {
                 this.text = [' ', ' ', ' ', '  ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
             } else if (this.agent.type == 7) {
-                this.text = ['q', ' ', ' ', '  ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+                this.text = ['q', 'e', ' ', '  ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
             } else if (this.agent.type == 8) {
                 this.text = [' ', ' ', ' ', '  ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
             } else if (this.agent.type == 9) {
@@ -13222,6 +13254,11 @@ let drawcount = 0
                     standee = this.buildings[t-this.units.length]
                         //  standee = new Building(sandmap.blocks[backgroundval.x][backgroundval.y], sandmap.players[Math.abs(sandmap.turn - 1)], 0,0,0)
                             standee.isBeehive(sandmap.blocks[backgroundval.x][backgroundval.y])
+                        }else if (backgroundval.type == -38+56) {
+                    this.buildings[t-this.units.length].totalBlank(sandmap.blocks[Math.min(Math.max(backgroundval.x, 0), worldscale)][Math.min(Math.max(backgroundval.y, 0), worldscale)], 0, player)
+                    standee = this.buildings[t-this.units.length]
+                        //  standee = new Building(sandmap.blocks[backgroundval.x][backgroundval.y], sandmap.players[Math.abs(sandmap.turn - 1)], 0,0,0)
+                            standee.isTeleporter(sandmap.blocks[backgroundval.x][backgroundval.y])
                         }
                     }
 
@@ -13284,6 +13321,9 @@ let drawcount = 0
                     } else if (backgroundval.type == -38+55) {
                   standee= new Building(sandmap.blocks[backgroundval.x][backgroundval.y], sandmap.players[player], 0,0,0)
                         standee.isBeehive(sandmap.blocks[backgroundval.x][backgroundval.y])
+                    }else if (backgroundval.type == -38+56) {
+                  standee= new Building(sandmap.blocks[backgroundval.x][backgroundval.y], sandmap.players[player], 0,1,0)
+                        standee.isTeleporter(sandmap.blocks[backgroundval.x][backgroundval.y])
                     }
                 }
 
@@ -22729,6 +22769,54 @@ let drawcount = 0
                 }
             }
         }
+        buildTeleporter(tile, options = 0) {
+            this.Mflag = 0
+            if (this.type == 7) {
+                let wet = 0
+                for (let t = 0; t < this.buildings.length; t++) {
+                    if (tile == this.buildings[t].tile || this.blocks[tile.t][tile.k].markdraw != 1) {
+                        wet = 1
+                        debreak = 1
+                    }
+                }
+                if (tile.walkable == false) {
+                    let us = 0
+                    for (let u = 0; u < this.units.length; u++) {
+                        if (this.units[u].tile == tile) {
+                            us = 1
+                        }
+                    }
+                    if (us == 0) {
+                        wet = 1
+                    }
+                }
+                if (tile.builtOn == 1) {
+                    wet = 1
+                }
+                if (wet == 0) {
+                    if (this.hotrock >= 300) {
+                        this.Bflag = 0
+                        this.hotrock -= 300
+                        const building = new Building(tile, this, 0, 1, 250)
+                        building.teleporter = 1
+                        building.alagadile = 1
+                        // building.eggtimer = 300
+                        building.name = "Alagadile Teleporter Pad"
+                        building.tile.spiretile = 1
+                        building.tile.walkable = true
+                        building.open = -1
+                        building.animated = 1
+                        building.defense = 3
+                        building.damage = 0
+                        // building.body = new UnitCircle(building.tile.x + 5, building.tile.y + 5, 110, this.color + "10")
+                        // building.bodybig = new UnitCircle(building.tile.x + 5, building.tile.y + 5, 170, this.color + "10")
+                        building.health = 500
+                        building.maxhealth = building.health
+                        building.tile.spiretile = 1
+                    }
+                }
+            }
+        }
 
         buildHive(tile, options = 0) {
             if (this.type == 10) {
@@ -26039,7 +26127,21 @@ let drawcount = 0
                 this.wall = 0
                 this.spire = 0
             }
-
+            teleport(){
+                if(this.waypoint.walkable == true){
+                    for(let t = 0;t<this.faction.units.length;t++){
+                       if(this.faction.units[t].tile.t == this.tiles[0].t &&this.faction.units[t].tile.k == this.tiles[0].k){
+                           this.faction.units[t].tile = this.waypoint
+                           this.faction.units[t].realPath = [this.faction.units[t].tile]
+                           this.faction.units[t].index = 0
+                           this.tiles[0].walkable = true
+                           this.tiles[0].occupied = false
+                           this.tiles[0].occuapant = {}
+                           break
+                       }
+                    }
+                }
+            }
                         isWall(tile){
 
             this.tile = tile
@@ -26084,6 +26186,17 @@ let drawcount = 0
                         this.name = "Alagadile Pond"
                         this.animated = 1
                         this.defense = 12
+                        this.damage = 0
+                        //this.health = 1260
+                        }
+                        isTeleporter(tile){
+
+            this.tile = tile
+                        this.teleporter = 1
+                        this.alagadile = 1
+                        this.name = "Alagadile Pond"
+                        this.animated = 1
+                        this.defense = 3
                         this.damage = 0
                         //this.health = 1260
                         }
@@ -27529,6 +27642,11 @@ let drawcount = 0
             //     }
             //     // this.draw()
             // } 
+            if (this.teleporter == 1 ) {     
+                 for (let t = 0; t < this.tiles.length; t++) {
+                this.tiles[t].walkable = true
+            }
+            }
             if (this.tile.sourcerock > 0) {
                 this.rocked = 1
             } else {
@@ -27837,6 +27955,12 @@ let drawcount = 0
                 }
 
             }
+
+            if (this.teleporter == 1 ) {     
+                 for (let t = 0; t < this.tiles.length; t++) {
+                this.tiles[t].walkable = true
+            }
+            }
         }
         draw() {
 
@@ -27960,7 +28084,10 @@ let drawcount = 0
                     }
                 } else {
 
-                    if (this.pond == 1) {
+                    if(this.teleporter == 1){
+                                sandmap.buildingCanvas_context.drawImage(teleporterimg, 0, 0, 10, 10, this.tiles[0].x, this.tiles[0].y, 10 + (this.size * 1 * 10), 10 + (this.size * 1 * 10))
+
+                    }else if (this.pond == 1) {
                         if (sandmap.players.indexOf(this.faction) == sandmap.turn) {
 
                             if (this.que != 1) {
