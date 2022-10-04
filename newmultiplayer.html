@@ -9542,6 +9542,12 @@ let drawcount = 0
                         this.windspeed *= 1.05
                     }
                 }
+                // if(keysPressed['n']){
+                //     this.windspeed = .1051
+                // }
+                // if(keysPressed['m']){
+                //     this.windspeed = 2.37
+                // }
                 if (chooser == 2) {
                     this.winddirx *= -1
                 }
@@ -9573,7 +9579,10 @@ let drawcount = 0
             canvas_context.lineWidth = 1.5
             canvas_context.font = "17px arial"
             // canvas_context.strokeText("Windspeed: " + Math.round(this.windspeed * 2000) + "cm/s", this.window.minibody.x, this.window.minibody.y - 16)
-            canvas_context.fillText("Windspeed: " + Math.round(this.windspeed * 2000) + "cm/s", this.window.minibody.x, this.window.minibody.y - 16)
+            canvas_context.fillText("Windspeed: " + Math.round(this.windspeed * 2000) + "cm/s, " + 'FPS: ' + oldframes, this.window.minibody.x, this.window.minibody.y - 16)
+
+
+
             canvas_context.drawImage(windmeter, 0, 10 * (Math.round(this.windspeed * 10)), windmeter.width, 10, this.window.minibody.x, this.window.minibody.y - 12, 250, 10)
 
 
@@ -29753,8 +29762,8 @@ let drawcount = 0
             this.ave = 1
             this.body.color = "teal"
             this.body.radius = 4
-            this.movespeed = 5
-            this.firerate = gargantuanNumber / 7
+            this.movespeed = 6
+            this.firerate = gargantuanNumber / 8
             this.decayRate = 0
             this.damage = 20
             this.name = "Avesectian Flugoon"
@@ -29776,8 +29785,8 @@ let drawcount = 0
             this.ave = 1
             this.body.color = "teal"
             this.body.radius = 4
-            this.movespeed = 2
-            this.firerate = gargantuanNumber / 2
+            this.movespeed = 3
+            this.firerate = gargantuanNumber / 3
             this.decayRate = 0
             this.damage = 3
             this.name = "Avesectian Buzzlet"
@@ -29800,8 +29809,8 @@ let drawcount = 0
             this.ave = 1
             this.body.color = "teal"
             this.body.radius = 4
-            this.movespeed = 4
-            this.firerate = gargantuanNumber / 5
+            this.movespeed = 5
+            this.firerate = gargantuanNumber / 6
             this.decayRate = 0
             this.damage = 24
             this.name = "Avesectian Starbatross"
@@ -29824,7 +29833,7 @@ let drawcount = 0
             this.body.color = "teal"
             this.body.radius = 4
             this.movespeed = 6
-            this.firerate = gargantuanNumber / 12
+            this.firerate = gargantuanNumber / 13
             this.decayRate = 0
             this.damage = 30
             this.name = "Avesectian Megagnat"
@@ -33080,7 +33089,7 @@ let drawcount = 0
             if (campaignController.mission == -1) {
                 if (this.faction.type == 2) {
                     if (this.suffocating > 0) {
-                        this.health -= ((this.decayRate * this.suffocating)) * .1 //.1 is new
+                        this.health -= ((this.decayRate * this.suffocating)*sandmap.windspeed) * .1 //.1 is new
                     } else {
                         this.health += (this.decayRate * .333)
                         if (this.health > this.maxhealth) {
@@ -33548,7 +33557,7 @@ let drawcount = 0
                         }
                     }
                     if(warm != 1){
-                        this.warmth -= .005
+                        this.warmth -= .005*sandmap.windspeed
                     }
                     this.warmth = Math.max(Math.min(1,this.warmth),0)
    
@@ -33660,6 +33669,29 @@ let drawcount = 0
                     // }
                 }
             }else if (this.ave == 1) {
+
+
+                if (this.flugoon == 1) {
+                    this.movespeed = Math.max(Math.floor(6 - (sandmap.windspeed*.5)),1)
+                    this.firerate = gargantuanNumber / (Math.floor(8 - (sandmap.windspeed*1)))
+                }
+                if (this.buzzlet == 1) {
+                    this.movespeed = Math.max(Math.floor(3 - (sandmap.windspeed*.5)),1)
+                    this.firerate = gargantuanNumber / (Math.floor(3 - (sandmap.windspeed*1)))
+                }
+                if (this.starbatross == 1) {
+                    this.movespeed = Math.max(Math.floor(5 - (sandmap.windspeed*.5)),1)
+                    this.firerate =gargantuanNumber / (Math.floor(6 - (sandmap.windspeed*1)))
+                }
+                if (this.megagnat == 1) {
+                    this.movespeed = Math.max(Math.floor(6 - (sandmap.windspeed*.5)),1)
+                    this.firerate = gargantuanNumber / (Math.floor(13 - (sandmap.windspeed*1)))
+                }
+                if(this.movespeed <= this.movespeedcount){
+                    this.movespeedcount--
+                }
+
+
                 if (this.flugoon == 1) {
 
                     if (sandmap.players.indexOf(this.faction) == sandmap.turn) {
@@ -35306,7 +35338,21 @@ let drawcount = 0
 
 let count = 0
 
+
+            let now = Date.now()
+            let oldnow = Date.now()
+            let frames = 0
+            let oldframes = 0
+
+
+
     function main() {
+        frames++
+            if (Math.abs(now - Date.now()) > 1000) {
+                oldframes = frames
+                frames = 0
+                now = Date.now()
+            }
         if(onlineNow == 1){
             for(let k =0;k<sandmap.players.length;k++){
                 if(k!= sandmap.turn){
