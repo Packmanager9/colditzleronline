@@ -1551,6 +1551,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
     beesoldierimgwalk.src = "https://ditzbitz.com/bee soldierwalk.png"
     const beescoutimgwalk = new Image()
     beescoutimgwalk.src = "https://ditzbitz.com/bee scoutwalk.png"
+    const beeworkerimgwalkinv = new Image()
+    beeworkerimgwalkinv.src = "https://ditzbitz.com/bee workerwalkinv.png"
+    const beemegaimgwalkinv = new Image()
+    beemegaimgwalkinv.src = "https://ditzbitz.com/bee megawalkinv.png"
+    const beesoldierimgwalkinv = new Image()
+    beesoldierimgwalkinv.src = "https://ditzbitz.com/bee soldierwalkinv.png"
+    const beescoutimgwalkinv = new Image()
+    beescoutimgwalkinv.src = "https://ditzbitz.com/bee scoutwalkinv.png"
 
 
 
@@ -1568,6 +1576,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
     beemegafacenew.src = "https://ditzbitz.com/beefacemega.png"
     const beehiveimg = new Image()
     beehiveimg.src = "https://ditzbitz.com/beehivesheet.png"
+    const beehiveimginv = new Image()
+    beehiveimginv.src = "https://ditzbitz.com/beehivesheetinv.png"
     const beeworkerimg = new Image()
     beeworkerimg.src = "https://ditzbitz.com/bee worker.png"
     const beemegaimg = new Image()
@@ -1584,6 +1594,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
     beemegadeathimg.src = "https://ditzbitz.com/bee megadeath.png"
     const beeworkerdeathimg = new Image()
     beeworkerdeathimg.src = "https://ditzbitz.com/bee workerdeath.png"
+
+
+    const beescoutdeathimginv = new Image()
+    beescoutdeathimginv.src = "https://ditzbitz.com/bee scoutdeathinv.png"
+    const beesoldierdeathimginv = new Image()
+    beesoldierdeathimginv.src = "https://ditzbitz.com/bee soldierdeathinv.png"
+    const beemegadeathimginv = new Image()
+    beemegadeathimginv.src = "https://ditzbitz.com/bee megadeathinv.png"
+    const beeworkerdeathimginv = new Image()
+    beeworkerdeathimginv.src = "https://ditzbitz.com/bee workerdeathinv.png"
+
+
     //itzler sprites
     const imago = new Image()
     imago.src = "https://ditzbitz.com/imagobl3.png" //imagobl3
@@ -11870,7 +11892,7 @@ let drawcount = 0
                             if (sandmap.players.indexOf(this.faction) == sandmap.turn) {
                                 canvas_context.drawImage(beehiveimg, 0, 0, 20, 20, this.faction.commandPanel.commandButtons[0].x + 25, this.faction.commandPanel.commandButtons[0].y + 5, 40, 40)
                             } else {
-                                canvas_context.drawImage(beehiveimg, 0, 0, 20, 20, this.faction.commandPanel.commandButtons[0].x + 25, this.faction.commandPanel.commandButtons[0].y + 5, 40, 40)
+                                canvas_context.drawImage(beehiveimginv, 0, 0, 20, 20, this.faction.commandPanel.commandButtons[0].x + 25, this.faction.commandPanel.commandButtons[0].y + 5, 40, 40)
                             }
                             canvas_context.fillStyle = "white"
                             canvas_context.font = "12px arial"
@@ -28409,9 +28431,9 @@ let drawcount = 0
                         }else{
 
                             if (this.que != 1) {
-                                sandmap.buildingCanvas_context.drawImage(beehiveimg, 0, 0, 20, 20, this.tiles[0].x, this.tiles[0].y, 10 + (this.size * 1 * 10), 10 + (this.size * 1 * 10))
+                                sandmap.buildingCanvas_context.drawImage(beehiveimginv, 0, 0, 20, 20, this.tiles[0].x, this.tiles[0].y, 10 + (this.size * 1 * 10), 10 + (this.size * 1 * 10))
                             }else{
-                                sandmap.buildingCanvas_context.drawImage(beehiveimg, (20 * ((this.maxtimer - this.timer) % 12)), 0, 20, 20, this.tiles[0].x, this.tiles[0].y, 10 + (this.size * 1 * 10), 10 + (this.size * 1 * 10))
+                                sandmap.buildingCanvas_context.drawImage(beehiveimginv, (20 * ((this.maxtimer - this.timer) % 12)), 0, 20, 20, this.tiles[0].x, this.tiles[0].y, 10 + (this.size * 1 * 10), 10 + (this.size * 1 * 10))
                             }
                         }
                     }
@@ -33631,7 +33653,7 @@ let drawcount = 0
                 }
                 }
                 if (this.beeworker == 1) {
-                    // if (sandmap.players.indexOf(this.faction) == sandmap.turn) {
+                    if (sandmap.players.indexOf(this.faction) == sandmap.turn) {
                         if (this.dying <= 0) {
                             if (this.moving == true) {
                                 this.walkcounter++
@@ -33643,10 +33665,23 @@ let drawcount = 0
                             map_context.drawImage(beeworkerdeathimg, (this.dying - 1) * 10, 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
 
                         }
-                    // }
+                    }else{
+                        if (this.dying <= 0) {
+                            if (this.moving == true) {
+                                this.walkcounter++
+                            map_context.drawImage(beeworkerimgwalkinv, (this.walkcounter * 10) % 20, 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
+                            } else {
+                            map_context.drawImage(beeworkerimgwalkinv, 0, 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
+                            }
+                        }else{
+                            map_context.drawImage(beeworkerdeathimginv, (this.dying - 1) * 10, 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
+
+                        }
+
+                    }
                 }
                 if (this.beesoldier == 1) {
-                    // if (sandmap.players.indexOf(this.faction) == sandmap.turn) {
+                    if (sandmap.players.indexOf(this.faction) == sandmap.turn) {
                         if (this.dying <= 0) {
                             if (this.moving == true) {
                                 this.walkcounter++
@@ -33658,10 +33693,22 @@ let drawcount = 0
                             map_context.drawImage(beesoldierdeathimg, (this.dying - 1) * 10, 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
 
                         }
-                    // }
+                    }else{
+                          if (this.dying <= 0) {
+                            if (this.moving == true) {
+                                this.walkcounter++
+                            map_context.drawImage(beesoldierimgwalkinv, (this.walkcounter * 10) % 80, 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
+                            } else {
+                            map_context.drawImage(beesoldierimgwalkinv, 0, 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
+                            }
+                        }else{
+                            map_context.drawImage(beesoldierdeathimginv, (this.dying - 1) * 10, 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
+
+                        }
+                    }
                 }
                 if (this.beescout == 1) {
-                    // if (sandmap.players.indexOf(this.faction) == sandmap.turn) {
+                    if (sandmap.players.indexOf(this.faction) == sandmap.turn) {
                         if (this.dying <= 0) {
                             if (this.moving == true) {
                                 this.walkcounter++
@@ -33670,12 +33717,24 @@ let drawcount = 0
                             map_context.drawImage(beescoutimg, 0, 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
                             }
                         }else{
-                            map_context.drawImage(beescoutdeathimg, (this.dying - 1) * 10, 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
+                            map_context.drawImage(beescoutdeathimginv, (this.dying - 1) * 10, 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
                         }
-                    // }
+                    }else{
+
+                        if (this.dying <= 0) {
+                            if (this.moving == true) {
+                                this.walkcounter++
+                            map_context.drawImage(beescoutimgwalkinv, (this.walkcounter * 10) % 20, 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
+                            } else {
+                            map_context.drawImage(beescoutimgwalkinv, 0, 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
+                            }
+                        }else{
+                            map_context.drawImage(beescoutdeathimginv, (this.dying - 1) * 10, 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
+                        }
+                    }
                 }
                 if (this.beemega == 1) {
-                    // if (sandmap.players.indexOf(this.faction) == sandmap.turn) {
+                    if (sandmap.players.indexOf(this.faction) == sandmap.turn) {
                         if (this.dying <= 0) {
                             if (this.moving == true) {
                                 this.walkcounter++
@@ -33686,7 +33745,19 @@ let drawcount = 0
                         }else{
                             map_context.drawImage(beemegadeathimg, (this.dying - 1) * 10, 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
                         }
-                    // }
+                    }else{
+                        if (this.dying <= 0) {
+                            if (this.moving == true) {
+                                this.walkcounter++
+                            map_context.drawImage(beemegaimgwalkinv, (this.walkcounter * 10) % 80, 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
+                            } else {
+                            map_context.drawImage(beemegaimgwalkinv, 0, 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
+                            }
+                        }else{
+                            map_context.drawImage(beemegadeathimg, (this.dying - 1) * 10, 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
+                        }
+
+                    }
                 }
             }else if (this.ave == 1) {
 
