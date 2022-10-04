@@ -1702,6 +1702,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
     hamartaninvaderwalksheetinv.src = "https://ditzbitz.com/hamartaninvaderwalksheetinv.png" //hamartaninvader
     const hamartanworker = new Image()
     hamartanworker.src = "https://ditzbitz.com/hamartanworker.png" //hamartanworker
+    const hamartanworkerwalk = new Image()
+    hamartanworkerwalk.src = "https://ditzbitz.com/hamartanworkerwalk.png" //hamartanworker
+    const hamartanworkerwalkinv = new Image()
+    hamartanworkerwalkinv.src = "https://ditzbitz.com/hamartanworkerwalkinv.png" //hamartanworker
 
 
     const hamartansoldierinv = new Image()
@@ -33930,10 +33934,49 @@ let drawcount = 0
                             }
                         } else if (this.hamartanworker == 1) {
                             if (sandmap.players.indexOf(this.faction) == sandmap.turn) {
-                                map_context.drawImage(hamartanworker, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5)
-                            } else {
-                                map_context.drawImage(hamartanworkerinv, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5)
 
+                                if (this.moving == true) {
+                                    this.walkcounter++
+                                    if(this.walkcounter > 4){                                        
+                                        map_context.drawImage(hamartanworkerwalk, 40 + ((this.walkcounter * 10) % 130), 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
+                                    }else{
+                                        map_context.drawImage(hamartanworkerwalk, 0 + ((this.walkcounter * 10) % 170), 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
+                                    }
+                                } else {
+                                    if(this.walkcounter > 0){
+                                        this.walkcounter--
+                                    }
+
+                                    if(this.walkcounter > 4){
+                                        this.walkcounter = 4
+                                        map_context.drawImage(hamartanworkerwalk, 40 + ((this.walkcounter * 10) % 130), 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
+                                    }else{
+                                        map_context.drawImage(hamartanworkerwalk, 0 + ((this.walkcounter * 10) % 170), 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
+                                    }
+                                }
+                                
+                            } else {
+                                // map_context.drawImage(hamartanworkerinv, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5)
+
+                                if (this.moving == true) {
+                                    this.walkcounter++
+                                    if(this.walkcounter > 4){                                        
+                                        map_context.drawImage(hamartanworkerwalkinv, 40 + ((this.walkcounter * 10) % 130), 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
+                                    }else{
+                                        map_context.drawImage(hamartanworkerwalkinv, 0 + ((this.walkcounter * 10) % 170), 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
+                                    }
+                                } else {
+                                    if(this.walkcounter > 0){
+                                        this.walkcounter--
+                                    }
+
+                                    if(this.walkcounter > 4){
+                                        this.walkcounter = 4
+                                        map_context.drawImage(hamartanworkerwalkinv, 40 + ((this.walkcounter * 10) % 130), 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
+                                    }else{
+                                        map_context.drawImage(hamartanworkerwalkinv, 0 + ((this.walkcounter * 10) % 170), 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
+                                    }
+                                }
                             }
                         }
                     } else {
