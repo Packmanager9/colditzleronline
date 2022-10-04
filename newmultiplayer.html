@@ -724,6 +724,21 @@ window.addEventListener('DOMContentLoaded', (event) => {
     const youneedmyassagain = new Audio()
     youneedmyassagain.src = "https://ditzbitz.com/youneedmyassagain.mp3"
     sounds.push(youneedmyassagain)
+    const youneedmyassagain1 = new Audio()
+    youneedmyassagain1.src = "https://ditzbitz.com/youneedmyassagain1y.mp3"
+    sounds.push(youneedmyassagain1)
+    const youneedmyassagain2 = new Audio()
+    youneedmyassagain2.src = "https://ditzbitz.com/youneedmyassagain2y.mp3"
+    sounds.push(youneedmyassagain2)
+    const youneedmyassagain3 = new Audio()
+    youneedmyassagain3.src = "https://ditzbitz.com/youneedmyassagain3y.mp3"
+    sounds.push(youneedmyassagain3)
+    const youneedmyassagain4 = new Audio()
+    youneedmyassagain4.src = "https://ditzbitz.com/youneedmyassagain4y.mp3"
+    sounds.push(youneedmyassagain4)
+    const youneedmyassagain5 = new Audio()
+    youneedmyassagain5.src = "https://ditzbitz.com/youneedmyassagain5y.mp3"
+    sounds.push(youneedmyassagain5)
     const yeahiminthisroom = new Audio()
     yeahiminthisroom.src = "https://ditzbitz.com/yeahiminthisroom.mp3"
     sounds.push(yeahiminthisroom)
@@ -731,6 +746,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
     slamdownmustard.src = "https://ditzbitz.com/slamdownmustard.mp3"
     sounds.push(slamdownmustard)
 
+    youneedmyassagain1.volume= .5
+    youneedmyassagain2.volume= .5
+    youneedmyassagain3.volume= .5
+    youneedmyassagain4.volume= .5
+    youneedmyassagain5.volume= .5
 
     const donttellme = new Audio()
     donttellme.src = "https://ditzbitz.com/onmyway.mp3"
@@ -29931,7 +29951,28 @@ let drawcount = 0
                             if (Math.random() < soundspamdrop * 3) {
                                 if (sandmap.players.indexOf(this.faction) == sandmap.turn) {
                                     soundCancel()
+
+                                    let playback = Math.floor(Math.random()*6)
+
+                                    if(Math.random() <.7){
                                     youneedmyassagain.play()
+                                    }else{
+                                    if(playback == 0){
+                                    youneedmyassagain.play()
+                                    }else if(playback == 1){
+                                    youneedmyassagain1.play()
+                                    }else if(playback == 2){
+                                    youneedmyassagain2.play()
+                                    }else if(playback == 3){
+                                    youneedmyassagain3.play()
+                                    }else if(playback == 4){
+                                    youneedmyassagain4.play()
+                                    }else if(playback == 5){
+                                    youneedmyassagain5.play()
+                                    }
+                                    }
+
+
                                 }
                             }
                         } else if (this.imago == 2) {
