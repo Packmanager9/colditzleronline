@@ -316,6 +316,27 @@ window.addEventListener('DOMContentLoaded', (event) => {
     sounds.push(rollout)
     const overtime = new Audio()
     overtime.src = "https://ditzbitz.com/overtime.mp3"
+    const undertime1 = new Audio()
+    undertime1.src = "https://ditzbitz.com/undertime1x.mp3"
+    const undertime2 = new Audio()
+    undertime2.src = "https://ditzbitz.com/undertime2x.mp3"
+    const undertime3 = new Audio()
+    undertime3.src = "https://ditzbitz.com/undertime3x.mp3"
+    const undertime4 = new Audio()
+    undertime4.src = "https://ditzbitz.com/undertime4x.mp3"
+    const undertime5 = new Audio()
+    undertime5.src = "https://ditzbitz.com/undertime0x.mp3"
+    undertime1.volume = 1
+    undertime2.volume = 1
+    undertime3.volume = 1
+    undertime4.volume = 1
+    undertime5.volume = 1
+
+    sounds.push(undertime1)
+    sounds.push(undertime2)
+    sounds.push(undertime3)
+    sounds.push(undertime4)
+    sounds.push(undertime5)
     sounds.push(overtime)
     const movin = new Audio()
     movin.src = "https://ditzbitz.com/movin.mp3"
@@ -721,12 +742,36 @@ window.addEventListener('DOMContentLoaded', (event) => {
     const orders = new Audio()
     orders.src = "https://ditzbitz.com/orders.mp3"
     sounds.push(orders)
+    const orders1 = new Audio()
+    orders1.src = "https://ditzbitz.com/orders1.mp3"
+    sounds.push(orders1)
+    const orders2 = new Audio()
+    orders2.src = "https://ditzbitz.com/orders2.mp3"
+    sounds.push(orders2)
+    const orders3 = new Audio()
+    orders3.src = "https://ditzbitz.com/orders3.mp3"
+    sounds.push(orders3)
+    const orders4 = new Audio()
+    orders4.src = "https://ditzbitz.com/orders4.mp3"
+    sounds.push(orders4)
     const righton = new Audio()
     righton.src = "https://ditzbitz.com/righton.mp3"
     sounds.push(righton)
     const freezin = new Audio()
     freezin.src = "https://ditzbitz.com/freezin.mp3"
     sounds.push(freezin)
+    const freezin1 = new Audio()
+    freezin1.src = "https://ditzbitz.com/freezin1.mp3"
+    sounds.push(freezin1)
+    const freezin2 = new Audio()
+    freezin2.src = "https://ditzbitz.com/freezin2.mp3"
+    sounds.push(freezin2)
+    const freezin3 = new Audio()
+    freezin3.src = "https://ditzbitz.com/freezin3.mp3"
+    sounds.push(freezin3)
+    const freezin4 = new Audio()
+    freezin4.src = "https://ditzbitz.com/freezin4.mp3"
+    sounds.push(freezin4)
 
 
     const combatinit = new Audio()
@@ -7322,6 +7367,8 @@ let drawcount = 0
             if (!sounds[t].paused) {
                 // //////////console.log("gh")
                 wet = 0
+                // sounds[t].pause()
+                // sounds[t].currentTime = 0
                 break
             }
         }
@@ -7419,8 +7466,25 @@ let drawcount = 0
 
 
                 if (unit.harvester == 1) {
-                    overtime.play()
+                    if(Math.random() < .98){
+                        overtime.play()
+                    }else{
+                        let playback = Math.floor(Math.random()*5)
+                        if(playback == 0){
+                            undertime1.play()
+                        }else if(playback == 1){
+                            undertime2.play()
+                        }else if(playback == 2){
+                            undertime3.play()
+                        }else if(playback == 3){
+                            undertime4.play()
+                        }else if(playback == 4){
+                            undertime5.play()
+                        }
+                    }
                 }
+
+
             } else {
 
                 soundCancel()
@@ -7533,12 +7597,12 @@ let drawcount = 0
 
         let wet = 1
         if (Math.random() > selectionspam) {
-            wet = 0
+            // wet = 0
         }
         for (let t = 0; t < sounds.length; t++) {
             if (!sounds[t].paused) {
                 // //////////console.log("gh")
-                wet = 0
+                // wet = 0
                 break
             }
         }
@@ -7640,9 +7704,32 @@ let drawcount = 0
 
                 if (unit.infantry == 1) {
                     if (Math.random() < .8) {
-                        orders.play()
+                        let playback = Math.floor(Math.random()*5)
+                        if(playback == 0){
+                            orders.play()
+                        }else if(playback == 1){
+                            orders1.play()
+                        }else if(playback == 2){
+                            orders2.play()
+                        }else if(playback == 3){
+                            orders3.play()
+                        }else if(playback == 4){
+                            orders4.play()
+                        }
                     } else {
-                        freezin.play()
+                        let playback = Math.floor(Math.random()*5)
+                        if(playback == 0){
+                            freezin.play()
+                        }else if(playback == 1){
+                            freezin1.play()
+                        }else if(playback == 2){
+                            freezin2.play()
+                        }else if(playback == 3){
+                            freezin3.play()
+                        }else if(playback == 4){
+                            freezin4.play()
+                        }
+                        
                     }
                 }
                 if (unit.hamartaninvader == 1) {
