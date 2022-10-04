@@ -342,6 +342,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
     movin.src = "https://ditzbitz.com/movin.mp3"
     sounds.push(movin)
 
+    const movin1 = new Audio()
+    movin1.src = "https://ditzbitz.com/movin1.mp3"
+    sounds.push(movin1)
+
+    const movin2 = new Audio()
+    movin2.src = "https://ditzbitz.com/movin2.mp3"
+    sounds.push(movin2)
+
+    const movin3 = new Audio()
+    movin3.src = "https://ditzbitz.com/movin3.mp3"
+    sounds.push(movin3)
+
     //gate audio
 
     const closing1 = new Audio()
@@ -7549,7 +7561,14 @@ let drawcount = 0
                         hovness.play()
                     }
                 } else if (unit.harvester == 1) {
-                    movin.play()
+                        let playback = Math.floor(Math.random()*3)
+                        if(playback == 0){
+                            movin.play()
+                        }else if(playback == 1){
+                            movin1.play()
+                        }else if(playback == 2){
+                            movin2.play()
+                        }
                 } else if (unit.podman == 1) {
                     if (Math.random() < .5) {
                         nahimgood.play()
@@ -7597,12 +7616,12 @@ let drawcount = 0
 
         let wet = 1
         if (Math.random() > selectionspam) {
-            // wet = 0
+            wet = 0
         }
         for (let t = 0; t < sounds.length; t++) {
             if (!sounds[t].paused) {
                 // //////////console.log("gh")
-                // wet = 0
+                wet = 0
                 break
             }
         }
