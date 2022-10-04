@@ -8782,7 +8782,7 @@ let drawcount = 0
                     this.factions[k].collection.push(sandmap.players[k].income)
 
                 if (this.factions[k].money.length > this.granularityLimit) {
-                    this.granularity *= 2
+                    this.granularity *= 3
                     this.granularityLimit *= 3
                     for (let t = this.factions[k].money.length - 1; t > 0; t--) {
                         if (t % 2 == 0) {
