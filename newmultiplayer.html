@@ -10814,6 +10814,13 @@ let drawcount = 0
                             }
                         }
 
+                        if (this.faction.buildings[t].teleporter == 1) {
+
+                        canvas_context.fillStyle = "white"
+                        canvas_context.font = "14px arial"
+                        canvas_context.fillText("Teleport", this.faction.units[t].commandPanel.commandButtons[0].x + 25, this.faction.units[t].commandPanel.commandButtons[0].y + 36)
+                        // }
+                        }
 
                         if (this.faction.buildings[t].pond == 1) {
 
