@@ -223,6 +223,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
     // barriers
     const nowalk = new Image()
     nowalk.src = 'https://ditzbitz.com/nowalk.png'
+    const nowalksheet = new Image()
+    nowalksheet.src = 'https://ditzbitz.com/nowalksheet.png'
 
 
     //schlorkupine sprites
@@ -8456,7 +8458,12 @@ let drawcount = 0
         iceDraw(context) {
             if (this.ice == 1) {
                 this.walkable = false
-                context.drawImage(nowalk, this.x, this.y)
+                if(typeof this.icetype == "undefined"){
+                    this.icetype = Math.floor(Math.random()*15)
+                }
+
+                context.drawImage(nowalksheet, 0 + ((this.icetype * 10) % 150), 0, 10, 10, Math.floor(this.x) - 5, Math.floor(this.y) - 5, 10, 10)
+                // context.drawImage(nowalk, this.x, this.y)
             }
             if (this.pit == 1) {
                 this.walkable = false
