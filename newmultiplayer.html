@@ -1464,6 +1464,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     // beeple sprites
 
+    const beeworkerimgwalk = new Image()
+    beeworkerimgwalk.src = "https://ditzbitz.com/bee workerwalk.png"
+    const beemegaimgwalk = new Image()
+    beemegaimgwalk.src = "https://ditzbitz.com/bee megawalk.png"
+    const beesoldierimgwalk = new Image()
+    beesoldierimgwalk.src = "https://ditzbitz.com/bee soldierwalk.png"
+    const beescoutimgwalk = new Image()
+    beescoutimgwalk.src = "https://ditzbitz.com/bee scoutwalk.png"
+
+
+
+
     const beemegaface = new Image()
     beemegaface.src = "https://ditzbitz.com/bee megaface3.png"
     const beehiveimg = new Image()
@@ -22787,6 +22799,11 @@ let drawcount = 0
 
         }
         buildPond(tile, options = 0) {
+
+            this.Bflag = 0
+            this.Nflag = 0
+            this.Gflag = 0
+            this.Mflag = 0
             if (this.type == 7) {
                 let wet = 0
                 for (let t = 0; t < this.buildings.length; t++) {
@@ -22831,6 +22848,9 @@ let drawcount = 0
             }
         }
         buildTeleporter(tile, options = 0) {
+            this.Bflag = 0
+            this.Nflag = 0
+            this.Gflag = 0
             this.Mflag = 0
             if (this.type == 7) {
                 let wet = 0
@@ -22880,6 +22900,10 @@ let drawcount = 0
         }
 
         buildHive(tile, options = 0) {
+            this.Bflag = 0
+            this.Nflag = 0
+            this.Gflag = 0
+            this.Mflag = 0
             if (this.type == 10) {
                 let wet = 0
                 for (let t = 0; t < this.buildings.length; t++) {
@@ -22925,6 +22949,10 @@ let drawcount = 0
         }
         buildTree(tile, options = 0) {
 
+            this.Bflag = 0
+            this.Nflag = 0
+            this.Gflag = 0
+            this.Mflag = 0
             if (this.type == 9) {
                 let wet = 0
                 for (let t = 0; t < this.buildings.length; t++) {
@@ -22969,6 +22997,10 @@ let drawcount = 0
         }
 
         buildMound(tile, options = 0) {
+            this.Bflag = 0
+            this.Nflag = 0
+            this.Gflag = 0
+            this.Mflag = 0
             if (this.type == 5) {
                 let wet = 0
                 for (let t = 0; t < this.buildings.length; t++) {
@@ -33286,7 +33318,12 @@ let drawcount = 0
                 if (this.beeworker == 1) {
                     // if (sandmap.players.indexOf(this.faction) == sandmap.turn) {
                         if (this.dying <= 0) {
-                            map_context.drawImage(beeworkerimg, (this.walkcounter * 10) % 80, 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
+                            if (this.moving == true) {
+                                this.walkcounter++
+                            map_context.drawImage(beeworkerimgwalk, (this.walkcounter * 10) % 20, 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
+                            } else {
+                            map_context.drawImage(beeworkerimg, 0, 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
+                            }
                         }else{
                             map_context.drawImage(beeworkerdeathimg, (this.dying - 1) * 10, 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
 
@@ -33296,7 +33333,12 @@ let drawcount = 0
                 if (this.beesoldier == 1) {
                     // if (sandmap.players.indexOf(this.faction) == sandmap.turn) {
                         if (this.dying <= 0) {
-                            map_context.drawImage(beesoldierimg, (this.walkcounter * 10) % 80, 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
+                            if (this.moving == true) {
+                                this.walkcounter++
+                            map_context.drawImage(beesoldierimgwalk, (this.walkcounter * 10) % 80, 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
+                            } else {
+                            map_context.drawImage(beesoldierimg, 0, 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
+                            }
                         }else{
                             map_context.drawImage(beesoldierdeathimg, (this.dying - 1) * 10, 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
 
@@ -33306,7 +33348,12 @@ let drawcount = 0
                 if (this.beescout == 1) {
                     // if (sandmap.players.indexOf(this.faction) == sandmap.turn) {
                         if (this.dying <= 0) {
-                            map_context.drawImage(beescoutimg, (this.walkcounter * 10) % 80, 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
+                            if (this.moving == true) {
+                                this.walkcounter++
+                            map_context.drawImage(beescoutimgwalk, (this.walkcounter * 10) % 20, 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
+                            } else {
+                            map_context.drawImage(beescoutimg, 0, 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
+                            }
                         }else{
                             map_context.drawImage(beescoutdeathimg, (this.dying - 1) * 10, 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
                         }
@@ -33315,7 +33362,12 @@ let drawcount = 0
                 if (this.beemega == 1) {
                     // if (sandmap.players.indexOf(this.faction) == sandmap.turn) {
                         if (this.dying <= 0) {
-                            map_context.drawImage(beemegaimg, (this.walkcounter * 10) % 80, 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
+                            if (this.moving == true) {
+                                this.walkcounter++
+                            map_context.drawImage(beemegaimgwalk, (this.walkcounter * 10) % 80, 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
+                            } else {
+                            map_context.drawImage(beemegaimg, 0, 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
+                            }
                         }else{
                             map_context.drawImage(beemegadeathimg, (this.dying - 1) * 10, 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
                         }
