@@ -13898,6 +13898,13 @@ let drawcount = 0
             let index = -1
             let j = 0
 
+            if (this.chunk % this.clickrate == 0) {
+                for (let t = 0; t < this.units.length; t++) {
+                            this.units[t].smartAttack()
+                }
+            }else{ 
+                return
+            }
 
             let unitcountersee = 0
             let buildingsseecount = 0
@@ -14067,6 +14074,13 @@ let drawcount = 0
             let index = -1
             let j = 0
 
+            if (this.chunk % this.clickrate == 0) {
+                for (let t = 0; t < this.units.length; t++) {
+                            this.units[t].smartAttack()
+                }
+            }else{ 
+                return
+            }
 
 
             let unitcountersee = 0
@@ -14547,6 +14561,19 @@ let drawcount = 0
         }
         gogonautAI() {
 
+            // }
+            this.chunk++
+            let index = -1
+            let j = 0
+
+            if (this.chunk % this.clickrate == 0) {
+                for (let t = 0; t < this.units.length; t++) {
+                            this.units[t].smartAttack()
+                }
+            }else{ 
+                return
+            }
+
             if (this.defending >= 25) {
                 this.defending = 0
                 this.defenseforce = 0
@@ -14575,12 +14602,6 @@ let drawcount = 0
                     this.units[t].attacksplatter--
                 }
             }
-            // }
-            this.chunk++
-            let index = -1
-            let j = 0
-
-
             let workercount = 0
             // for (let t = 0; t < this.units.length; t++) {
             //     if (this.units[t].bighunchalagadile == 1) {
@@ -14763,6 +14784,18 @@ let drawcount = 0
 
         alagadileAI() {
 
+            // }
+            this.chunk++
+            let index = -1
+            let j = 0
+
+            if (this.chunk % this.clickrate == 0) {
+                for (let t = 0; t < this.units.length; t++) {
+                            this.units[t].smartAttack()
+                }
+            }else{ 
+                return
+            }
             if (this.defending >= 500) {
                 this.defending = 0
                 this.defenseforce = 0
@@ -14803,11 +14836,6 @@ let drawcount = 0
                     this.units[t].attacksplatter--
                 }
             }
-            // }
-            this.chunk++
-            let index = -1
-            let j = 0
-
 
             let workercount = 0
             for (let t = 0; t < this.units.length; t++) {
@@ -15043,6 +15071,14 @@ let drawcount = 0
             this.chunk++
             let index = -1
             let j = 0
+
+            if (this.chunk % this.clickrate == 0) {
+                for (let t = 0; t < this.units.length; t++) {
+                            this.units[t].smartAttack()
+                }
+            }else{ 
+                return
+            }
             if (this.chunk % this.clickrate == 0) {
                 //this.units.sort((a, b) => (Math.random() > .5) ? 1 : -1)
 
@@ -15406,6 +15442,17 @@ let drawcount = 0
         }
         avesectianAI() {
 
+            this.chunk++
+            let index = -1
+            let j = 0
+
+            if (this.chunk % this.clickrate == 0) {
+                for (let t = 0; t < this.units.length; t++) {
+                            this.units[t].smartAttack()
+                }
+            }else{ 
+                return
+            }
             if (this.defending >= 20) {
                 this.defending = 0
                 this.defenseforce = 0
@@ -15445,10 +15492,6 @@ let drawcount = 0
                     }
                 }
             }
-            this.chunk++
-            let index = -1
-            let j = 0
-
 
             let workercount = 0
             for (let t = 0; t < this.units.length; t++) {
@@ -15731,6 +15774,19 @@ let drawcount = 0
         }
         plaztiliteAI() {
 
+            this.chunk++
+            let index = -1
+            let j = 0
+
+
+            if (this.chunk % this.clickrate == 0) {
+                for (let t = 0; t < this.units.length; t++) {
+                            this.units[t].smartAttack()
+                }
+            }else{ 
+                return
+            }
+
             if (Math.random() < .01) {
                 for (let t = 0; t < this.units.length; t++) {
 
@@ -15758,9 +15814,7 @@ let drawcount = 0
             }
 
 
-            this.chunk++
-            let index = -1
-            let j = 0
+
             if (this.chunk % this.clickrate == 0) {
 
                 if (this.hotrock >= 10) {
@@ -16198,6 +16252,22 @@ let drawcount = 0
 
         async alternatePlaztiliteAI() {
 
+
+
+            this.chunk++
+            let index = -1
+            let j = 0
+
+
+
+            if (this.chunk % this.clickrate == 0) {
+                for (let t = 0; t < this.units.length; t++) {
+                            this.units[t].smartAttack()
+                }
+            }else{ 
+                return
+            }
+
             for (let t = 0; t < this.units.length; t++) {
                 if (!(this.units[t].attacksplatter > 0)) {
                     this.units[t].attackmove()
@@ -16212,11 +16282,6 @@ let drawcount = 0
                 }
                 this.racks = 0
             }
-
-
-            this.chunk++
-            let index = -1
-            let j = 0
             if (this.chunk % this.clickrate == 0) {
                 for (let t = 0; t < this.units.length; t++) {
                     this.units[t].smartAttack()
@@ -16802,6 +16867,14 @@ let drawcount = 0
 
 
             if (this.chunk % this.clickrate == 0) {
+                for (let t = 0; t < this.units.length; t++) {
+                            this.units[t].smartAttack()
+                }
+            }else{ 
+                return
+            }
+
+            if (this.chunk % this.clickrate == 0) {
                 //this.units.sort((a, b) => (Math.random() > .5) ? 1 : -1)
                 for (let t = 0; t < this.units.length; t++) {
                     if (this.units[t].pollinator == 1) {
@@ -16810,6 +16883,15 @@ let drawcount = 0
                         }
                     }
                 }
+            }else{ 
+                return
+            }
+            if (this.chunk % this.clickrate == 0) {
+                for (let t = 0; t < this.units.length; t++) {
+                            this.units[t].smartAttack()
+                }
+            }else{ 
+                return
             }
 
 
@@ -17281,6 +17363,14 @@ let drawcount = 0
             let index = -1
             let j = 0
 
+
+            if (this.chunk % this.clickrate == 0) {
+                for (let t = 0; t < this.units.length; t++) {
+                            this.units[t].smartAttack()
+                }
+            }else{ 
+                return
+            }
 
             if (this.chunk % this.clickrate == 0) {
                 //this.units.sort((a, b) => (Math.random() > .5) ? 1 : -1)
@@ -17910,6 +18000,19 @@ let drawcount = 0
         }
         huntAlternateHamartanAI() {
 
+            let index
+            let j = 0
+            this.chunk++
+
+
+            if (this.chunk % this.clickrate == 0) {
+                for (let t = 0; t < this.units.length; t++) {
+                            this.units[t].smartAttack()
+                }
+            }else{ 
+                return
+            }
+
 
             if (this.chunk % this.clickrate == 0) {
 
@@ -18286,9 +18389,8 @@ let drawcount = 0
             }
 
 
-            let index
-            let j = 0
-            this.chunk++
+
+
             if (this.chunk % this.clickrate == 0) {
 
 
@@ -19459,6 +19561,15 @@ let drawcount = 0
             this.chunk++
             let j = 0
 
+
+            if (this.chunk % this.clickrate == 0) {
+                for (let t = 0; t < this.units.length; t++) {
+                            this.units[t].smartAttack()
+                }
+            }else{ 
+                return
+            }
+
             if (this.chunk % this.clickrate == 0) {
                 //this.units.sort((a, b) => (Math.random() > .5) ? 1 : -1)
             } else {
@@ -20556,6 +20667,18 @@ let drawcount = 0
         alternateHumanAI() {
             this.nymphstop--
 
+            let index = 0
+            this.chunk++
+
+
+            if (this.chunk % this.clickrate == 0) {
+                for (let t = 0; t < this.units.length; t++) {
+                            this.units[t].smartAttack()
+                }
+            }else{ 
+                return
+            }
+
             let dronecheckcount = 0
             for (let t = 0; t < this.units.length; t++) {
                 if (this.units[t].drone == 1) {
@@ -20851,8 +20974,6 @@ let drawcount = 0
             //     this.racks = 0
             //     this.lab = 0
             // }
-            let index = 0
-            this.chunk++
             if (this.aimode == 1) {
                 let j = 0
                 // if (Math.random() < this.units.length * .075) {
