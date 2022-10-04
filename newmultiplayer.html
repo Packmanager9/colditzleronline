@@ -6167,6 +6167,8 @@ let drawcount = 0
                             return
                         }
 
+                    }
+                    if(playstart == 1){
                         if (endgame == 1) {
                             if (score.button.isPointInside(TIP_engine)) {
                                 if (score.mode == 0) {
@@ -6215,8 +6217,6 @@ let drawcount = 0
                                 return
                             }
                         }
-                    }
-                    if(playstart == 1){
 
                         if (sandmap.players[sandmap.turn].flopped == 1 && sandmap.players[sandmap.turn].playerUI.state == 0) {
                             if (sandmap.players[sandmap.turn].commandPanel.commandButtons[1].isPointInside(TIP_engine)) {
