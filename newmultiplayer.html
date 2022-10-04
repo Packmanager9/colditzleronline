@@ -1557,6 +1557,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     const beemegaface = new Image()
     beemegaface.src = "https://ditzbitz.com/bee megaface3.png"
+
+    const beeplesoldierface = new Image()
+    beeplesoldierface.src = "https://ditzbitz.com/beeplesoldierface.png"
+    const beeworkerface = new Image()
+    beeworkerface.src = "https://ditzbitz.com/beepleworkerface.png"
+    const beeplescoutface = new Image()
+    beeplescoutface.src = "https://ditzbitz.com/beeplescoutface.png"
+    const beemegafacenew = new Image()
+    beemegafacenew.src = "https://ditzbitz.com/beefacemega.png"
     const beehiveimg = new Image()
     beehiveimg.src = "https://ditzbitz.com/beehivesheet.png"
     const beeworkerimg = new Image()
@@ -10688,7 +10697,18 @@ let drawcount = 0
                             this.faction.units[t].facerect.draw()
 
                             if(this.faction.units[t].bee == 1){
+                                if(this.faction.units[t].beemega == 1){
+                                canvas_context.drawImage(beemegafacenew, facex, facey)
+                                }else  if(this.faction.units[t].beeworker == 1){
+                                canvas_context.drawImage(beeworkerface, facex, facey)
+                                }else  if(this.faction.units[t].beescout == 1){
+                                canvas_context.drawImage(beeplescoutface, facex, facey)
+                                }else  if(this.faction.units[t].beesoldier == 1){
+                                canvas_context.drawImage(beeplesoldierface, facex, facey)
+                                }else{
+
                                 canvas_context.drawImage(beemegaface, facex, facey)
+                                }
                             }else if (this.faction.units[t].targetroid == 1) {
 
                                 if (sandmap.players.indexOf(this.faction.units[t].faction) == 0) {
