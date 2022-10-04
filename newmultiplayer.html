@@ -8783,7 +8783,7 @@ let drawcount = 0
 
                 if (this.factions[k].money.length > this.granularityLimit) {
                     this.granularity *= 2
-                    this.granularityLimit *= 2
+                    this.granularityLimit *= 3
                     for (let t = this.factions[k].money.length - 1; t > 0; t--) {
                         if (t % 2 == 0) {
                             this.factions[k].money.splice(t, 1)
