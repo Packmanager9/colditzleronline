@@ -8462,7 +8462,7 @@ let drawcount = 0
                     this.icetype = Math.floor(Math.random()*15)
                 }
 
-                context.drawImage(nowalksheet, 0 + ((this.icetype * 10) % 150), 0, 10, 10, Math.floor(this.x) - 5, Math.floor(this.y) - 5, 10, 10)
+                context.drawImage(nowalksheet, 0 + ((this.icetype * 10) % 150), 0, 10, 10, Math.floor(this.x), Math.floor(this.y), 10, 10)
                 // context.drawImage(nowalk, this.x, this.y)
             }
             if (this.pit == 1) {
