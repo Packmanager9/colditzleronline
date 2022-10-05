@@ -1523,6 +1523,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     const harvesterinv = new Image()
     harvesterinv.src = "https://ditzbitz.com/harvester2inv.png"
+    const harvesterinvwalk = new Image()
+    harvesterinvwalk.src = "https://ditzbitz.com/harvester2invwalk.png"
+    const harvesterwalk = new Image()
+    harvesterwalk.src = "https://ditzbitz.com/harvester3walk.png"
     const droneinv = new Image()
     droneinv.src = "https://ditzbitz.com/drone1inv.png"
     const infantryinv = new Image()
@@ -34512,10 +34516,20 @@ let drawcount = 0
                             map_context.drawImage(superharvester, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5)
                         } else {
                             if (sandmap.players.indexOf(this.faction) == sandmap.turn) {
-                                map_context.drawImage(harvester, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5)
-                            } else {
-                                map_context.drawImage(harvesterinv, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5)
 
+                                if (this.moving == true) {
+                                    this.walkcounter++
+                                    map_context.drawImage(harvesterwalk, (this.walkcounter * 10) % 120, 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
+                                } else {
+                                    map_context.drawImage(harvester, 0, 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
+                                }
+                            } else {
+                                if (this.moving == true) {
+                                    this.walkcounter++
+                                    map_context.drawImage(harvesterinvwalk, (this.walkcounter * 10) % 40, 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
+                                } else {
+                                    map_context.drawImage(harvesterinv, 0, 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
+                                }
                             }
 
                         }
