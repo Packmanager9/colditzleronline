@@ -8987,6 +8987,7 @@ let drawcount = 0
             this.granularity = 1
             this.count = 0
             this.mode = 0
+            this.button = new UiRectangle(1010, 40, 270, 75, "#333333")
         }
         initialize() {
             this.factions = []
@@ -28991,7 +28992,7 @@ let drawcount = 0
             this.id = (player.createdCount/500)
             player.createdCount++
             if(player.createdCount >= 500){
-                faction.createdCount += .5
+                player.createdCount += .5
                 let c = 0
                 for(let t = 0;t<player.units.length;t++){
                     player.units[t].id = c
