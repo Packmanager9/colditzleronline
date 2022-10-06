@@ -211,7 +211,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
     const startupart = new Image()
     startupart.src = 'https://ditzbitz.com/startupart.png'
     const icetitleart = new Image()
-    icetitleart.src = 'https://ditzbitz.com/icetitleart.png'
+    icetitleart.src = 'https://ditzbitz.com/icetitle3.png'
+    let icealpha = .005
 
     // background
     const snow = new Image()
@@ -3901,7 +3902,13 @@ let drawcount = 0
                 if(playstart == -1){
                     icetitleart
                     canvas_context.drawImage(startupart, 0, 0)
+                    canvas_context.globalAlpha = icealpha
+                    icealpha*=1.05
+                    if(icealpha > 1){
+                        icealpha = 1
+                    }
                     canvas_context.drawImage(icetitleart, 0, 0)
+                    canvas_context.globalAlpha = 1
 
                     playbutton.draw()
                     const invscale = 1
