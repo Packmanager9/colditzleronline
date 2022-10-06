@@ -230,6 +230,116 @@ window.addEventListener('DOMContentLoaded', (event) => {
     nowalksheet.src = 'https://ditzbitz.com/nowalksheet.png'
 
 
+    let ima = new Image()
+    ima.src = "https://ditzbitz.com/spritewalks.png"
+
+    class Walkanim {
+        constructor(x,y, t, k,f){
+            this.x = (x*1.06)-15
+            this.y = y+20
+            this.t = t
+            this.frame = 0
+            this.lim = 36
+            this.name = k
+            this.text = f
+        }
+        draw(){
+            this.frame++
+            this.frame%=this.lim
+            canvas_context.drawImage(ima, this.frame*14, this.t*14, 14,14, this.x, this.y, 28, 28)
+            canvas_context.font = '10px arial'
+            canvas_context.fillStyle = "white"
+            canvas_context.fillText(this.name, this.x + 40, this.y+12)
+            canvas_context.fillText(this.text, this.x + 40, this.y+25)
+        }
+    }
+
+
+    let walkset = []
+    // plaz 14, 30,35, 36
+        let p1 = new Walkanim(40, 40, 14, "Plaztilite Fruiting Buddy: 45 Hotrock.", "Health: 135, Attack/Rate: 18/60, Defense: 4, Move: 40, Sight/Range: 5/4")
+        let p2 = new Walkanim(40, 80, 35, "Plaztilite Spore Seer: 80 Hotrock.","Health: 595, Attack/Rate: 39/30, Defense: 12, Move: 24, Sight/Range: 8/4")
+        let p3 = new Walkanim(40, 120, 30, "Plaztilite Spore Vizir: 130 Hotrock.","Health: 625, Attack/Rate: 45/30, Defense: 16, Move: 20, Sight/Range: 5/4")
+        let p4 = new Walkanim(40, 160,30, "Plaztilite Mycoknight: 200 Hotrock.","Health: 1110, Attack/Rate: 102/24, Defense: 11, Move: 17, Sight/Range: 6/4")
+        walkset.push(p1)
+        walkset.push(p2)
+        walkset.push(p3)
+        walkset.push(p4)
+    //ham 0, 20, 21, 22
+        let h1 = new Walkanim(40, 240+40, 22, "Hamartan Worker: 145 Hotrock.", "Health: 200, Attack/Rate: 12/17, Defense: 1, Move: 40, Sight/Range: 4/3")
+        let h2 = new Walkanim(40, 280+40, 0, "Hamartan Scout: 75 Hotrock.", "Health: 90, Attack/Rate: 9/120, Defense: 25, Move: 13, Sight/Range: 12/7")
+        let h3 = new Walkanim(40, 320+40, 21, "Hamartan Soldier: 175 Hotrock.", "Health: 850, Attack/Rate: 39/40, Defense: 11, Move: 30, Sight/Range: 7/7")
+        let h4 = new Walkanim(40, 360+40,20, "Hamartan Invader: 340 Hotrock.", "Health: 2100, Attack/Rate: 94/17, Defense: 12, Move: 30, Sight/Range: 6/6")
+        walkset.push(h1)
+        walkset.push(h2)
+        walkset.push(h3)
+        walkset.push(h4)
+    //cold  25 31 33 15
+        let c1 = new Walkanim(40, 440+80, 31, "Cold Itzlerian Nymph: 109 Hotrock.", "Health: 70, Attack/Rate: 36/60, Defense: 3, Move: 60, Sight/Range: 3/2")
+        let c2 = new Walkanim(40, 480+80, 33, "Cold Itzlerian Scurrier: Morphs from Nymph for 180 Hotrock.", "Health: 660, Attack/Rate: 52/60, Defense: 6, Move: 40, Sight/Range: 4/3")
+        let c3 = new Walkanim(40, 520+80, 25, "Cold Itzlerian Imago: Morphs from Scurrier for 240 Hotrock.", "Health: 2800, Attack/Rate: 126/24, Defense: 9, Move: 20, Sight/Range: 7/6")
+        let c4 = new Walkanim(40, 560+80,15, "Cold Itzlerian Gamergate: Morphs from Scurrier for 350 Hotrock.", "Health: 1451, Attack/Rate: 363/12, Defense: 18, Move: 20, Sight/Range: 7/7")
+        walkset.push(c1)
+        walkset.push(c2)
+        walkset.push(c3)
+        walkset.push(c4)
+    // lib 27 28 29 32
+        let l1 = new Walkanim(440, 40+0, 28, "Librilbian Pollinator: 85 Hotrock.", "Health: 170, Attack/Rate: 21/20, Defense: 0, Move: 60, Sight/Range: 5/4")
+        let l2 = new Walkanim(440, 80+0, 29, "Librilbian Pufffellow: 90 Hotrock.", "Health: 440, Attack/Rate: 37/30, Defense: 4, Move: 60, Sight/Range: 4/3")
+        let l3 = new Walkanim(440, 120+0, 32, "Librilbian Podman: 140 Hotrock.", "Health: 990, Attack/Rate: 43/40, Defense: 7, Move: 30, Sight/Range: 6/5")
+        let l4 = new Walkanim(440, 160+0,27, "Librilbian Golophyte: 355 Hotrock.", "Health: 1700, Attack/Rate: 78/20, Defense: 14, Move: 15, Sight/Range: 10/9")
+        walkset.push(l1)
+        walkset.push(l2)
+        walkset.push(l3)
+        walkset.push(l4)
+    // gogo  16 18 19 17
+         l1 = new Walkanim(440, 40+480, 19, "Gogognaut: 75 Hotrock.", "Health: 500, Attack/Rate: 21/40, Defense: 6, Move: 30, Sight/Range: 5/4")
+         l2 = new Walkanim(440, 80+480, 18, "Gogognaut Team: 120 Hotrock.", "Health: 750, Attack/Rate: 30/40, Defense: 8, Move: 40, Sight/Range: 5/4")
+         l3 = new Walkanim(440, 120+480, 17, "Gogognaut Defender: 210 Hotrock.", "Health: 1860, Attack/Rate: 69/20, Defense: 11, Move: 30, Sight/Range: 5/4")
+         l4 = new Walkanim(440, 160+480,16, "Gogognaut Champion: 400 Hotrock.", "Health: 2345, Attack/Rate: 99/15, Defense: 16, Move: 20, Sight/Range: 6/5")
+        walkset.push(l1)
+        walkset.push(l2)
+        walkset.push(l3)
+        walkset.push(l4)
+    // ave 2 3 4 5
+         l1 = new Walkanim(840, 40+480, 2, "Avesectian Buzzlet: 90 Hotrock.", "Health: 50, Attack/Rate: 9/40, Defense: 16, Move: 40-120, Sight/Range: 6/5")
+         l2 = new Walkanim(840, 80+480, 4,  "Avesectian Megagnat: 130 Hotrock.", "Health: 1170, Attack/Rate: 90/9, Defense: 4, Move: 20-40, Sight/Range: 7/6")
+         l3 = new Walkanim(840, 120+480,3, "Avesectian Flugoon: 180 Hotrock.", "Health: 1740, Attack/Rate: 36/15, Defense: 12, Move: 20-40, Sight/Range: 9/8")
+         l4 = new Walkanim(840, 160+480,5, "Avesectian Starbatross: 180 Hotrock.", "Health: 870, Attack/Rate: 72/20, Defense: 6, Move: 24-60, Sight/Range: 8/7")
+        walkset.push(l1)
+        walkset.push(l2)
+        walkset.push(l3)
+        walkset.push(l4)
+    //bee 6 7 8 9
+         l1 = new Walkanim(440, 40+240, 9, "Beeple Worker: 100 Hotrock.", "Health: 280, Attack/Rate: 42/40, Defense: 0, Move: 30-60, Sight/Range: 5/5")
+         l2 = new Walkanim(440, 80+240, 7, "Beeple Scout: 100 Hotrock.", "Health: 420, Attack/Rate: 30/40, Defense: 0, Move: 60-120, Sight/Range: 10/7")
+         l3 = new Walkanim(440, 120+240, 8, "Beeple Soldier: 230 Hotrock.", "Health: 1369, Attack/Rate: 66/20, Defense: 6, Move: 30-60, Sight/Range: 6/6")
+         l4 = new Walkanim(440, 160+240,6, "Beeple Queen: 450 Hotrock.", "Health: 2060, Attack/Rate: 153/15, Defense: 17, Move: 20-40, Sight/Range: 7/7")
+        walkset.push(l1)
+        walkset.push(l2)
+        walkset.push(l3)
+        walkset.push(l4)
+    // alag 10 11 1 24
+         l1 = new Walkanim(840, 40+240, 1, "Baby Alagadile: 50 Hotrock.", "Health: 320, Attack/Rate: 42/40, Defense: 0, Move: 12, Sight/Range: 4/4")
+         l2 = new Walkanim(840, 80+240, 24, "Hunch Alagadile: 90 Hotrock.", "Health: 960, Attack/Rate: 63/30, Defense: 10, Move: 9, Sight/Range: 4/4")
+         l3 = new Walkanim(840, 120+240, 10, "Big Alagadile: 160 Hotrock.", "Health: 1800, Attack/Rate: 81/24, Defense: 0, Move: 8, Sight/Range: 5/5")
+         l4 = new Walkanim(840, 160+240,11, "Big Hunch Alagadile: 200 Hotrock.", "Health: 2125, Attack/Rate: 135/15, Defense: 0, Move: 7, Sight/Range: 4/4")
+        walkset.push(l1)
+        walkset.push(l2)
+        walkset.push(l3)
+        walkset.push(l4)
+    //humans 23 26 13 34
+         l1 = new Walkanim(840, 40+0, 13, "Earthoid Drone: 30 Hotrock.", "Health: 250, Attack/Rate: 12/40, Defense: 1, Move: 60, Sight/Range: 6/5")
+         l2 = new Walkanim(840, 80+0, 26, "Earthoid Infantry: 85 Hotrock.", "Health: 460, Attack/Rate: 42/24, Defense: 4, Move: 40, Sight/Range: 4/4")
+         l3 = new Walkanim(840, 120+0, 23, "Earthoid Harvesting Vehicle: 190 Hotrock.", "Health: 1400, Attack/Rate: 12/17, Defense: 10, Move: 40, Sight/Range: 4/4")
+         l4 = new Walkanim(840, 160+0,34, "Earthoid Sniper: 190 Hotrock.", "Health: 775, Attack/Rate: 72/40, Defense: 7, Move: 17, Sight/Range: 8-12/8-12")
+        walkset.push(l1)
+        walkset.push(l2)
+        walkset.push(l3)
+        walkset.push(l4)
+    // tar 12
+    
+
     //schlorkupine sprites
     const schlorkupineimg = new Image()
     schlorkupineimg.src = 'https://ditzbitz.com/schlorkupine.png'
@@ -2570,6 +2680,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             return false
         }
     }
+    let bg = new UiRectangle(0,0,1280,720, "#090909")
 
 
     let factionNames = ["Earthoids", "Cold Itzlerians", "Hamartans", "Librilbians", "Plaztilites", "Avesectians", "Schlorkupine", "Alagadiles", "Targetroid", "Gogonauts", "Beeple", "None"]
@@ -4205,16 +4316,30 @@ let drawcount = 0
 
                 }
                 if (playstart == 4) {
-                    canvas_context.drawImage(startupart, 0, 0)
                     // mapSizer.draw()
+                    if(manual == 12){
+
                     guideplus.draw()
                     playbutton.draw()
+                    guideplus.x =220
+                    guideplus.y =460
+                    playbutton.y = 460
+                    playbutton.x = 600
+                    }else{
+                    canvas_context.drawImage(startupart, 0, 0)
+                    guideplus.x =550
+                    guideplus.y =620
+                    playbutton.y = 620
+                    playbutton.x = 80
+                    guideplus.draw()
+                    playbutton.draw()
+                    }
                     canvas_context.font = "40px Arial";
                     canvas_context.fillStyle = "#FFFFFF"
                     canvas_context.fillText("Back", playbutton.x + 35, playbutton.y + 50)
                     canvas_context.font = "40px Arial";
                     canvas_context.fillStyle = "#FFFFFF"
-                    if (manual < 11) {
+                    if (manual < 12) {
                         canvas_context.fillText("Next", guideplus.x + 35, guideplus.y + 50)
                     } else {
                         canvas_context.fillText("Again", guideplus.x + 35, guideplus.y + 50)
@@ -5599,7 +5724,23 @@ let drawcount = 0
                                 }
                             }
                         }
-                    } 
+                    }else if (manual == 12){
+                        bg.draw()
+                            for(let t= 0;t<walkset.length;t++){
+                                walkset[t].draw()
+                            }
+                            canvas_context.font = '30px arial'
+                            canvas_context.fillStyle = "white"
+                            canvas_context.fillText("Plaztilites",20,40)
+                            canvas_context.fillText("Hamartans",20,280)
+                            canvas_context.fillText("Cold Itzlerians",20, 440+80)
+                            canvas_context.fillText("Librilbians",(440*1.06)-30,40)
+                            canvas_context.fillText("Beeple",(440*1.06)-30,280)
+                            canvas_context.fillText("Gogonauts",(440*1.06)-30, 440+80)
+                            canvas_context.fillText("Earthoids",(840*1.06)-30,40)
+                            canvas_context.fillText("Alagadiles",(840*1.06)-30,280)
+                            canvas_context.fillText("Avesectians",(840*1.06)-30, 440+80)
+                    }
                 }
             }
             
@@ -6098,7 +6239,7 @@ let drawcount = 0
                     if (playstart == 4) {
                         if (guideplus.isPointInside(TIP_engine)) {
                             manual += 1
-                            manual %= 12
+                            manual %= 13
                         }
                         if (playbutton.isPointInside(TIP_engine)) {
                             manual = 0
