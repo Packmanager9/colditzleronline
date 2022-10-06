@@ -4115,6 +4115,8 @@ let drawcount = 0
 
                     playbutton.y = 620
                     playbutton.x = 80
+                    guideplus.x =220
+                    guideplus.y =460
                     campaignController.draw()
 
                     if (campaignController.on == 1) {
@@ -4321,6 +4323,7 @@ let drawcount = 0
                     // mapSizer.draw()
                     if(manual == 12){
 
+                        bg.draw()
                     guideplus.draw()
                     playbutton.draw()
                     guideplus.x =220
@@ -5727,7 +5730,6 @@ let drawcount = 0
                             }
                         }
                     }else if (manual == 12){
-                        bg.draw()
                             for(let t= 0;t<walkset.length;t++){
                                 walkset[t].draw()
                             }
@@ -6336,6 +6338,8 @@ let drawcount = 0
                                     if (playstart == 2) {
                                         playbutton.y = 620
                                         playbutton.x = 80
+                                        guideplus.x =220
+                                        guideplus.y =460
                                         playstart = 3
                                     }
                                     if (playstart == 0) {
