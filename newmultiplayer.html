@@ -196,7 +196,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     // const engageconstant = .4
     const engageconstant = .04
 
-    let playstart = 0
+    let playstart = -1
     let debreak = 1
     let manual = 0
     let start = 0 // whether it's okay to draw the game into the canvas element.
@@ -210,6 +210,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
     // startup frames
     const startupart = new Image()
     startupart.src = 'https://ditzbitz.com/startupart.png'
+    const icetitleart = new Image()
+    icetitleart.src = 'https://ditzbitz.com/icetitleart.png'
 
     // background
     const snow = new Image()
@@ -3896,6 +3898,38 @@ let drawcount = 0
                 canvas_context.clearRect(0, 0, canvas.width, canvas.height)  // refreshes the image
 
                 playbutton.draw()
+                if(playstart == -1){
+                    icetitleart
+                    canvas_context.drawImage(startupart, 0, 0)
+                    canvas_context.drawImage(icetitleart, 0, 0)
+
+                    playbutton.draw()
+                    const invscale = 1
+                    const string = ""
+                    let ypointer = 50
+                    let xpointer = 10
+                    canvas_context.font = "50px Arial";
+                    canvas_context.fillStyle = "#FFFFFF"
+                    const stoarr = string.split(' ')
+                    let stostring = ''
+                    for (let t = 0; t < stoarr.length; t++) {
+                        const width = canvas_context.measureText(stostring + ' ' + stoarr[t]).width
+                        if (width > canvas.width * invscale * .821) {
+                            canvas_context.fillText(stostring + ' ' + stoarr[t], xpointer, ypointer)
+                            ypointer += 60
+                            stostring = ''
+                        } else {
+                            stostring = stostring + " " + stoarr[t]
+                            if (t == stoarr.length - 1) {
+                                canvas_context.fillText(stostring, xpointer, ypointer)
+                            }
+                        }
+                    }
+                    canvas_context.font = "40px Arial";
+                    canvas_context.fillStyle = "#FFFFFF"
+                    canvas_context.fillText("Continue", playbutton.x + 15, playbutton.y + 50)
+                }
+
                 if (playstart == 0) {
                     canvas_context.drawImage(startupart, 0, 0)
 
@@ -6150,10 +6184,14 @@ let drawcount = 0
                                         playstart = 1
                                     }
                                     if (playstart == 2) {
+                                        playbutton.x = 80
                                         playstart = 3
                                     }
                                     if (playstart == 0) {
                                         playstart = 2
+                                    }
+                                    if (playstart == -1) {
+                                        playstart = 0
                                     }
                                 }
                             }
@@ -6231,7 +6269,7 @@ let drawcount = 0
                                 campaignController.initialize() // = new Campaign()
                                 sandmap.initialize(CANVAS_WIDTH, CANVAS_HEIGHT, 0, 0, []) // = new Sandmap(CANVAS_WIDTH, CANVAS_HEIGHT, 0, 0, []);
                                 start = 0
-                                playstart = 0
+                                playstart = -1
                                 endgame = 0
                                 // score = new ScoreGraph()
                                 score.initialize()
@@ -8988,7 +9026,7 @@ let drawcount = 0
             campaignController.initialize() // = new Campaign()
             sandmap.initialize(CANVAS_WIDTH, CANVAS_HEIGHT, 0, 0, []) // = new Sandmap(CANVAS_WIDTH, CANVAS_HEIGHT, 0, 0, []);
             start = 0
-            playstart = 0
+            playstart = -1
             endgame = 0
             // score = new ScoreGraph()
             score.initialize()
@@ -9302,7 +9340,7 @@ let drawcount = 0
      controlToggle = new UiRectangle(40, 535, 400, 75, "#777777")
 
      guideplus = new UiRectangle(550, 620, 200, 75, "#333333")
-     playbutton = new UiRectangle(80, 620, 200, 75, "#333333")
+     playbutton = new UiRectangle(530, 620, 200, 75, "#333333")
      aitoggle1 = new UiRectangle(200, 200, 300, 75, "#333333")
     // DropDownFaction
      chartoggle1 = new DropDownFaction(sandmap.players[0])
@@ -26329,7 +26367,7 @@ let drawcount = 0
     let controlToggle = new UiRectangle(40, 535, 400, 75, "#777777")
 
     let guideplus = new UiRectangle(550, 620, 200, 75, "#333333")
-    let playbutton = new UiRectangle(80, 620, 200, 75, "#333333")
+    let playbutton = new UiRectangle(530, 620, 200, 75, "#333333")
     let aitoggle1 = new UiRectangle(200, 200, 300, 75, "#333333")
     // DropDownFaction
     let chartoggle1 = new DropDownFaction(sandmap.players[0])
@@ -35349,7 +35387,7 @@ let drawcount = 0
                 campaignController.initialize() // = new Campaign()
                 sandmap.initialize(CANVAS_WIDTH, CANVAS_HEIGHT, 0, 0, []) // = new Sandmap(CANVAS_WIDTH, CANVAS_HEIGHT, 0, 0, []);
                 start = 0
-                playstart = 0
+                playstart = -1
                 endgame = 0
                 // score = new ScoreGraph()
                 score.initialize()
@@ -35406,7 +35444,7 @@ let drawcount = 0
                 campaignController.initialize() // = new Campaign()
                 sandmap.initialize(CANVAS_WIDTH, CANVAS_HEIGHT, 0, 0, []) // = new Sandmap(CANVAS_WIDTH, CANVAS_HEIGHT, 0, 0, []);
                 start = 0
-                playstart = 0
+                playstart = -1
                 endgame = 0
                 // score = new ScoreGraph()
                 score.initialize()
@@ -35506,7 +35544,7 @@ let count = 0
             campaignController.initialize() // = new Campaign()
             sandmap.initialize(CANVAS_WIDTH, CANVAS_HEIGHT, 0, 0, []) // = new Sandmap(CANVAS_WIDTH, CANVAS_HEIGHT, 0, 0, []);
             start = 0
-            playstart = 0
+            playstart = -1
             endgame = 0
             // score = new ScoreGraph()
             score.initialize()
