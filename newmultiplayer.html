@@ -4113,6 +4113,8 @@ let drawcount = 0
 
                     canvas_context.drawImage(startupart, 0, 0)
 
+                    playbutton.y = 620
+                    playbutton.x = 80
                     campaignController.draw()
 
                     if (campaignController.on == 1) {
@@ -6332,6 +6334,7 @@ let drawcount = 0
                                         playstart = 1
                                     }
                                     if (playstart == 2) {
+                                        playbutton.y = 620
                                         playbutton.x = 80
                                         playstart = 3
                                     }
