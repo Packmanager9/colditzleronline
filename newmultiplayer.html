@@ -1170,6 +1170,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     const knightface = new Image()
     knightface.src = "https://ditzbitz.com/knightface.png"
+    const knightfacesheet = new Image()
+    knightfacesheet.src = "https://ditzbitz.com/knightfacesheet.png"
     const vizirface = new Image()
     vizirface.src = "https://ditzbitz.com/vizirface.png"
     const seerface = new Image()
@@ -11132,7 +11134,10 @@ let drawcount = 0
 
                             } else {
                                 if (this.faction.units[t].mycoknight == 1) {
-                                    canvas_context.drawImage(knightface, facex, facey)
+                                    // canvas_context.drawImage(knightface, facex, facey)
+                                    // knightfacesheet
+                                        this.faction.units[t].facecounter+=.5
+                                        canvas_context.drawImage(knightfacesheet,(Math.floor(this.faction.units[t].facecounter)%68)*64,0,64,64, facex,facey, 64, 64)
                                 }
                                 if (this.faction.units[t].sporevizir == 1) {
                                     canvas_context.drawImage(vizirface, facex, facey)
