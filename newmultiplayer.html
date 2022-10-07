@@ -1490,6 +1490,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
     pufffellowfacesheet.src = "https://ditzbitz.com/pufffellowfacesheet.png"
     const podmanface = new Image()
     podmanface.src = "https://ditzbitz.com/podmanface7.png"
+    const podmanfacesheet = new Image()
+    podmanfacesheet.src = "https://ditzbitz.com/podmanfacesheet.png"
 
 
     // campaign librilbian sprites
@@ -11281,7 +11283,11 @@ let drawcount = 0
                                         canvas_context.drawImage(golophytefacesheet,(Math.floor(this.faction.units[t].facecounter)%69)*64,0,64,64, facex,facey, 64, 64)
                                 }
                                 if (this.faction.units[t].podman == 1) {
-                                    canvas_context.drawImage(podmanface, facex, facey)
+                                    // canvas_context.drawImage(podmanface, facex, facey)
+
+                                        this.faction.units[t].facecounter+=1
+                                        canvas_context.drawImage(podmanfacesheet,(Math.floor(this.faction.units[t].facecounter)%62)*64,0,64,64, facex,facey, 64, 64)
+                                    
                                 }
                                 if (this.faction.units[t].nymph == 2) {
                                     if (this.faction.units[t].sana == 1) {
