@@ -1278,6 +1278,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
     
     const droneface = new Image()
     droneface.src = "https://ditzbitz.com/droneface2.png"
+    
+    const dronefacesheet = new Image()
+    dronefacesheet.src = "https://ditzbitz.com/dronefacesheet2.png"
     const sniperface = new Image()
     sniperface.src = "https://ditzbitz.com/sniperface2.png"
     const harvesterface = new Image()
@@ -11219,7 +11222,11 @@ let drawcount = 0
                                     if (this.faction.units[t].super == 1) {
                                         canvas_context.drawImage(superdroneface, facex, facey)
                                     } else {
-                                        canvas_context.drawImage(droneface, facex, facey)
+                                        // canvas_context.drawImage(droneface, facex, facey)
+
+                                        this.faction.units[t].facecounter+=1
+                                        canvas_context.drawImage(dronefacesheet,(Math.floor(this.faction.units[t].facecounter)%58)*64,0,64,64, facex,facey, 64, 64)
+                                        
                                     }
                                 }
                                 if (this.faction.units[t].harvester == 1) {
