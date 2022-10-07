@@ -1482,6 +1482,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
     xlibrilbianpollinator.src = "https://ditzbitz.com/librilbian rootlayer.png" //librilbian pollinator
     const goliophytewalksheet = new Image()
     goliophytewalksheet.src = "https://ditzbitz.com/librilbian goliophytewalksheet.png" //librilbian pollinator
+    const goliophytewalksheet2 = new Image()
+    goliophytewalksheet2.src = "https://ditzbitz.com/librilbian goliophytewalksheet2.png" //librilbian pollinator
 
     const goliophytewalksheetinv = new Image()
     goliophytewalksheetinv.src = "https://ditzbitz.com/librilbian goliophytewalksheetinv.png" //librilbian pollinator
@@ -11214,7 +11216,29 @@ let drawcount = 0
                                 }
                                 if (this.faction.units[t].goliophyte == 1) {
                                     // canvas_context.drawImage(golophyteface, facex, facey)
-                                        this.faction.units[t].facecounter++
+                                    if(this.faction.units[t].recent > 0){
+                                        this.faction.units[t].recent--
+                                    this.faction.units[t].facecounter++
+                                    }
+                                    if(this.faction.units[t].recent > 10){
+                                        this.faction.units[t].recent--
+                                    this.faction.units[t].facecounter++
+                                    }
+                                    this.faction.units[t].facecounter++
+                                    if(this.faction.units[t].walkcounter > 4){
+                                        if(this.faction.units[t].facecounter > 41){
+                                        this.faction.units[t].facecounter-=5
+                                        }else{
+                                        this.faction.units[t].facecounter+=5
+                                        }
+                                        this.faction.units[t].recent = 20
+                                    }else{                                        
+                                        if( this.faction.units[t].facecounter <= 15){
+                                            this.faction.units[t].facecounter%=15
+                                        }else{
+                                            this.faction.units[t].facecounter%=69
+                                        }
+                                    }
                                         canvas_context.drawImage(golophytefacesheet,(Math.floor(this.faction.units[t].facecounter)%69)*64,0,64,64, facex,facey, 64, 64)
                                 }
                                 if (this.faction.units[t].podman == 1) {
@@ -35103,22 +35127,22 @@ let drawcount = 0
                             // goliophytewalksheet
 
                             if (this.moving == true) {
-                                this.walkcounter++
-                                if(this.walkcounter > 6){
-                                    map_context.drawImage(goliophytewalksheet, 60 + ((this.walkcounter * 10) % 60), 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
+                                this.walkcounter+=1
+                                if(this.walkcounter > 9){
+                                    map_context.drawImage(goliophytewalksheet2, 90 + ((Math.floor(this.walkcounter) * 10) % 130), 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
                                 }else{
-                                    map_context.drawImage(goliophytewalksheet, 0 + ((this.walkcounter * 10) % 120), 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
+                                    map_context.drawImage(goliophytewalksheet2, 0 + ((Math.floor(this.walkcounter) * 10) % 120), 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
                                 }
                             } else {
                                 if(this.walkcounter > 0){
                                     this.walkcounter--
                                 }
 
-                                if(this.walkcounter > 6){
-                                    this.walkcounter = 6
-                                    map_context.drawImage(goliophytewalksheet, 60 + ((this.walkcounter * 10) % 60), 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
+                                if(this.walkcounter > 9){
+                                    this.walkcounter = 9
+                                    map_context.drawImage(goliophytewalksheet2, 90 + ((this.walkcounter * 10) % 130), 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
                                 }else{
-                                    map_context.drawImage(goliophytewalksheet, 0 + ((this.walkcounter * 10) % 120), 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
+                                    map_context.drawImage(goliophytewalksheet2, 0 + ((this.walkcounter * 10) % 120), 0, 10, 10, Math.floor(this.body.x) - 5, Math.floor(this.body.y) - 5, 10, 10)
                                 }
                             }
 
