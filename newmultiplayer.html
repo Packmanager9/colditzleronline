@@ -1127,10 +1127,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     const nymphface = new Image()
     nymphface.src = "https://ditzbitz.com/nymphface2.png"
+    const nymphfacesheet = new Image()
+    nymphfacesheet.src = "https://ditzbitz.com/nymphfacesheet2.png"
     const imagoface = new Image()
     imagoface.src = "https://ditzbitz.com/imagoface2.png"
     const scurrierface = new Image()
     scurrierface.src = "https://ditzbitz.com/scurrierface2.png"
+    const scurrierfacesheet = new Image()
+    scurrierfacesheet.src = "https://ditzbitz.com/scurrierfacesheet.png"
+
+    
     const gamergateface = new Image()
     gamergateface.src = "https://ditzbitz.com/gamergateface2.png"
 
@@ -11207,7 +11213,9 @@ let drawcount = 0
                                     if (this.faction.units[t].sana == 1) {
                                         canvas_context.drawImage(nymphfacesana, facex, facey)
                                     } else {
-                                        canvas_context.drawImage(nymphface, facex, facey)
+                                        // canvas_context.drawImage(nymphface, facex, facey)
+                                        this.faction.units[t].facecounter+=1
+                                        canvas_context.drawImage(nymphfacesheet,(Math.floor(this.faction.units[t].facecounter)%140)*64,0,64,64, facex,facey, 64, 64)
                                     }
                                 }
                                 if (this.faction.units[t].pollinator == 1) {
@@ -11257,7 +11265,10 @@ let drawcount = 0
                                     if (this.faction.units[t].sana == 1) {
                                         canvas_context.drawImage(scurrierfacesana, facex, facey)
                                     } else {
-                                        canvas_context.drawImage(scurrierface, facex, facey)
+                                        // canvas_context.drawImage(scurrierface, facex, facey)
+
+                                        this.faction.units[t].facecounter+=1
+                                        canvas_context.drawImage(scurrierfacesheet,(Math.floor(this.faction.units[t].facecounter)%31)*64,0,64,64, facex,facey, 64, 64)
                                     }
                                 }
                                 if (this.faction.units[t].imago == 1) {
