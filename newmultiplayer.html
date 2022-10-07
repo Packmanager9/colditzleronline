@@ -1263,6 +1263,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
     sniperface.src = "https://ditzbitz.com/sniperface2.png"
     const harvesterface = new Image()
     harvesterface.src = "https://ditzbitz.com/harvesterface2.png"
+    const harvesterfacesheet = new Image()
+    harvesterfacesheet.src = "https://ditzbitz.com/harvesterfacesheet.png"
 
     const superinfantryface = new Image()
     superinfantryface.src = "https://ditzbitz.com/superinfantryface.png"
@@ -11178,7 +11180,11 @@ let drawcount = 0
                                     if (this.faction.units[t].super == 1) {
                                         canvas_context.drawImage(superharvesterface, facex, facey)
                                     } else {
-                                        canvas_context.drawImage(harvesterface, facex, facey)
+                                        // canvas_context.drawImage(harvesterface, facex, facey)
+
+                                        this.faction.units[t].facecounter+=.25
+                                        canvas_context.drawImage(harvesterfacesheet,(Math.floor(this.faction.units[t].facecounter)%15)*64,0,64,64, facex,facey, 64, 64)
+
                                     }
                                 }
                                 if (this.faction.units[t].nymph == 1) {
