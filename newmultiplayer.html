@@ -1310,6 +1310,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     const hamartansoldierface = new Image()
     hamartansoldierface.src = "https://ditzbitz.com/hamartansoldierface2.png"  //hamartansoldierface2
+    const hamartansoldierfacesheet = new Image()
+    hamartansoldierfacesheet.src = "https://ditzbitz.com/hamartansoldierfacesheet.png"  //hamartansoldierface2
     const hamartanworkerface = new Image()
     hamartanworkerface.src = "https://ditzbitz.com/hamartanworkerface2.png" //hamartanworkerface2
     const hamartaninvaderface = new Image()
@@ -11199,7 +11201,11 @@ let drawcount = 0
                                         canvas_context.drawImage(hamartanscoutfacesheet,(Math.floor(this.faction.units[t].facecounter)%39)*64,0,64,64, facex,facey, 64, 64)
                                 }
                                 if (this.faction.units[t].hamartansoldier == 1) {
-                                    canvas_context.drawImage(hamartansoldierface, facex, facey)
+                                    // canvas_context.drawImage(hamartansoldierface, facex, facey)
+                                        this.faction.units[t].facecounter+=.25
+
+                                        canvas_context.drawImage(hamartansoldierfacesheet,(Math.floor(this.faction.units[t].facecounter)%18)*64,0,64,64, facex,facey, 64, 64)
+                                    
                                 }
                                 if (this.faction.units[t].hamartanworker == 1) {
                                     canvas_context.drawImage(hamartanworkerface, facex, facey)
