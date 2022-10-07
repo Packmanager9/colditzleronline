@@ -1147,6 +1147,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
     
     const gamergateface = new Image()
     gamergateface.src = "https://ditzbitz.com/gamergateface2.png"
+    
+    const gamergatefacesheet = new Image()
+    gamergatefacesheet.src = "https://ditzbitz.com/gamergatefacesheet.png"
 
     const nymphfacesana = new Image()
     nymphfacesana.src = "https://ditzbitz.com/nymphface2sana.png"
@@ -11303,7 +11306,9 @@ let drawcount = 0
                                     if (this.faction.units[t].sana == 1) {
                                         canvas_context.drawImage(gamergatefacesana, facex, facey)
                                     } else {
-                                        canvas_context.drawImage(gamergateface, facex, facey)
+                                        // canvas_context.drawImage(gamergateface, facex, facey)
+                                        this.faction.units[t].facecounter+=.1875
+                                        canvas_context.drawImage(gamergatefacesheet,(Math.floor(this.faction.units[t].facecounter)%39)*64,0,64,64, facex,facey, 64, 64)
                                     }
                                 }
                             }
