@@ -1249,6 +1249,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
     humanfacesintro.src = "https://ditzbitz.com/humanfacesintro.png"
     const infantryface = new Image()
     infantryface.src = "https://ditzbitz.com/infantryface2.png"
+    const infantryfacesheet = new Image()
+    infantryfacesheet.src = "https://ditzbitz.com/infantryfacesheet.png"
     const droneface = new Image()
     droneface.src = "https://ditzbitz.com/droneface2.png"
     const sniperface = new Image()
@@ -4110,8 +4112,8 @@ let drawcount = 0
 
                 }
                 if (playstart == 3) {
-
                     canvas_context.drawImage(startupart, 0, 0)
+                    // roomSelectionBox.draw()
 
                     playbutton.y = 620
                     playbutton.x = 80
@@ -5752,6 +5754,11 @@ let drawcount = 0
         document.addEventListener('keydown', (event) => {
             if (typeof keysPressed[event.key] == "undefined") {
                 keysPressed[event.key] = true;
+                if (roomSelectionBox.focus == 1) {
+                    if (parseInt(event.key, 10) > -1 && parseInt(event.key, 10) < 10) {
+                        roomSelectionBox.addchar(event.key)
+                    }
+                }
             }
         });
         document.addEventListener('keyup', (event) => {
@@ -6391,6 +6398,12 @@ let drawcount = 0
                                 return
                             }
                         }
+
+                // if (roomSelectionBox.inputbox.isPointInside(TIP_engine)) {
+                //     roomSelectionBox.focus = 1
+                // } else {
+                //     roomSelectionBox.focus = 0
+                // }
                         //all pre game logic clicks should be above here
 
                         if (playstart !== 1) {
@@ -8975,6 +8988,94 @@ let drawcount = 0
 
     }
 
+    class Textinput {
+        constructor(x, y, w, h) {
+            this.inputbox = new UiRectangle(x, y, w, h, "#FFFFFF")
+            this.string = ""
+            this.focus = 0
+            this.neverfocus = 1
+            this.lock = ''
+            this.focusindicator = new UiRectangle(x, y + (h * .1), w * .03, h * .8, "#000000")
+            this.flash = -1
+            this.flashspin = 45
+            this.flashnum = -1
+            this.rooms = 0
+            this.primes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 31, 37, 41, 43, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157]
+        }
+
+        measure() {
+            canvas_context.font = "17px Arial";
+            canvas_context.fillStyle = "#000000"
+            const width = canvas_context.measureText(this.string).width
+            return width
+        }
+        draw() {
+            this.inputbox.draw()
+            if (this.neverfocus == 1) {
+                canvas_context.font = "17x Arial"
+                canvas_context.fillStyle = "#000000"
+                canvas_context.fillText("Room #", this.inputbox.x + 10, this.inputbox.y + 20)
+            } else {
+                canvas_context.font = "17px Arial"
+                canvas_context.fillStyle = "#000000"
+                canvas_context.fillText(this.string, this.inputbox.x + 10, this.inputbox.y + 20)
+            }
+            if (this.focus == 1) {
+                this.neverfocus = 0
+                this.flashnum++
+                if (this.flashnum % (this.flashspin + (-15 * this.flash)) == 0) {
+                    this.flash *= -1
+                }
+                if (this.flash == 1) {
+                    this.focusindicator.x = (this.measure(this.string) + this.inputbox.x + 10)
+                    this.focusindicator.draw()
+                }
+            }
+        }
+        backspace() {
+            this.string = this.string.split('')
+            this.string.splice(this.string.length - 1, 1)
+            this.string = this.string.join('')
+            const room = parseInt(this.string, 10)
+            if (this.string.length == 0) {
+                room = 0
+            }
+            const Rson = {
+                "room": `${room}` //(0.5 * (room + MapSelect) * (room + MapSelect + 1)) + MapSelect
+            }
+            this.rooms =  room //(0.5 * (room + MapSelect) * (room + MapSelect + 1)) + MapSelect
+
+            if(onlineNow == 1){
+                ws.send(JSON.stringify(Rson))
+            }
+        }
+        addchar(char) {
+            if(char == 'Escape' || char == 'Shift'|| char == 'Meta' || char == 'Control' || char == 'Alt' || char == 'Tab'){
+                return
+            }
+            if (this.string.length < 3) {
+                if (this.lock != char) {
+                    this.string += char
+                    this.lock = char
+                }
+                if (this.string.length == 0 || this.string == "0") {
+                    this.string = "1"
+                }
+                const room = parseInt(this.string, 10)
+                const Rson = {
+                    "room": `${room}` //(0.5 * (room + MapSelect) * (room + MapSelect + 1)) + MapSelect
+                }
+                this.rooms =  room //(0.5 * (room + MapSelect) * (room + MapSelect + 1)) + MapSelect
+
+                
+            if(onlineNow == 1){
+                    ws.send(JSON.stringify(Rson))
+                }
+            }
+        }
+    }
+
+    const roomSelectionBox = new Textinput(1100, 380, 100, 33)
 
     class ScoreGraph {
         constructor() {
@@ -11028,7 +11129,9 @@ let drawcount = 0
                                     if (this.faction.units[t].super == 1) {
                                         canvas_context.drawImage(superinfantryface, facex, facey)
                                     } else {
-                                        canvas_context.drawImage(infantryface, facex, facey)
+                                        // canvas_context.drawImage(infantryface, facex, facey)
+                                        this.faction.units[t].facecounter+=.5
+                                        canvas_context.drawImage(infantryfacesheet,(Math.floor(this.faction.units[t].facecounter)%21)*64,0,64,64, facex,facey, 64, 64)
                                     }
                                 }
                                 if (this.faction.units[t].infantry == 2) {
@@ -17627,7 +17730,7 @@ let drawcount = 0
                 //this.units.sort((a, b) => (Math.random() > .5) ? 1 : -1)
                 for (let t = 0; t < this.units.length; t++) {
                     if (this.units[t].pollinator == 1) {
-                        if (this.units[t].health <= (this.units[t].maxhealth * .55)) {
+                        if (this.units[t].health <= (this.units[t].maxhealth * .95)) { //55
                             this.units[t].metamorphpufffellow()
                         }
                     }
@@ -17966,7 +18069,7 @@ let drawcount = 0
                     if (this.defending > 39) {
                         for (let t = 0; t < this.units.length; t++) {
                             if (this.units[t].pollinator == 1) {
-                                if (Math.random() < (this.hotrock / 2000)) {
+                                if (Math.random() < (this.hotrock / 20000)) { //2000
                                     this.units[t].metamorphpufffellow()
                                     if (sandmap.players.indexOf(this) == sandmap.turn) {
                                         if (Math.random() < soundspamdrop) {
@@ -28978,6 +29081,7 @@ let drawcount = 0
             if(player.type == 11){
                 return
             }   
+            this.facecounter = 0
             this.factionNum = sandmap.players.indexOf(player)
             this.agent = 1
             this.decay = 200
