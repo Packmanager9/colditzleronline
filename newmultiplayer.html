@@ -1455,6 +1455,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
     bibiintro.src = "https://ditzbitz.com/bibiintro.png"
     const librilbianpollinatorface = new Image()
     librilbianpollinatorface.src = "https://ditzbitz.com/librilbianpollinatorface2.png"
+    const librilbianpollinatorfacesheet = new Image()
+    librilbianpollinatorfacesheet.src = "https://ditzbitz.com/librilbianpollinatorfacesheet.png"
     const golophyteface = new Image()
     golophyteface.src = "https://ditzbitz.com/librilbiangoliophyteface2.png"
     const pufffellowface = new Image()
@@ -11182,7 +11184,12 @@ let drawcount = 0
                                     }
                                 }
                                 if (this.faction.units[t].pollinator == 1) {
-                                    canvas_context.drawImage(librilbianpollinatorface, facex, facey)
+                                    // canvas_context.drawImage(librilbianpollinatorface, facex, facey)
+                                    // librilbianpollinatorfacesheet
+
+                                        this.faction.units[t].facecounter+=1
+                                        canvas_context.drawImage(librilbianpollinatorfacesheet,(Math.floor(this.faction.units[t].facecounter)%22)*64,0,64,64, facex,facey, 64, 64)
+
                                 }
                                 if (this.faction.units[t].pufffellow == 1) {
                                     canvas_context.drawImage(pufffellowface, facex, facey)
