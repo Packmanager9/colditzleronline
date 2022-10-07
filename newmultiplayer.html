@@ -1467,6 +1467,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
     golophytefacesheet.src = "https://ditzbitz.com/golophytefacesheet.png"
     const pufffellowface = new Image()
     pufffellowface.src = "https://ditzbitz.com/pufffellowface4.png"
+    const pufffellowfacesheet = new Image()
+    pufffellowfacesheet.src = "https://ditzbitz.com/pufffellowfacesheet.png"
     const podmanface = new Image()
     podmanface.src = "https://ditzbitz.com/podmanface7.png"
 
@@ -11212,7 +11214,9 @@ let drawcount = 0
 
                                 }
                                 if (this.faction.units[t].pufffellow == 1) {
-                                    canvas_context.drawImage(pufffellowface, facex, facey)
+                                    // canvas_context.drawImage(pufffellowface, facex, facey)
+                                        this.faction.units[t].facecounter+=.5
+                                        canvas_context.drawImage(pufffellowfacesheet,(Math.floor(this.faction.units[t].facecounter)%29)*64,0,64,64, facex,facey, 64, 64)
                                 }
                                 if (this.faction.units[t].goliophyte == 1) {
                                     // canvas_context.drawImage(golophyteface, facex, facey)
