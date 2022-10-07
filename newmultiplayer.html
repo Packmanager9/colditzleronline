@@ -1697,6 +1697,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     const beemegaface = new Image()
     beemegaface.src = "https://ditzbitz.com/bee megaface3.png"
+    const beefacemegasheet = new Image()
+    beefacemegasheet.src = "https://ditzbitz.com/beefacemegasheet.png"
 
     const beeplesoldierface = new Image()
     beeplesoldierface.src = "https://ditzbitz.com/beeplesoldierface.png"
@@ -11038,7 +11040,11 @@ let drawcount = 0
 
                             if(this.faction.units[t].bee == 1){
                                 if(this.faction.units[t].beemega == 1){
-                                canvas_context.drawImage(beemegafacenew, facex, facey)
+                                // canvas_context.drawImage(beemegafacenew, facex, facey)
+
+
+                                        this.faction.units[t].facecounter+=.33333
+                                        canvas_context.drawImage(beefacemegasheet,(Math.floor(this.faction.units[t].facecounter)%27)*64,0,64,64, facex,facey, 64, 64)
                                 }else  if(this.faction.units[t].beeworker == 1){
                                         this.faction.units[t].facecounter+=.5
                                         canvas_context.drawImage(beepleworkerfacesheet,(Math.floor(this.faction.units[t].facecounter)%39)*64,0,64,64, facex,facey, 64, 64)
@@ -11048,7 +11054,6 @@ let drawcount = 0
                                 }else  if(this.faction.units[t].beesoldier == 1){
                                 canvas_context.drawImage(beeplesoldierface, facex, facey)
                                 }else{
-
                                 canvas_context.drawImage(beemegaface, facex, facey)
                                 }
                             }else if (this.faction.units[t].targetroid == 1) {
