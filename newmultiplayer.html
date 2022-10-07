@@ -1164,6 +1164,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
     // const buddyface = new Image()
     // buddyface.src = "https://ditzbitz.com/boomface.png"
 
+    const buddyfacesheet = new Image()
+    buddyfacesheet.src = "https://ditzbitz.com/buddyfacesheet.png"
 
 
     const knightface = new Image()
@@ -11126,7 +11128,10 @@ let drawcount = 0
                                     canvas_context.drawImage(seerface, facex, facey)
                                 }
                                 if (this.faction.units[t].fruiting == 1) {
-                                    canvas_context.drawImage(buddyface, facex, facey)
+                                        this.faction.units[t].facecounter+=.25
+                                        canvas_context.drawImage(buddyfacesheet,(Math.floor(this.faction.units[t].facecounter)%37)*64,0,64,64, facex,facey, 64, 64)
+
+                                    // canvas_context.drawImage(buddyface, facex, facey)
                                 }
                                 if (this.faction.units[t].hamartaninvader == 1) {
                                     canvas_context.drawImage(hamartaninvaderface, facex, facey)
