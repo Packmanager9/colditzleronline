@@ -1320,6 +1320,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
     hamartanworkerfacesheet.src = "https://ditzbitz.com/hamartanworkerfacesheet.png" //hamartanworkerface2
     const hamartaninvaderface = new Image()
     hamartaninvaderface.src = "https://ditzbitz.com/hamartaninvaderface2.png" //hamartaninvaderface2
+    const invaderfacesheet = new Image()
+    invaderfacesheet.src = "https://ditzbitz.com/invaderfacesheet.png" //hamartaninvaderface2
 
 
 
@@ -11201,7 +11203,35 @@ let drawcount = 0
                                     // canvas_context.drawImage(buddyface, facex, facey)
                                 }
                                 if (this.faction.units[t].hamartaninvader == 1) {
-                                    canvas_context.drawImage(hamartaninvaderface, facex, facey)
+                                    // canvas_context.drawImage(hamartaninvaderface, facex, facey)
+                                    
+                                    if(this.faction.units[t].recent > 0){
+                                        this.faction.units[t].recent-=2
+                                    this.faction.units[t].facecounter-=3
+                                    }else{
+                                        
+                                    this.faction.units[t].facecounter++
+                                    }
+                                    if(this.faction.units[t].facecounter <= 0){
+                                        this.faction.units[t].facecounter = 0
+                                    }
+                                    if(this.faction.units[t].walkcounter > 1){
+                                        if(this.faction.units[t].facecounter > 41){
+                                        this.faction.units[t].facecounter-=4
+                                        }else{
+                                        this.faction.units[t].facecounter+=5
+                                        }
+                                        this.faction.units[t].recent = 47
+                                    }else{                                        
+                                        if( this.faction.units[t].facecounter <= 13){
+                                            this.faction.units[t].facecounter%=13
+                                        }else{
+                                            this.faction.units[t].facecounter%=47
+                                        }
+                                    }
+                                        // canvas_context.drawImage(golophytefacesheet,(Math.floor(this.faction.units[t].facecounter)%69)*64,0,64,64, facex,facey, 64, 64)
+                                        // this.faction.units[t].facecounter+=.5
+                                        canvas_context.drawImage(invaderfacesheet,(Math.floor(this.faction.units[t].facecounter)%47)*64,0,64,64, facex,facey, 64, 64)
                                 }
                                 if (this.faction.units[t].hamartanscout == 1) {
                                     // canvas_context.drawImage(hamartanscoutface, facex, facey)
