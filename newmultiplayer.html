@@ -1742,6 +1742,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     const beeplesoldierface = new Image()
     beeplesoldierface.src = "https://ditzbitz.com/beeplesoldierface.png"
+    const beeplesoldierfacesheet = new Image()
+    beeplesoldierfacesheet.src = "https://ditzbitz.com/beeplesoldierfacesheet.png"
     const beeworkerface = new Image()
     beeworkerface.src = "https://ditzbitz.com/beepleworkerface.png"
     
@@ -11098,7 +11100,11 @@ let drawcount = 0
 
                                 
                                 }else  if(this.faction.units[t].beesoldier == 1){
-                                canvas_context.drawImage(beeplesoldierface, facex, facey)
+                                // canvas_context.drawImage(beeplesoldierface, facex, facey)
+
+                                        this.faction.units[t].facecounter+= .3333 //(512/400)
+                                        canvas_context.drawImage(beeplesoldierfacesheet,(Math.floor(this.faction.units[t].facecounter)%25)*64,0,64,64, facex,facey, 64, 64)
+                                
                                 }else{
                                 canvas_context.drawImage(beemegaface, facex, facey)
                                 }
