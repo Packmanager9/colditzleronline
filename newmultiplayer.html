@@ -1193,6 +1193,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
     vizirface.src = "https://ditzbitz.com/vizirface.png"
     const seerface = new Image()
     seerface.src = "https://ditzbitz.com/seerface3.png"
+    const seerfacesheet = new Image()
+    seerfacesheet.src = "https://ditzbitz.com/seerfacesheet.png"
     const buddyface = new Image()
     buddyface.src = "https://ditzbitz.com/buddyface4.png"
 
@@ -11184,7 +11186,11 @@ let drawcount = 0
                                     canvas_context.drawImage(vizirface, facex, facey)
                                 }
                                 if (this.faction.units[t].seer == 1) {
-                                    canvas_context.drawImage(seerface, facex, facey)
+                                    // canvas_context.drawImage(seerface, facex, facey)
+                                        this.faction.units[t].facecounter+=.5
+                                        canvas_context.drawImage(seerfacesheet,(Math.floor(this.faction.units[t].facecounter)%31)*64,0,64,64, facex,facey, 64, 64)
+
+                                    
                                 }
                                 if (this.faction.units[t].fruiting == 1) {
                                         this.faction.units[t].facecounter+=.25
