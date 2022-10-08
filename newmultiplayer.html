@@ -1191,6 +1191,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
     knightfacesheet.src = "https://ditzbitz.com/knightfacesheet.png"
     const vizirface = new Image()
     vizirface.src = "https://ditzbitz.com/vizirface.png"
+    const vizirfacesheet = new Image()
+    vizirfacesheet.src = "https://ditzbitz.com/vizirfacesheet.png"
     const seerface = new Image()
     seerface.src = "https://ditzbitz.com/seerface3.png"
     const seerfacesheet = new Image()
@@ -11187,7 +11189,9 @@ let drawcount = 0
                                         canvas_context.drawImage(knightfacesheet,(Math.floor(this.faction.units[t].facecounter)%68)*64,0,64,64, facex,facey, 64, 64)
                                 }
                                 if (this.faction.units[t].sporevizir == 1) {
-                                    canvas_context.drawImage(vizirface, facex, facey)
+                                    // canvas_context.drawImage(vizirface, facex, facey)
+                                        this.faction.units[t].facecounter+=.3333
+                                        canvas_context.drawImage(vizirfacesheet,(Math.floor(this.faction.units[t].facecounter)%33)*64,0,64,64, facex,facey, 64, 64)
                                 }
                                 if (this.faction.units[t].seer == 1) {
                                     // canvas_context.drawImage(seerface, facex, facey)
