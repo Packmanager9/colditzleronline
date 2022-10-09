@@ -1932,6 +1932,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
     buzzletface.src = "https://ditzbitz.com/avesectian buzzletface.png" //nymph2
     const avesectianbuzzletfacesheet = new Image()
     avesectianbuzzletfacesheet.src = "https://ditzbitz.com/avesectianbuzzletfacesheet.png" //nymph2
+    const avesectianflugoonfacesheet = new Image()
+    avesectianflugoonfacesheet.src = "https://ditzbitz.com/avesectianflugoonfacesheet2.png" //nymph2
 
     const avesectianstarbatrossfacesheet = new Image()
     avesectianstarbatrossfacesheet.src = "https://ditzbitz.com/avesectianstarbatrossfacesheet.png" //nymph2
@@ -11183,7 +11185,10 @@ let drawcount = 0
 
                             } else if (this.faction.units[t].ave == 1) {
                                 if (this.faction.units[t].flugoon == 1) {
-                                    canvas_context.drawImage(flugoonface, facex, facey)
+                                        this.faction.units[t].facecounter+=.5
+                                        canvas_context.drawImage(avesectianflugoonfacesheet,(Math.floor(this.faction.units[t].facecounter)%57)*64,0,64,64, facex,facey, 64, 64)
+                                    // canvas_context.drawImage(flugoonface, facex, facey)
+                                    
                                 } else if (this.faction.units[t].buzzlet == 1) {
                                     // canvas_context.drawImage(buzzletface, facex, facey)
                                         this.faction.units[t].facecounter+=.5
