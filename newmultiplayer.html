@@ -1933,6 +1933,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
     const avesectianbuzzletfacesheet = new Image()
     avesectianbuzzletfacesheet.src = "https://ditzbitz.com/avesectianbuzzletfacesheet.png" //nymph2
 
+    const avesectianstarbatrossfacesheet = new Image()
+    avesectianstarbatrossfacesheet.src = "https://ditzbitz.com/avesectianstarbatrossfacesheet.png" //nymph2
+
 
     //sana sprites
 
@@ -11186,7 +11189,10 @@ let drawcount = 0
                                         this.faction.units[t].facecounter+=.5
                                         canvas_context.drawImage(avesectianbuzzletfacesheet,(Math.floor(this.faction.units[t].facecounter)%29)*64,0,64,64, facex,facey, 64, 64)
                                 } else if (this.faction.units[t].starbatross == 1) {
-                                    canvas_context.drawImage(starbatrossface, facex, facey)
+                                    // canvas_context.drawImage(starbatrossface, facex, facey)
+                                    // avesectianstarbatrossfacesheet
+                                        this.faction.units[t].facecounter+=.5
+                                        canvas_context.drawImage(avesectianstarbatrossfacesheet,(Math.floor(this.faction.units[t].facecounter)%59)*64,0,64,64, facex,facey, 64, 64)
                                 } else if (this.faction.units[t].megagnat == 1) {
                                     canvas_context.drawImage(megagnatface, facex, facey)
                                 }
