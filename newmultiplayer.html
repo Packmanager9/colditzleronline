@@ -1168,6 +1168,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
     // babyalagadilefacesheet
     const bigalagadileface = new Image()
     bigalagadileface.src = "https://ditzbitz.com/big alagadileface.png"
+    const bigalagadilefacesheet = new Image()
+    bigalagadilefacesheet.src = "https://ditzbitz.com/bigalagadilesheet2.png"
     const bighunchalagadileface = new Image()
     bighunchalagadileface.src = "https://ditzbitz.com/big hunch alagadileface.png"
     const hunchalagadileface = new Image()
@@ -11161,11 +11163,15 @@ let drawcount = 0
                                         this.faction.units[t].facecounter+=.5
                                         canvas_context.drawImage(alagadilefacesheet,(Math.floor(this.faction.units[t].facecounter)%57)*64,0,64,64, facex,facey, 64, 64)
                                 } else if (this.faction.units[t].bigalagadile == 1) {
+
+                                    
                                     canvas_context.drawImage(bigalagadileface, facex, facey)
                                 } else if (this.faction.units[t].hunchalagadile == 1) {
                                     canvas_context.drawImage(hunchalagadileface, facex, facey)
                                 } else if (this.faction.units[t].bighunchalagadile == 1) {
-                                    canvas_context.drawImage(bighunchalagadileface, facex, facey)
+                                    // canvas_context.drawImage(bighunchalagadileface, facex, facey)
+                                        this.faction.units[t].facecounter+=.25
+                                        canvas_context.drawImage(bigalagadilefacesheet,(Math.floor(this.faction.units[t].facecounter)%40)*64,0,64,64, facex,facey, 64, 64)
                                 }
 
                             } else if (this.faction.units[t].gogo == 1) {
