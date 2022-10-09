@@ -997,6 +997,17 @@ window.addEventListener('DOMContentLoaded', (event) => {
     beeaudio9.volume= .5
     sounds.push(beeaudio9)
 
+    let alagadilesounds = []
+    for (let t = 1; t < 14; t++) {
+        const audi = new Audio()
+        if(t < 10){
+        audi.src = `https://ditzbitz.com/alagadileaudio-0${t}.mp3`
+        }else{
+        audi.src = `https://ditzbitz.com/alagadileaudio-${t}.mp3`
+        }
+        alagadilesounds.push(audi)
+        sounds.push(audi)
+    }
     //avesection audio hack 
     let avesounds = []
     for (let t = 1; t < 24; t++) {
@@ -7782,6 +7793,10 @@ let drawcount = 0
                     }
                 }else if (unit.ave == 1) {
                     avesounds[Math.floor(Math.random() * (avesounds.length - 2))].play()
+                    // alagadilesounds[Math.floor(Math.random() * (alagadilesounds.length - 1))].play()
+                }else if (unit.alagadile == 1) {
+                    // avesounds[Math.floor(Math.random() * (avesounds.length - 2))].play()
+                    alagadilesounds[Math.floor(Math.random() * (alagadilesounds.length - 1))].play()
                 } else if (unit.imago == 1) {
                     if (Math.random() < .5) {
                         sieveseejunior.play()
@@ -7894,6 +7909,8 @@ let drawcount = 0
                     }
                 }else if (unit.ave == 1) {
                     avesounds[Math.floor(Math.random() * (avesounds.length - 2))].play()
+                }else if (unit.alagadile == 1) {
+                    alagadilesounds[Math.floor(Math.random() * (alagadilesounds.length - 1))].play()
                 } else if (unit.hamartaninvader == 1) {
                     gentlemen.play()
                 } else if (unit.hamartansoldier == 1) {
@@ -7997,6 +8014,9 @@ let drawcount = 0
                 soundCancel()
                 if (unit.ave == 1) {
                     avesounds[Math.floor(Math.random() * (avesounds.length - 2))].play()
+                }
+                if (unit.alagadile == 1) {
+                    alagadilesounds[Math.floor(Math.random() * (alagadilesounds.length - 1))].play()
                 }
 
                 if (unit.drone == 1) {
@@ -28331,11 +28351,13 @@ let drawcount = 0
             }
         }
         finishAlagadile() {
-            //     if (Math.random() < soundspamdrop) {
-            //         if (sandmap.players.indexOf(this.faction) == sandmap.turn) {
-            //             avesounds[Math.floor(Math.random()*(avesounds.length-2))].play()
-            //     }
-            // }
+                if (Math.random() < soundspamdrop) {
+                    if (sandmap.players.indexOf(this.faction) == sandmap.turn) {
+                        // avesounds[Math.floor(Math.random()*(avesounds.length-2))].play()
+
+                    alagadilesounds[Math.floor(Math.random() * (alagadilesounds.length - 1))].play()
+                }
+            }
             const agent1 = new Agent(this.tile, this.faction)
             agent1.shouldMove = 1
             agent1.ultrabreak = this.waypoint
@@ -28343,11 +28365,11 @@ let drawcount = 0
             agent1.isAlagadile()
         }
         finishBigAlagadile() {
-            //     if (Math.random() < soundspamdrop) {
-            //         if (sandmap.players.indexOf(this.faction) == sandmap.turn) {
-            //             avesounds[Math.floor(Math.random()*(avesounds.length-2))].play()
-            //     }
-            // }
+                if (Math.random() < soundspamdrop) {
+                    if (sandmap.players.indexOf(this.faction) == sandmap.turn) {
+                    alagadilesounds[Math.floor(Math.random() * (alagadilesounds.length - 1))].play()
+                }
+            }
             const agent1 = new Agent(this.tile, this.faction)
             agent1.shouldMove = 1
             agent1.ultrabreak = this.waypoint
@@ -28355,11 +28377,11 @@ let drawcount = 0
             agent1.isBigAlagadile()
         }
         finishBigHunchAlagadile() {
-            //     if (Math.random() < soundspamdrop) {
-            //         if (sandmap.players.indexOf(this.faction) == sandmap.turn) {
-            //             avesounds[Math.floor(Math.random()*(avesounds.length-2))].play()
-            //     }
-            // }
+                if (Math.random() < soundspamdrop) {
+                    if (sandmap.players.indexOf(this.faction) == sandmap.turn) {
+                    alagadilesounds[Math.floor(Math.random() * (alagadilesounds.length - 1))].play()
+                }
+            }
             const agent1 = new Agent(this.tile, this.faction)
             agent1.shouldMove = 1
             agent1.ultrabreak = this.waypoint
@@ -28367,11 +28389,11 @@ let drawcount = 0
             agent1.isBigHunchAlagadile()
         }
         finishHunchAlagadile() {
-            //     if (Math.random() < soundspamdrop) {
-            //         if (sandmap.players.indexOf(this.faction) == sandmap.turn) {
-            //             avesounds[Math.floor(Math.random()*(avesounds.length-2))].play()
-            //     }
-            // }
+                if (Math.random() < soundspamdrop) {
+                    if (sandmap.players.indexOf(this.faction) == sandmap.turn) {
+                    alagadilesounds[Math.floor(Math.random() * (alagadilesounds.length - 1))].play()
+                }
+            }
             const agent1 = new Agent(this.tile, this.faction)
             agent1.shouldMove = 1
             agent1.ultrabreak = this.waypoint
@@ -30987,6 +31009,23 @@ let drawcount = 0
                     if (wet == 1) {
                     soundCancel()
                     avesounds[Math.floor(Math.random() * (avesounds.length - 2))].play()
+                    }
+                }
+                if (this.alagadile == 1) {
+                    let wet = 1
+                    if (Math.random() > (soundspamdrop * engageconstant)) {
+                        wet = 0
+                    }
+                    for (let t = 0; t < sounds.length; t++) {
+                        if (!sounds[t].paused) {
+                            // //////////console.log("gh")
+                            wet = 0
+                            break
+                        }
+                    }
+                    if (wet == 1) {
+                    soundCancel()
+                    alagadilesounds[Math.floor(Math.random() * (alagadilesounds.length - 1))].play()
                     }
                 }
 
