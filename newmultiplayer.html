@@ -1067,12 +1067,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     const gogonautface = new Image()
     gogonautface.src = "https://ditzbitz.com/gogonautface.png"
+    const gogonautfacesheet = new Image()
+    gogonautfacesheet.src = "https://ditzbitz.com/gogonautfacesheet.png"
     const gogonautchampionface = new Image()
     gogonautchampionface.src = "https://ditzbitz.com/gogonautchampionface2.png"
     const gogonautchampionfacesheet = new Image()
-    gogonautchampionfacesheet.src = "https://ditzbitz.com/gogonautchampionfacesheet.png"
+    gogonautchampionfacesheet.src = "https://ditzbitz.com/gogonautchampionfacesheet3.png"
     const gogonautdefenderface = new Image()
     gogonautdefenderface.src = "https://ditzbitz.com/gogonautchampionface.png"
+    const gogonautdefenderfacesheet = new Image()
+    gogonautdefenderfacesheet.src = "https://ditzbitz.com/gogonautchampionfacesheet.png"
+
+    
     const gogonautteamface = new Image()
     gogonautteamface.src = "https://ditzbitz.com/gogonautteamface.png"
     const gogonautteamfacesheet = new Image()
@@ -11200,19 +11206,26 @@ let drawcount = 0
                             } else if (this.faction.units[t].gogo == 1) {
                                 if (sandmap.players.indexOf(this.faction.units[t].faction) == 0) {
                                     if (this.faction.units[t].gogonaut == 1) {
-                                        canvas_context.drawImage(gogonautface, facex, facey)
-                                    } else if (this.faction.units[t].gogonautchampion == 1) {
-                                        // canvas_context.drawImage(gogonautchampionface, facex, facey)
-                                        this.faction.units[t].facecounter+=.25
-                                        canvas_context.drawImage(gogonautchampionfacesheet,(Math.floor(this.faction.units[t].facecounter)%366)*64,0,64,64, facex,facey, 64, 64)
-                                    } else if (this.faction.units[t].gogonautdefender == 1) {
-                                        canvas_context.drawImage(gogonautdefenderface, facex, facey)
-                                    } else if (this.faction.units[t].gogonautteam == 1) {
+                                        // canvas_context.drawImage(gogonautface, facex, facey)
 
                                         
 
+                                        this.faction.units[t].facecounter+=.333
+                                        canvas_context.drawImage(gogonautfacesheet,(Math.floor(this.faction.units[t].facecounter)%69)*64,0,64,64, facex,facey, 64, 64)
+
+                                    } else if (this.faction.units[t].gogonautchampion == 1) {
+                                        // canvas_context.drawImage(gogonautchampionface, facex, facey)
                                         this.faction.units[t].facecounter+=1
-                                        canvas_context.drawImage(gogonautteamfacesheet,(Math.floor(this.faction.units[t].facecounter)%203)*64,0,64,64, facex,facey, 64, 64)
+                                        canvas_context.drawImage(gogonautchampionfacesheet,(Math.floor(this.faction.units[t].facecounter)%171)*64,0,64,64, facex,facey, 64, 64)
+                                    } else if (this.faction.units[t].gogonautdefender == 1) {
+                                        // canvas_context.drawImage(gogonautdefenderface, facex, facey)
+
+                                        this.faction.units[t].facecounter+=.25
+                                        canvas_context.drawImage(gogonautdefenderfacesheet,(Math.floor(this.faction.units[t].facecounter)%366)*64,0,64,64, facex,facey, 64, 64)
+
+                                    } else if (this.faction.units[t].gogonautteam == 1) {
+                                        this.faction.units[t].facecounter+=1
+                                        canvas_context.drawImage(gogonautteamfacesheet,(Math.floor(this.faction.units[t].facecounter)%64)*64,0,64,64, facex,facey, 64, 64)
 
                                         // canvas_context.drawImage(gogonautteamface, facex, facey)
                                     }
