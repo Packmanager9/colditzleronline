@@ -331,7 +331,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     //humans 23 26 13 34
          l1 = new Walkanim(840, 40+0, 13, "Earthoid Drone: 30 Hotrock.", "Health: 250, Attack/Rate: 12/40, Defense: 1, Move: 60, Sight/Range: 6/5")
          l2 = new Walkanim(840, 80+0, 26, "Earthoid Infantry: 85 Hotrock.", "Health: 460, Attack/Rate: 42/24, Defense: 4, Move: 40, Sight/Range: 4/4")
-         l3 = new Walkanim(840, 120+0, 23, "Earthoid Harvesting Vehicle: 190 Hotrock.", "Health: 1400, Attack/Rate: 12/17, Defense: 10, Move: 40, Sight/Range: 4/4")
+         l3 = new Walkanim(840, 120+0, 23, "Earthoid Harvesting Vehicle: 190 Hotrock.", "Health: 1400, Attack/Rate: 93/17, Defense: 10, Move: 40, Sight/Range: 4/4")
          l4 = new Walkanim(840, 160+0,34, "Earthoid Sniper: 190 Hotrock.", "Health: 775, Attack/Rate: 72/40, Defense: 7, Move: 17, Sight/Range: 8-12/8-12")
         walkset.push(l1)
         walkset.push(l2)
@@ -1162,6 +1162,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     const babyalagadileface = new Image()
     babyalagadileface.src = "https://ditzbitz.com/alagadileface.png"
+    const alagadilefacesheet = new Image()
+    alagadilefacesheet.src = "https://ditzbitz.com/alagadilefacesheet2.png"
+
+    // babyalagadilefacesheet
     const bigalagadileface = new Image()
     bigalagadileface.src = "https://ditzbitz.com/big alagadileface.png"
     const bighunchalagadileface = new Image()
@@ -11153,7 +11157,9 @@ let drawcount = 0
 
                             } else if (this.faction.units[t].alagadile == 1) {
                                 if (this.faction.units[t].babyalagadile == 1) {
-                                    canvas_context.drawImage(babyalagadileface, facex, facey)
+                                    // canvas_context.drawImage(babyalagadileface, facex, facey)
+                                        this.faction.units[t].facecounter+=.5
+                                        canvas_context.drawImage(alagadilefacesheet,(Math.floor(this.faction.units[t].facecounter)%57)*64,0,64,64, facex,facey, 64, 64)
                                 } else if (this.faction.units[t].bigalagadile == 1) {
                                     canvas_context.drawImage(bigalagadileface, facex, facey)
                                 } else if (this.faction.units[t].hunchalagadile == 1) {
