@@ -1075,6 +1075,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
     gogonautdefenderface.src = "https://ditzbitz.com/gogonautchampionface.png"
     const gogonautteamface = new Image()
     gogonautteamface.src = "https://ditzbitz.com/gogonautteamface.png"
+    const gogonautteamfacesheet = new Image()
+    gogonautteamfacesheet.src = "https://ditzbitz.com/gogonautteamfacesheet.png"
 
     const gogonautfaceinv = new Image()
     gogonautfaceinv.src = "https://ditzbitz.com/gogonautfaceinv.png"
@@ -11201,14 +11203,18 @@ let drawcount = 0
                                         canvas_context.drawImage(gogonautface, facex, facey)
                                     } else if (this.faction.units[t].gogonautchampion == 1) {
                                         // canvas_context.drawImage(gogonautchampionface, facex, facey)
-
-                                        
                                         this.faction.units[t].facecounter+=.25
                                         canvas_context.drawImage(gogonautchampionfacesheet,(Math.floor(this.faction.units[t].facecounter)%366)*64,0,64,64, facex,facey, 64, 64)
                                     } else if (this.faction.units[t].gogonautdefender == 1) {
                                         canvas_context.drawImage(gogonautdefenderface, facex, facey)
                                     } else if (this.faction.units[t].gogonautteam == 1) {
-                                        canvas_context.drawImage(gogonautteamface, facex, facey)
+
+                                        
+
+                                        this.faction.units[t].facecounter+=1
+                                        canvas_context.drawImage(gogonautteamfacesheet,(Math.floor(this.faction.units[t].facecounter)%203)*64,0,64,64, facex,facey, 64, 64)
+
+                                        // canvas_context.drawImage(gogonautteamface, facex, facey)
                                     }
                                 } else {
 
