@@ -2808,7 +2808,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     let bg = new UiRectangle(0,0,1280,720, "#090909")
 
 
-    let factionNames = ["Earthoids", "Cold Itzlerians", "Hamartans", "Librilbians", "Plaztilites", "Avesectians", "Schlorkupine", "Alagadiles", "Targetroid", "Gogonauts", "Beeple", "None"]
+    let factionNames = ["Earthoids", "Cold Itzlerians", "Hamartans", "Librilbians", "Plaztilites", "Avesectians", "Schlorkupine", "Alagadiles", "Targetroid", "Gogonauts", "Beeple", "Spectator"]
 
     class DropDownDifficulty {
         constructor(player){
@@ -10156,12 +10156,13 @@ let drawcount = 0
             //     }
             // }
             //remove fog/g
-
+            if(this.players[this.turn].type != 11){
             map_context.drawImage(this.players[this.turn].canvasx, 0, 0, worldscale, worldscale, 0, 0, (worldscale * 10), (worldscale * 10))
             // map_context.globalAlpha = 0
             map_context.globalAlpha = .4;
             map_context.drawImage(this.players[this.turn].canvas, 0, 0, worldscale, worldscale, 0, 0, (worldscale * 10), (worldscale * 10))
 
+            }
             map_context.globalAlpha = 1
 
             this.window.draw()
@@ -29389,6 +29390,11 @@ let drawcount = 0
     class Agent {
         constructor(tile, player) {
             if(player.type == 11){
+                for(let t = 0;t<player.blocks.length;t++){
+                for(let k = 0;k<player.blocks[t].length;k++){
+                    player.blocks[t][k].markdraw = 1
+                }
+                }
                 return
             }   
             this.facecounter = 0
