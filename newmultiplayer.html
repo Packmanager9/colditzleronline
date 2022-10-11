@@ -84,6 +84,7 @@ let intendingToPlayOnline = 0
     let enterlock = 0
     let typing = 0
     let alpha = 1
+    let textalpha = 1
     let chatsetup = 0
 window.addEventListener('DOMContentLoaded', (event) => {
 
@@ -8452,6 +8453,33 @@ let drawcount = 0
         //     debreak = 0
         // }
     }
+
+    function invertColor(hex) {
+    if (hex.indexOf('#') === 0) {
+        hex = hex.slice(1);
+    }
+    // convert 3-digit hex to 6-digits.
+    if (hex.length === 3) {
+        hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
+    }
+    if (hex.length !== 6) {
+        throw new Error('Invalid HEX color.');
+    }
+    // invert color components
+    var r = (255 - parseInt(hex.slice(0, 2), 16)).toString(16),
+        g = (255 - parseInt(hex.slice(2, 4), 16)).toString(16),
+        b = (255 - parseInt(hex.slice(4, 6), 16)).toString(16);
+    // pad each with zeros and return
+    return '#' + padZero(r) + padZero(g) + padZero(b);
+}
+
+function padZero(str, len) {
+    len = len || 2;
+    var zeros = new Array(len).join('0');
+    return (zeros + str).slice(-len);
+}
+
+
     function getRandomLightColor() { // random color that will be visible on  black background
         var letters = '0123456789ABCDEF';
         var color = '#';
@@ -8576,7 +8604,6 @@ let drawcount = 0
 
 
             if(JSON.parse(data).color != "undefined"){
-
                         // //console.log("hit?")
 
 
@@ -8585,9 +8612,10 @@ let drawcount = 0
                             // }
                             textcanvas_context.clearRect(0, 320 + textscroll, 1000, 40)
                             textcanvas_context.font = "14px arial"
-                            textcanvas_context.fillStyle = JSON.parse(data).color
+                            textcanvas_context.fillStyle = "white" //JSON.parse(data).color
                             if (typeof JSON.parse(data).name != "undefined") {
 
+                        textalpha = 21
 
                                 let ypointer = 300 + textscroll
                                 let stoarr = (`(${JSON.parse(data).name}) ` + ' ' + JSON.parse(data).text).split('')
@@ -8595,6 +8623,10 @@ let drawcount = 0
                                 for (let t = 0; t < stoarr.length; t++) {
                                     const width = textcanvas_context.measureText(stostring + '' + stoarr[t]).width
                                     if (width > textcanvas.width - 14) {
+                                            textcanvas_context.strokeStyle = "black" // invertColor(JSON.parse(data).color)
+                                            textcanvas_context.lineWidth = 4
+                                            textcanvas_context.strokeText(stostring + '' + stoarr[t], 0, ypointer)
+                                            textcanvas_context.font = "14px arial"
                                         textcanvas_context.fillText(stostring + '' + stoarr[t], 0, ypointer)
                                         ypointer += 14
                                         textscroll += 14
@@ -8604,6 +8636,10 @@ let drawcount = 0
                                         if (t == stoarr.length - 1) {
 
                                             textscroll += 14
+                                            textcanvas_context.strokeStyle = "black" // invertColor(JSON.parse(data).color)
+                                            textcanvas_context.lineWidth = 4
+                                            textcanvas_context.strokeText(stostring, 0, ypointer)
+                                            textcanvas_context.font = "14px arial"
                                             textcanvas_context.fillText(stostring, 0, ypointer)
                                         }
                                     }
@@ -36630,6 +36666,7 @@ let count = 0
         }
 
         if (typing == 1) {
+                textalpha = 7
                 textcanvas_context.font = "14px arial"
                 textcanvas_context.fillStyle = "white"
                 textcanvas_context.clearRect(0, 320 + textscroll, 1000, 40)
@@ -36659,13 +36696,17 @@ let count = 0
                         textcanvas_context.clearRect(0, 320 + textscroll, 1000, 40)
                         ws.send(JSON.stringify(tson))
                         tson = JSON.stringify(tson)
-                        textcanvas_context.fillStyle = JSON.parse(tson).color
+                        textcanvas_context.fillStyle = "white"// JSON.parse(tson).color
                         let ypointer = 300 + textscroll
                         let stoarr = (`(You) ` + ' ' + JSON.parse(tson).text).split('')
                         let stostring = ''
                         for (let t = 0; t < stoarr.length; t++) {
                             const width = textcanvas_context.measureText(stostring + '' + stoarr[t]).width
                             if (width > textcanvas.width - 14) {
+                                            textcanvas_context.strokeStyle = "black" // invertColor(JSON.parse(data).color)
+                                            textcanvas_context.lineWidth = 4
+                                            textcanvas_context.strokeText(stostring + '' + stoarr[t], 0, ypointer)
+                                            textcanvas_context.font = "14px arial"
                                 textcanvas_context.fillText(stostring + '' + stoarr[t], 0, ypointer)
                                 ypointer += 14
                                 textscroll += 14
@@ -36674,6 +36715,10 @@ let count = 0
                                 stostring = stostring + "" + stoarr[t]
                                 if (t == stoarr.length - 1) {
                                     textscroll += 14
+                                            textcanvas_context.strokeStyle = "black" // invertColor(JSON.parse(data).color)
+                                            textcanvas_context.lineWidth = 4
+                                            textcanvas_context.strokeText(stostring, 0, ypointer)
+                                            textcanvas_context.font = "14px arial"
                                     textcanvas_context.fillText(stostring, 0, ypointer)
                                 }
                             }
@@ -36685,7 +36730,11 @@ let count = 0
                     }
                 }
             }
+
+                    canvas_context.globalAlpha = Math.min(textalpha,1)
+                    textalpha*=.98
                 canvas_context.drawImage(textcanvas,0,-textscroll)
+                    canvas_context.globalAlpha = 1
         }
 })
                     </script>
