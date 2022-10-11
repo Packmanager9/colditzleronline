@@ -41,7 +41,7 @@ class Game {
             this.players.push(player)
         }else{
             this.players.push(player)
-            this.swapRoom(player, games.indexOf(this)+1)
+            this.swapRoom(player, (games.indexOf(this)+1)%(games.length-1))
         }
     }
     swapRoom(player, room){
