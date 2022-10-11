@@ -9761,7 +9761,11 @@ function padZero(str, len) {
             this.posx = posx;
             this.posy = posy;
             this.gridPoints = gridPoints;
+            // if(intendingToPlayOnline == 1){
             this.turn = -1
+            // }else{
+            // this.turn = 0
+            // }
             this.blocks = []
             this.fog = []
             let id = 0
@@ -9901,7 +9905,11 @@ function padZero(str, len) {
             this.posx = posx;
             this.posy = posy;
             this.gridPoints = gridPoints;
+            if(intendingToPlayOnline == 1){
             this.turn = -1
+            }else{
+            this.turn = 0
+            }
             this.blocks = []
             this.fog = []
             let id = 0
@@ -16023,31 +16031,26 @@ function padZero(str, len) {
 
 
         }
+        
         alternateAvesectianAI() {
             this.chunk++
             let index = -1
             let j = 0
-
             if (this.chunk % this.clickrate == 0) {
                 for (let t = 0; t < this.units.length; t++) {
-                            this.units[t].smartAttack()
+                    this.units[t].smartAttack()
                 }
             }else{ 
                 return
             }
             if (this.chunk % this.clickrate == 0) {
-                //this.units.sort((a, b) => (Math.random() > .5) ? 1 : -1)
-
-
                 let unitcountersee = 0
                 let buildingsseecount = 0
                 let lastseen = {}
                 let healthMeter = 999999999
                 let epowercount = 0
-
                 for(let d = 1;d<sandmap.players.length;d++){
                 const indexer = Math.abs((sandmap.players.indexOf(this) + d)%sandmap.players.length)
-
                 for (let t = 0; t < sandmap.players[indexer].buildings.length; t++) {
                     if (this.blocks[sandmap.players[indexer].buildings[t].tile.t][sandmap.players[indexer].buildings[t].tile.k].markdraw == 1) { //can see this unit
                         buildingsseecount++
@@ -16072,19 +16075,15 @@ function padZero(str, len) {
                 for (let t = 0; t < this.units.length; t++) {
                     if ((unitcountersee > 0 || buildingsseecount > 0) && (this.units[t].health > 400)) { //calculate strength of current army
                         if ((this.units[t].health > this.units[t].maxhealth * .25)) {
-                            // if (!(this.units[t].defendsplatter > 0)) {
                             powercount += this.units[t].health
-                            // }
                         }
                     }
                 }
-
                 if (this.units.length > 0) {
                     for (let t = 0; t < this.units.length; t++) {
                         if ((unitcountersee > 0 || buildingsseecount > 0) && (this.units[t].health > 400)) {
                             if ((this.units[t].health > this.units[t].maxhealth * .25)) {
                                 if (!(this.units[t].defendsplatter > 0)) {
-                                    // if(!(this.units[t].isInRange(this.units[t].attacktarget && this.units[t].attacktarget.health > 0))){
                                     if (epowercount <= powercount) {
                                         let gj = 0
                                         while (lastseen.walkable == false) {
@@ -16102,7 +16101,6 @@ function padZero(str, len) {
                                     } else {
                                         this.units[t].defendsplatter--
                                     }
-                                    // }
                                 } else {
                                     this.units[t].defendsplatter--
                                 }
@@ -16114,35 +16112,24 @@ function padZero(str, len) {
                         }
                     }
                 }
-
                 for (let t = 0; t < this.units.length; t++) {
                     this.units[t].smartAttack()
                 }
-
-
-
             } else {
                 return
             }
-
             if (this.defending >= 1) {
-
                 for (let t = 0; t < this.units.length; t++) {
                     if (this.units[t].buzzlet == 1) {
                         if (Math.abs(this.units[t].tile.x - this.attackedAt.x) + Math.abs(this.units[t].tile.y - this.attackedAt.y) < 300) {
                             if (this.buildings.length < 0) { //lol
                                 let block = this.buildings[0].tile
-                                // if (this.units[t].hotrockrepathlimit <= 0) {
                                 this.units[t].hotrockrepathlimit = ((Math.abs(this.units[t].tile.t - block.t) + Math.abs(this.units[t].tile.k - block.k)) * this.units[t].movespeed) * 1.01
                                 this.units[t].defensepathlimit = (Math.abs(this.units[t].tile.t - block.t) + Math.abs(this.units[t].tile.k - block.k)) * this.units[t].movespeed
                                 this.units[t].ultrabreak = block
                                 this.units[t].ultrawalk = 0
                                 this.units[t].start = this.units[t].tile
-                                // }
-
-
                             } else {
-
                                 if (Math.abs(this.units[t].tile.x - this.units[t].realPath[this.units[t].realPath.length - 1].x) + Math.abs(this.units[t].tile.y - this.units[t].realPath[this.units[t].realPath.length - 1].y) < (worldscale * .25 * 10)) {
                                     let block = sandmap.gridPoints[Math.floor(Math.random() * sandmap.gridPoints.length)]
                                     let u = 0
@@ -16150,21 +16137,13 @@ function padZero(str, len) {
                                         u++
                                         block = sandmap.gridPoints[Math.floor(Math.random() * sandmap.gridPoints.length)]
                                     }
-                                    // 
-
-                                    // if (this.units[t].hotrockrepathlimit <= 0) {
                                     this.units[t].hotrockrepathlimit = ((Math.abs(this.units[t].tile.t - block.t) + Math.abs(this.units[t].tile.k - block.k)) * this.units[t].movespeed) * 1.01
                                     this.units[t].defensepathlimit = (Math.abs(this.units[t].tile.t - block.t) + Math.abs(this.units[t].tile.k - block.k)) * this.units[t].movespeed
                                     this.units[t].ultrabreak = block
                                     this.units[t].ultrawalk = 0
                                     this.units[t].start = this.units[t].tile
-                                    // }
-
-
                                 } else {
-
                                 }
-
                             }
                         }
                     }
@@ -16174,11 +16153,9 @@ function padZero(str, len) {
                 this.defending = 0
                 this.defenseforce = 0
                 for (let t = 0; t < this.units.length; t++) {
-                    // if (Math.abs(this.units[t].tile.x - this.attackedAt.x) + Math.abs(this.units[t].tile.y - this.attackedAt.y) < 110) { //16 //80
                     if (this.units[t].buzzlet == 1) {
                     } else if (this.units[t].megagnat == 1) {
                         if (Math.abs(this.units[t].tile.x - this.attackedAt.x) + Math.abs(this.units[t].tile.y - this.attackedAt.y) < 400) { //16 //80
-
                             if (this.units[t].defensepathlimit <= 0) {
                                 this.units[t].hotrockrepathlimit = ((Math.abs(this.units[t].tile.t - this.attackedAt.t) + Math.abs(this.units[t].tile.k - this.attackedAt.k)) * this.units[t].movespeed) * 1.01
                                 this.units[t].defensepathlimit = (Math.abs(this.units[t].tile.t - this.attackedAt.t) + Math.abs(this.units[t].tile.k - this.attackedAt.k)) * this.units[t].movespeed
@@ -16188,7 +16165,6 @@ function padZero(str, len) {
                             }
                         }
                     } else {
-
                         if (this.units[t].defensepathlimit <= 0) {
                             this.units[t].hotrockrepathlimit = ((Math.abs(this.units[t].tile.t - this.attackedAt.t) + Math.abs(this.units[t].tile.k - this.attackedAt.k)) * this.units[t].movespeed) * 1.01
                             this.units[t].defensepathlimit = (Math.abs(this.units[t].tile.t - this.attackedAt.t) + Math.abs(this.units[t].tile.k - this.attackedAt.k)) * this.units[t].movespeed
@@ -16197,7 +16173,6 @@ function padZero(str, len) {
                             this.units[t].start = this.units[t].tile
                         }
                     }
-                    // }
                 }
             }
             for (let t = 0; t < this.units.length; t++) {
@@ -16208,8 +16183,6 @@ function padZero(str, len) {
                     this.units[t].attacksplatter--
                 }
             }
-
-
             this.workercount = 0
             this.buzzcount = 0
             for (let t = 0; t < this.units.length; t++) {
@@ -16221,7 +16194,6 @@ function padZero(str, len) {
                     this.workercount++
                 }
             }
-
             this.eggcount = 0
             this.moundcount = 0
             for (let t = 0; t < this.buildings.length; t++) {
@@ -16233,9 +16205,6 @@ function padZero(str, len) {
                     this.moundcount++
                 }
             }
-
-
-
             if (this.chunk % this.clickrate == 0 || Math.random() < .03) {
                 for (let t = 0; t < this.buildings.length; t++) {
                     if (this.buzzcount == 0) {
@@ -16271,18 +16240,14 @@ function padZero(str, len) {
                     }
                 }
             }
-
-
             let tpos = 0
             let kpos = 0
-
             for (let t = 0; t < this.units.length; t++) {
                 tpos += this.units[t].tile.t
                 kpos += this.units[t].tile.k
             }
             tpos = Math.max(Math.min(Math.round(tpos / 3), (worldscale - 4)), 0)
             kpos = Math.max(Math.min(Math.round(kpos / 3), (worldscale - 4)), 0)
-
             let tile = sandmap.blocks[tpos][kpos]
             if (tile.occupied == true) {
                 if (kpos < (worldscale - 4)) {
@@ -16293,7 +16258,6 @@ function padZero(str, len) {
                     }
                 }
             }
-
             if (this.eggcount == 0) {
                 for (let t = 0; t < this.units.length; t++) {
                     if (this.units[t].realPath.length - 1 == this.units[t].index) {
@@ -16316,16 +16280,10 @@ function padZero(str, len) {
                     }
                 }
             }
-
-
-
-
-
             if (this.chunk % this.clickrate == 0) {
                 for (let t = 0; t < this.units.length; t++) {
                     index = -1
                     if (this.units[t].tile.hotrock != 1 && this.units[t].tile.hotrock != 2) {
-
                         if (this.units[t].hotrockrepathlimit <= 0) {
                             let max = 999999999
                             let drytrack = 0
@@ -16352,8 +16310,6 @@ function padZero(str, len) {
                     }
                 }
             }
-
-
             for (let t = 0; t < this.units.length; t++) {
                 if (this.units.length >= this.seenrocks.length - 3 && (this.units[t].health / this.units[t].maxhealth) > .3) {
                     if (this.units[t].buzzlet == 1) {
@@ -16393,8 +16349,6 @@ function padZero(str, len) {
                     }
                 }
             }
-
-
         }
         avesectianAI() {
 
