@@ -133,6 +133,7 @@ wss.on("connection", ws => {
             // model.save()
             return
           }else  if (JSON.parse(data).room > -1) {
+            //   console.log(JSON.parse(data))
             if(true===true){
             let minarr = []
             for (let t = 0; t < games[ws.assigned].players.length; t++) {
