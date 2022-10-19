@@ -33469,7 +33469,7 @@ function padZero(str, len) {
                 if (this.submerged == 1 || this.mounted == 0) {
                     this.pather = liarsastar //big if?
                 } else {
-                    this.pather = astar
+                    this.pather = window.astar
                 }
                 this.pather.agent = this
                 this.obvious = this.realPath[this.index]
